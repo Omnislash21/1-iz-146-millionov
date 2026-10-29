@@ -88,7 +88,7 @@ RL.Events = (function () {
     for (var i = list.length - 1; i > 0; i--) { var j = Math.floor(rng.next() * (i + 1)); var t = list[i]; list[i] = list[j]; list[j] = t; }
     for (var k = 0; k < list.length; k++) {
       var e = list[k];
-      if (rng.chance(Math.min(0.9, e.p * mulMods(e.mods, f)))) { fire(s, e, {}, rng); return; }
+      if (rng.chance(Math.min(0.9, e.p * mulMods(e.mods, f) * (RL.Character ? RL.Character.eventMul(s, e) : 1) * (f.abroad && !(e.when && e.when.tags) ? 0.35 : 1)))) { fire(s, e, {}, rng); return; }
     }
   }
 
@@ -111,8 +111,9 @@ RL.Events = (function () {
     else { if (head) S.log(s, head, e.type || 'event'); applyEffects(s, e.effects, v, rng); }
   }
 
-  function pickOutcome(outs, f, rng) {
-    return rng.weighted(outs, function (o) { return (o.w === undefined ? 1 : o.w) * mulMods(o.mods, f); });
+  // ct — черты выбранного варианта: у кого они сильны, тому чаще выпадают хорошие исходы (RL.Character)
+  function pickOutcome(outs, f, rng, s, ct) {
+    return rng.weighted(outs, function (o) { return (o.w === undefined ? 1 : o.w) * mulMods(o.mods, f) * (s && RL.Character ? RL.Character.outcomeMul(s, ct, o) : 1); });
   }
   function applyOutcome(s, o, v, rng, head) {
     var t = (head ? head + ' ' : '') + (o.text ? text(s, o.text, v) : '');
@@ -123,7 +124,7 @@ RL.Events = (function () {
     var f = S.facts(s);
     if (c.traits) Object.keys(c.traits).forEach(function (t) { S.trait(s, t, c.traits[t]); });
     applyEffects(s, c.effects, v, rng);
-    if (c.outcomes) applyOutcome(s, pickOutcome(c.outcomes, f, rng), v, rng, '');
+    if (c.outcomes) applyOutcome(s, pickOutcome(c.outcomes, f, rng, s, c.traits), v, rng, '');
   }
 
   function resolve(s, idx, rng) {
@@ -168,6 +169,10 @@ RL.Events = (function () {
     if (RL.Old) RL.Old.applyEffects(s, eff, rng);
     if (RL.Law) RL.Law.applyEffects(s, eff, rng);
     if (RL.Assets) RL.Assets.applyEffects(s, eff, rng);
+    if (RL.Social) RL.Social.applyEffects(s, eff, rng);
+    if (RL.Chains) RL.Chains.applyEffects(s, eff, rng);
+    if (RL.Hardship) RL.Hardship.applyEffects(s, eff, rng);
+    if (RL.Emigration) RL.Emigration.applyEffects(s, eff, rng);
     if (RL.Politics) RL.Politics.applyEffects(s, eff, rng);
     if (eff.death && (!eff.deathP || rng.chance(eff.deathP))) s.deathNow = eff.death;
   }

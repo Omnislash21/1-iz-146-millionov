@@ -27,6 +27,7 @@ RL.Politics = (function () {
   }
 
   function offerVote(s, cp) {
+    if (RL.Emigration && RL.Emigration.abroad(s)) return; // за границей — только консульство, в игре не голосуем
     var p = s.person, c = cp.c, y = s.date.year, opts = [];
     if (cp.kind === 'local') { offer(s, 'election', c.title, c.title + ' ' + y + ' года.', [{kind: 'vote', who: 'local', text: 'Пойти и проголосовать'}, {kind: 'skip', text: 'Не ходить'}]).camp = {kind: 'local', year: y, title: c.title, c: c}; return; }
     var title = c.title || (cp.kind === 'president' ? 'Выборы президента' : cp.kind === 'duma' ? 'Выборы в Госдуму' : 'Голосование');

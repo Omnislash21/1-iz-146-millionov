@@ -270,6 +270,9 @@ details.more summary { cursor: pointer; color: var(--stamp); font: 600 15px var(
 #report ul { padding-left: 18px; margin: 0 0 10px; } #report li { margin-bottom: 3px; }
 #report li::marker { color: var(--cover); }
 .epitaph { font-size: 20px; line-height: 1.4; margin: 6px 0 4px; font-style: italic; }
+.sociology { border-left: 3px solid var(--cover); padding: 4px 0 4px 14px; margin: 10px 0 14px; }
+.sociology h3 { margin-top: 0; }
+.sociology li { margin: 4px 0; line-height: 1.45; }
 .badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 8px; }
 .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 3px 8px; border-radius: 6px; font: 600 13.5px var(--disp); color: var(--stamp);
   border: 2px solid var(--stamp); transform: rotate(var(--r, -1.5deg)); animation: badgeIn .45s cubic-bezier(.2, .9, .3, 1.3) both; }

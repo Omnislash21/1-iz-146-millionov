@@ -14,7 +14,8 @@ RL.Old = (function () {
   function workMonthly(s, rng) {
     var p = s.person, w = record(s), j = p.job;
     if (j && j.employed && !j.onLeave) {
-      w.months++;
+      // целиком «в конверте» — взносов нет, в стаж месяц не идёт
+      if ((j.shadow || 0) >= 0.9) w.grayMonths = (w.grayMonths || 0) + 1; else w.months++;
       var base = j.base * RL.World.realWageIndex(s, s.date.year, s.date.month) * (j.raise || 1);
       w.wageSum += base * (1 - (j.shadow || 0)) / AVG(s);
       if (j.dms === undefined) {
@@ -37,6 +38,8 @@ RL.Old = (function () {
     var p = s.person;
     p.pension = {amount: pensionAmount(s), since: s.date.year, real: true};
     S.log(s, 'Пенсия назначена: ' + RL.World.money(s, p.pension.amount) + ' в месяц (стаж ' + Math.round(record(s).months / 12) + ' ' + RL.Game.years(Math.round(record(s).months / 12)) + ').', 'money');
+    var gy = Math.round((record(s).grayMonths || 0) / 12);
+    if (gy >= 3) S.log(s, gy + ' ' + RL.Game.years(gy) + ' зарплаты «в конверте» в стаж не вошли — пенсия меньше, чем могла быть.', 'bad');
   }
   function income(s) {
     var p = s.person;

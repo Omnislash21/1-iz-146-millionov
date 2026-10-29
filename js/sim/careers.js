@@ -36,6 +36,7 @@ RL.Careers = (function () {
     if (r.maxAge && a > r.maxAge) return false;
     if (r.minAge && a < r.minAge) return false;
     if (r.noRecord && p.flags.criminalRecord) return false;
+    if (RL.Chains && RL.Chains.banned(s, id)) return false;
     if (r.level && lvl < r.level && !skillsOk) return false;
     if (r.field && !hasDip(s, r.field, false) && !(r.orCollege && hasDip(s, r.orCollege, true)) && !skillsOk) return false;
     if (!r.field && r.orCollege && !r.level && lvl < 2 && !hasDip(s, r.orCollege, true) && !skillsOk) return false;
@@ -63,7 +64,8 @@ RL.Careers = (function () {
   function driveBan(s) {
     var p = s.person, c = p.conditions.filter(function (x) { return !x.cured && (DRIVE_BAN.indexOf(x.id) >= 0 || (x.id === 'stroke' && p.disability)); })[0];
     if (c) return RL.Health.condName(c);
-    if (((p.habits || {}).alcohol || 0) >= 3) return 'алкогольная зависимость (учёт у нарколога)';
+    if (((p.habits || {}).alcohol || 0) >= 3 || (s.flags.narcoRecord && ((p.habits || {}).alcohol || 0) >= 2)) return 'алкогольная зависимость (учёт у нарколога)';
+    if (s.flags.narcoRecord) return 'наркологический учёт';
     if (((p.habits || {}).drugs || 0) >= 2) return 'наркотическая зависимость (учёт у нарколога)';
     return null;
   }
@@ -304,9 +306,9 @@ RL.Careers = (function () {
     p.flags.adultWorkM = (p.flags.adultWorkM || 0) + 1;
     var sp = p.spouse && !p.spouse.dead ? p.spouse : null;
     if (f.adultWork === 'escort') {
-      if (rng.chance(0.02)) { RL.Events.applyEffects(s, {cash: -3000, mental: -3}, rng); S.log(s, 'Облава: протокол по ст. 6.11 КоАП и штраф. Фамилию записали.', 'bad'); }
+      if (rng.chance(0.02)) { RL.Events.applyEffects(s, {cash: -3000, mental: -3}, {}, rng); S.log(s, 'Облава: протокол по ст. 6.11 КоАП и штраф. Фамилию записали.', 'bad'); }
       if (rng.chance(0.012)) { S.adj(s, 'health', -12); S.adj(s, 'mental', -8); S.log(s, 'Клиент оказался опасным: побои, синяки — неделями. В полицию идти бессмысленно.', 'bad'); }
-      if (rng.chance(0.006)) { RL.Events.applyEffects(s, {cash: -8000, health: -4}, rng); S.log(s, 'Инфекция — анализы и лечение в платной клинике, «чтобы без учёта».', 'health'); }
+      if (rng.chance(0.006)) { RL.Events.applyEffects(s, {cash: -8000, health: -4}, {}, rng); S.log(s, 'Инфекция — анализы и лечение в платной клинике, «чтобы без учёта».', 'health'); }
       if (rng.chance(0.0012) && RL.DATA.conditions && RL.DATA.conditions.hiv) RL.Health.addCondition(s, 'hiv', rng);
       if (rng.chance(0.008)) {
         if (sp) { sp.relation = U.clamp(sp.relation - 40, 0, 100); S.log(s, sp.name + ' узнал, чем ты зарабатываешь. Скандал, вещи у двери.', 'bad'); }
@@ -332,7 +334,7 @@ RL.Careers = (function () {
     if (c.burnout && rng.chance(c.burnout) && RL.Events.def('burnout')) RL.Events.queue(s, 'burnout', {});
     if (c.fire && rng.chance(c.fire)) { j.employed = false; S.log(s, 'Тебя уволили: «не вписываешься в политику компании».', 'bad'); return; }
     if (c.death && rng.chance(c.death)) { s.deathNow = 'Погиб в зоне боевых действий'; return; }
-    if (c.caseRisk) Object.keys(c.caseRisk).forEach(function (art) { if (!s.pending && rng.chance(c.caseRisk[art])) { S.log(s, tx(s, 'Проверка нашла то, что ты [прятал|прятала].'), 'bad'); RL.Events.applyEffects(s, {case: art}, rng); } });
+    if (c.caseRisk) Object.keys(c.caseRisk).forEach(function (art) { if (!s.pending && rng.chance(c.caseRisk[art])) { S.log(s, tx(s, 'Проверка нашла то, что ты [прятал|прятала].'), 'bad'); RL.Events.applyEffects(s, {case: art}, {}, rng); } });
     if (c.fame && rng.chance(c.fame)) {
       j.base = Math.round(j.base * rng.range(2.5, 6));
       S.log(s, rng.pick(['Главная роль в сериале на федеральном канале — тебя узнают на улицах!', 'Песня попала в чарты, концерты расписаны на год вперёд.', 'Персональная выставка в Москве, работы раскупают коллекционеры.']), 'good');
@@ -347,6 +349,12 @@ RL.Careers = (function () {
     var p = s.person, a = S.age(s);
     if (a < 6) return;
     p.fy = p.fy || {};
+    // наркологический учёт снимают после трёх лет стойкой ремиссии
+    if (s.flags.narcoRecord) {
+      var hb = p.habits || {};
+      p.flags.remissionM = (hb.alcohol || 0) <= 1 && (hb.drugs || 0) === 0 ? (p.flags.remissionM || 0) + 1 : 0;
+      if (p.flags.remissionM >= 36) { delete s.flags.narcoRecord; p.flags.remissionM = 0; S.log(s, 'Три года ремиссии — сняли с наркологического учёта.', 'good'); }
+    }
     // медкомиссия ГИБДД при замене прав, ДТП или по сигналу врача: с противопоказаниями права аннулируют
     var ban = s.flags.license && driveBan(s);
     if (ban && rng.chance(0.06)) {

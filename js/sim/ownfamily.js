@@ -128,6 +128,7 @@ RL.OwnFamily = (function () {
     if (c.relation < 35) h *= M.lowRelation; else if (c.relation > 75) h *= 0.4;
     if (r.tags.indexOf('caucasus') >= 0) h *= M.caucasus;
     if (kids(s).some(function (x) { return x.age < 3; })) h *= M.kidsSmall;
+    h *= (RL.Character ? RL.Character.mul(s, 'breakup') : 1);
     if (rng.chance(h)) RL.Events.queue(s, 'breakup_adult', {n: c.name});
     // работа партнёра
     if (c.job.employed && !c.job.onLeave && rng.chance(0.006)) c.job.employed = false;

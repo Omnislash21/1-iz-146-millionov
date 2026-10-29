@@ -11,7 +11,10 @@ RL.Law = (function () {
     var opts = [{kind: 'deal'}, {kind: 'lawyer'}, {kind: 'self'}];
     var choices = [{i: 0, text: 'Признать вину — особый порядок (срок на треть меньше)'}, {i: 1, text: 'Нанять адвоката (~' + RL.World.money(s, L().lawyerCost * AVG(s)) + ')'},
       {i: 2, text: 'Защищаться самому, не признавать вину'}];
-    if (S.region(s).corruption > 0.55 || s.date.year < 2010) { opts.push({kind: 'bribe'}); choices.push({i: 3, text: '«Решить вопрос» со следствием'}); }
+    if (S.region(s).corruption > 0.55 || s.date.year < 2010) { opts.push({kind: 'bribe'}); choices.push({i: opts.length - 1, text: '«Решить вопрос» со следствием'}); }
+    // «телефонное право»: знакомый в полиции, прокуратуре, администрации
+    var tie = RL.Social && RL.Social.courtOption(s);
+    if (tie) { opts.push({kind: 'tie'}); choices.push({i: opts.length - 1, text: 'Позвонить: ' + RL.Social.label(tie)}); }
     var p = {kind: 'custom', handler: 'law', id: 'court', title: 'Суд', text: 'Уголовное дело: ' + A.name + '. Оправдательных приговоров в России меньше 1%.', art: art, opts: opts, choices: choices};
     if (s.pending) s.queue.unshift({custom: p}); else s.pending = p;
   }
@@ -26,6 +29,12 @@ RL.Law = (function () {
       pay(s, 6 * AVG(s));
       if (rng.chance(0.25 + S.region(s).corruption * 0.4)) { S.log(s, 'Дело «развалилось» после передачи денег.', 'money'); return; }
       S.log(s, 'Деньги взяли, но дело дошло до суда. Плюс эпизод о даче взятки.', 'bad'); colonyP = Math.min(0.9, colonyP + 0.15);
+    }
+    if (o.kind === 'tie') {
+      var t = RL.Social.courtOption(s);
+      S.trait(s, 'honesty', -2);
+      if (t && RL.Social.ask(s, t, rng, 0.25 + S.region(s).corruption * 0.45)) { S.log(s, t.name + ' сделал' + (t.sex === 'f' ? 'а' : '') + ' пару звонков. Дело прекратили «за отсутствием состава».', 'good'); return; }
+      S.log(s, (t ? t.name : 'Знакомый') + ': «Тут на контроле у Москвы, извини». Дело идёт в суд.', 'bad');
     }
     if (o.kind === 'self' && rng.chance(L().acquittal * 10)) { S.log(s, 'Редчайший случай — оправдательный приговор!', 'good'); return; }
     p.flags.criminalRecord = 1; p.flags.adultCase = (p.flags.adultCase || 0) + 1;

@@ -184,6 +184,7 @@
 
   $('btnPlay').onclick = function () { if (state.pending && !state.settings.auto) { showModal(); return; } play(!running); };
   $('btnStep').onclick = function () {
+    if (!state) return;
     play(false);
     // до конца месяца — разом
     var m = state.date.month, guard = 0;
@@ -236,7 +237,7 @@
       frag = '<div class="e ' + l.type + (fresh ? ' new' : '') + '"><span class="d">' + (l.d ? l.d + ' ' : '') + RL.Game.MONTHS_N[l.m].slice(0, 3) + ' ' + l.y + ', ' + l.age + ' ' + RL.Game.years(l.age) + '</span>' + body + '</div>' + frag;
     }
     if (frag) $('log').insertAdjacentHTML('afterbegin', frag);
-    pumpAch(); renderLeisure(); renderFamily(); renderBudget(); renderHealth(); renderEdu(); renderTraits();
+    pumpAch(); renderLeisure(); renderFamily(); renderBudget(); renderHealth(); renderEdu(); renderTraits(); renderTies();
   }
 
   var prevStats = null, lastYear = null;
@@ -428,6 +429,14 @@
     if (S.age(s) >= 3) h += '<div class="small muted">Фокус года: ' + esc(RL.Childhood.focusName(s, f)) + '</div>';
     $('edu').innerHTML = h;
   }
+  // связи: конкретные люди, которые могут помочь (RL.Social); сила — насколько близко общаетесь
+  function renderTies() {
+    var T = (state.person.ties || []).slice().sort(function (a, b) { return b.rank * 40 + b.str - (a.rank * 40 + a.str); });
+    $('tiesPanel').style.display = S.age(state) >= 16 ? '' : 'none';
+    $('ties').innerHTML = T.length ? T.map(function (t) {
+      return '<div class="m">' + esc(RL.Social.label(t)) + ' <span class="small muted">' + (t.str >= 60 ? 'близко' : t.str >= 30 ? 'общаетесь' : 'остывает') + '</span></div>';
+    }).join('') : '<span class="muted">Нужных знакомых пока нет. Они появляются в вузе, армии, на работе и в компаниях друзей.</span>';
+  }
   function renderTraits() {
     var p = state.person, T = RL.DATA.traits, list = [];
     Object.keys(p.traits).forEach(function (k) { var v = p.traits[k]; if (Math.abs(v) >= 8) list.push([Math.abs(v), RL.Report.traitLabel(k, v, p.sex) + (Math.abs(v) >= 30 ? '!' : '')]); });
@@ -472,6 +481,7 @@
     h += '<p class="big">' + rep.born + ' — ' + (rep.dead ? rep.ended + ' · ' + esc(rep.cause) : 'жизнь продолжается') + '</p>';
     h += '<p>' + esc(RL.Report.verdict(rep, s)) + '</p>';
     var ep = RL.Report.epitaph(s); if (ep) h += '<p class="epitaph">«' + esc(ep) + '»</p>';
+    var soc = RL.Report.sociology ? RL.Report.sociology(s) : []; if (soc.length) h += '<div class="sociology"><h3>Социологический разбор</h3>' + li(soc) + '</div>';
     var bd = RL.Report.badges(s); if (bd.length) h += '<div class="badges">' + bd.map(function (x, i) { return '<span class="badge' + (x.dark ? ' dark' : '') + '" style="animation-delay:' + (0.3 + i * 0.07) + 's"><i>' + x.icon + '</i>' + esc(x.text) + '</span>'; }).join('') + '</div>';
     h += '<canvas id="chart" width="900" height="260"></canvas>';
     h += '<div class="grid"><div><h3>Итог жизни</h3>' + li(RL.Report.summary(s)) + '</div><div><h3>Жизнь по десятилетиям</h3>' + li(RL.Report.decades(s)) + '</div></div>';

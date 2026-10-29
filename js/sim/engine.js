@@ -71,6 +71,11 @@ RL.Game = (function () {
     RL.Adult.monthly(s, rng);
     if (RL.Assets) RL.Assets.monthly(s, rng);
     if (RL.Careers) RL.Careers.monthly(s, rng);
+    if (RL.Character) RL.Character.monthly(s, rng);
+    if (RL.Social) RL.Social.monthly(s, rng);
+    if (RL.Chains) RL.Chains.monthly(s, rng);
+    if (RL.Hardship) RL.Hardship.monthly(s, rng);
+    if (RL.Emigration) RL.Emigration.monthly(s, rng);
     if (RL.Politics) RL.Politics.monthly(s, rng);
     if (RL.Leisure && !o.daily) RL.Leisure.monthly(s, rng);
     RL.OwnFamily.monthly(s, rng);
@@ -89,9 +94,11 @@ RL.Game = (function () {
         var heavy = s.person.conditions.filter(function (c) { var d = RL.DATA.conditions[c.id]; return !c.cured && (d.mortCancer || d.mort || d.mortSevere || 1) > 2; });
         var cond = heavy.length ? rng.weighted(heavy, function (c) { var d = RL.DATA.conditions[c.id]; var k = d.mortCancer ? 7 : d.mort || d.mortSevere || 2; return k * k; }) : null;
         var hb = s.person.habits || {};
-        if (hb.drugs >= 2 && rng.chance(0.6)) death = 'Передозировка наркотиков';
+        var mt = s.person.stats.mental;
+        if (a >= 14 && mt < 25 && rng.chance(0.3 * (25 - mt) / 25 * (RL.Character ? RL.Character.mul(s, 'suicide') : 1))) death = 'Самоубийство';
+        else if (hb.drugs >= 2 && rng.chance(0.6)) death = 'Передозировка наркотиков';
         else if (hb.alcohol >= 3 && rng.chance(0.4)) death = 'Отравление алкоголем';
-        else death = cond && rng.chance(0.7) ? RL.Health.condName(cond) : RL.Mortality.sampleCause(rng, a, s.person.sex);
+        else death = cond && rng.chance(0.7) ? RL.Health.condName(cond) : RL.Mortality.sampleCause(rng, a, s.person.sex, s);
       }
     }
     return death;

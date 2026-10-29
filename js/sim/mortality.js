@@ -84,10 +84,38 @@ RL.Mortality = (function () {
     return c.old;
   }
   // группа причин по Росстату → конкретная причина (инфаркт, ДТП, рак лёгкого…)
-  function sampleCause(rng, age, sex) {
+  // причина — по образу жизни: курильщики чаще умирают от рака лёгкого и ХОБЛ, пьющие — от алкогольных и внешних причин,
+  // бедные — от туберкулёза и насилия, сельские — от ДТП, утоплений, пожаров [~ относительные риски: ВОЗ, Немцов «Алкогольная смертность в России»]
+  var LIFE = [
+    {re: /Рак трахеи|обструктивная болезнь лёгких/, k: function (x) { return x.smoke ? 3 : x.smokeEver ? 1.8 : 0.4; }},
+    {re: /Инфаркт|ишемическая|пищевода|мочевого пузыря|Аневризма/, k: function (x) { return x.smoke ? 1.7 : 1; }},
+    {re: /Алкогольная|алкоголем|цирроз|панкреатит|Кардиомиопатия/, k: function (x) { return x.alc >= 3 ? 5 : x.alc >= 2 ? 2.5 : x.sober ? 0.2 : 1; }},
+    {re: /Падение|Утопление|Переохлаждение|Пожар|Убийство|Травма при невыясненных/, k: function (x) { return (x.alc >= 2 ? 2.2 : 1) * (x.poor ? 1.5 : 1) * (x.rural ? 1.3 : 1); }},
+    {re: /наркотиками|ВИЧ|гепатит/, k: function (x) { return x.drugsEver ? 4 : 0.6; }},
+    {re: /Туберкулёз/, k: function (x) { return (x.poor ? 2.5 : 0.7) * (x.prison ? 3 : 1); }},
+    {re: /Самоубийство/, k: function (x) { return x.mental < 30 ? 2.5 : x.mental > 65 ? 0.5 : 1; }},
+    {re: /ДТП/, k: function (x) { return x.rural ? 1.4 : 1; }},
+    // рак у тех, у кого он диагностирован, уже считает js/sim/health.js — без диагноза табличный рак реже
+    {re: /Рак|опухол|Лейкоз|Лимфом|Меланом/, k: function (x) { return x.cancerDx ? 1 : 0.5; }}
+  ];
+  function lifeOf(s) {
+    var p = s.person, h = p.habits || {}, ev = p.habitsEver || {}, L = RL.Young && p.own ? RL.Young.loc(s) : null;
+    return {smoke: (h.smoking || 0) >= 2, smokeEver: (ev.smoking || 0) >= 2, alc: h.alcohol || 0, sober: !(ev.alcohol >= 2), drugsEver: (ev.drugs || 0) >= 2,
+      poor: p.stats.money < 25, rural: L ? ['village', 'small'].indexOf(L.settlement) >= 0 : p.settlement === 'village', mental: p.stats.mental, prison: !!p.flags.adultPrison,
+      cancerDx: p.conditions.some(function (c) { return c.id === 'cancer_adult'; })};
+  }
+  function sampleCause(rng, age, sex, s) {
     // подробная таблица P(причина | смерть, пол, возраст) из пакета данных, иначе — группа Росстата и её расшифровка
     var T = RL.DATA.deathCauseTable;
-    if (T && T[sex]) { var row = T[sex][Math.min(110, Math.max(0, Math.floor(age)))]; if (row && Object.keys(row).length) return rng.weightedKey(row); }
+    if (T && T[sex]) {
+      var row = T[sex][Math.min(110, Math.max(0, Math.floor(age)))];
+      if (row && Object.keys(row).length) {
+        if (!s || age < 15) return rng.weightedKey(row);
+        var x = lifeOf(s), w = {};
+        Object.keys(row).forEach(function (c) { var k = 1; LIFE.forEach(function (r) { if (r.re.test(c)) k *= r.k(x); }); w[c] = row[c] * k; });
+        return rng.weightedKey(w);
+      }
+    }
     return detailCause(rng, rng.weightedKey(causeTable(age, sex)), age, sex);
   }
   function detailCause(rng, g, age, sex) {

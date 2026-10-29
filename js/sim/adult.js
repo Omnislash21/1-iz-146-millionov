@@ -90,7 +90,7 @@ RL.Adult = (function () {
     var L = A().levels;
     if (j.level >= L.length - 1) return;
     var dip = (p.diplomas || []).some(function (d) { return d.level !== 'СПО'; });
-    var h = A().promoBase * (RL.Careers ? RL.Careers.focusPromo(s) : p.focus === 'career' ? 2.5 : 1) * Math.pow(Math.max(20, p.stats.skills) / 55, 2) * Math.exp((p.traits.diligence || 0) / 60)
+    var h = (RL.Character ? RL.Character.mul(s, 'promo') : 1) * (RL.Chains ? RL.Chains.promoMul(s) : 1) * A().promoBase * (RL.Careers ? RL.Careers.focusPromo(s) : p.focus === 'career' ? 2.5 : 1) * Math.pow(Math.max(20, p.stats.skills) / 55, 2) * Math.exp((p.traits.diligence || 0) / 60)
       * (dip ? 1.3 : 0.8) * Math.pow(0.75, j.level) * (((p.habits || {}).alcohol || 0) >= 2 ? 0.4 : 1);
     if ((S.ageMonths(s) - (j.since || 0)) < 12) h *= 0.3;
     if (a >= 65) h = 0; else if (a >= 58) h *= 0.3;
@@ -137,7 +137,7 @@ RL.Adult = (function () {
     z.profit = gross * (1 - b.tax);
     z.total = (z.total || 0) + z.profit;
     if (rng.chance(b.inspect)) RL.Events.queue(s, 'biz_inspection', {});
-    var fail = b.fail * crisis * (p.focus === 'business' ? 0.7 : 1) * (skill < 0.8 ? 1.5 : 1);
+    var fail = b.fail * crisis * (p.focus === 'business' ? 0.7 : 1) * (skill < 0.8 ? 1.5 : 1) * (RL.Character ? RL.Character.mul(s, 'bizFail') : 1);
     if (rng.chance(fail)) closeBiz(s, 'Бизнес закрылся: ' + rng.pick(['выручка упала, аренда съела всё', 'конкуренты демпингуют', 'поставщик подвёл, клиенты ушли', 'арендодатель поднял цену вдвое']) + '.');
   }
   function closeBiz(s, why) {

@@ -47,7 +47,8 @@ RL.DATA.events.push(
    "choices":[
      {"text":"Заплатить штраф и исправить","traits":{"honesty":3},"effects":{"bizFine":1.5,"mental":-3}},
      {"text":"«Решить вопрос» на месте","traits":{"honesty":-4},"outcomes":[{"w":3,"text":"Решили. Дешевле штрафа.","effects":{"bizFine":0.6}},{"w":1,"text":"Проверяющий оказался «честным». Штраф вдвое и протокол о попытке дачи взятки.","effects":{"bizFine":3,"mental":-8}}]},
-     {"text":"Судиться","traits":{"courage":3},"outcomes":[{"w":1,"text":"Через полгода суд отменил штраф.","effects":{"mental":-2}},{"w":1,"text":"[Проиграл|Проиграла]. Штраф плюс юристы.","effects":{"bizFine":2.5,"mental":-5}}]}]},
+     {"text":"Судиться","traits":{"courage":3},"outcomes":[{"w":1,"text":"Через полгода суд отменил штраф.","effects":{"mental":-2}},{"w":1,"text":"[Проиграл|Проиграла]. Штраф плюс юристы.","effects":{"bizFine":2.5,"mental":-5}}]},
+     {"text":"Позвонить знакомому «наверху»","if":{"tieOfficial":true},"traits":{"honesty":-2},"effects":{"useTie":"official","noTie":{"bizFine":1.8}}}]},
   {"id":"biz_close_choice","title":"Бизнес не тянет","when":{"hasBiz":true,"money":{"<":30}},"p":0.05,"cooldown":8,
    "text":"Третий месяц в минус. Может, хватит?",
    "choices":[

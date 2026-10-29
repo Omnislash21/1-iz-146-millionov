@@ -108,15 +108,17 @@ RL.S = (function () {
 
   // Плоские факты для условий событий.
   function facts(s) {
-    var p = s.person, r = region(s), a = age(s), y = s.date.year, fam = s.family;
+    var p = s.person, a = age(s), y = s.date.year, fam = s.family;
+    // где живёшь сейчас (после переезда — новый регион и город), а не где родился
+    var r = p.loc ? regionById(p.loc.regionId) : region(s), stl = p.loc ? p.loc.settlement : p.settlement;
     var man = manInHome(s), mom = mother(s);
     var hm = home(s);
     var f = {
       age: a, ageM: ageMonths(s), sex: p.sex, year: y, month: s.date.month,
       season: [0, 1, 11].indexOf(s.date.month) >= 0 ? 'winter' : s.date.month <= 4 ? 'spring' : s.date.month <= 7 ? 'summer' : 'autumn',
-      region: r.id, tags: r.tags, settlement: p.settlement,
-      bigCity: ['megapolis', 'million', 'big'].indexOf(p.settlement) >= 0,
-      village: p.settlement === 'village', smallTown: p.settlement === 'small' || p.settlement === 'village',
+      region: r.id, tags: r.tags, settlement: stl,
+      bigCity: ['megapolis', 'million', 'big'].indexOf(stl) >= 0,
+      village: stl === 'village', smallTown: stl === 'small' || stl === 'village',
       familyType: fam.type, orphanage: fam.type === 'orphanage',
       quintile: fam.quintile || 3, poor: !!fam.poverty, rich: (fam.quintile || 3) >= 5,
       debt: (fam.debts || []).reduce(function (t, d) { return t + d.balance; }, 0) > 0,
@@ -172,6 +174,9 @@ RL.S = (function () {
     if (RL.Law) RL.Law.facts(s, f);
     if (RL.Assets) RL.Assets.facts(s, f);
     if (RL.Careers) RL.Careers.facts(s, f);
+    if (RL.Social) RL.Social.facts(s, f);
+    if (RL.Hardship) RL.Hardship.facts(s, f);
+    if (RL.Emigration) RL.Emigration.facts(s, f);
     if (RL.Leisure) RL.Leisure.facts(s, f);
     f.prof = p.job && p.job.employed ? p.job.prof : null;
     f.birthdayMonth = s.date.month === s.birth.month;

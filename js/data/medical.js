@@ -29,7 +29,7 @@ RL.DATA.conditions = {
     "text":"Мать пила во время беременности: у тебя фетальный алкогольный синдром."},
   "hiv":{"name":"ВИЧ-инфекция","kind":"congenital","birthP":0,
     "cap":80,"mortNoArt":12,"mortArt":2,"artFrom":2006,"cost":0,"freeShare":1,
-    "text":"Ты родился с ВИЧ, переданным от матери."},
+    "text":"Ты [родился|родилась] с ВИЧ, переданным от матери."},
   "asthma":{"name":"Бронхиальная астма","kind":"chronic","perYear":0.006,"ages":[2,17],
     "mods":{"parentsSmoke":1.5,"bigCity":1.3,"allergy":2.2,"poorHousing":1.4},
     "cap":82,"mort":1.6,"cost":2500,"freeShare":0.6,"cureYear":0.04,

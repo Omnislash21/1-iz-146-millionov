@@ -206,7 +206,12 @@ RL.Teen = (function () {
 
   function applyEffects(s, eff, rng) {
     if (eff.habit) Object.keys(eff.habit).forEach(function (k) { if (habits(s)[k] < eff.habit[k]) setHabit(s, k, eff.habit[k]); });
-    if (eff.habitDown) Object.keys(eff.habitDown).forEach(function (k) { setHabit(s, k, habits(s)[k] - eff.habitDown[k], true); });
+    // сорваться / удержаться: сила зависимости ±; gamble — лудомания (js/sim/leisure.js, p.gamble.lvl)
+    var gam = function () { return s.person.gamble = s.person.gamble || {lvl: 0, n: 0, net: 0}; };
+    if (eff.habitUp) Object.keys(eff.habitUp).forEach(function (k) { if (k === 'gamble') gam().lvl = U.clamp(gam().lvl + eff.habitUp[k], 0, 3); else setHabit(s, k, habits(s)[k] + eff.habitUp[k]); });
+    if (eff.habitDown) Object.keys(eff.habitDown).forEach(function (k) { if (k === 'gamble') gam().lvl = U.clamp(gam().lvl - eff.habitDown[k], 0, 3); else setHabit(s, k, habits(s)[k] - eff.habitDown[k], true); });
+    if (eff.habitTry) Object.keys(eff.habitTry).forEach(function (k) { if (rng && !rng.chance(0.35)) return; if (k === 'gamble') gam().lvl = U.clamp(gam().lvl - eff.habitTry[k], 0, 3); else setHabit(s, k, habits(s)[k] - eff.habitTry[k], true); });
+    if (eff.jobLoss && s.person.job && s.person.job.employed) { s.person.job.employed = false; s.person.job.monthsUnemployed = 0; }
     if (eff.track) setTrack(s, eff.track, rng);
     if (eff.profile) {
       s.person.education.profile = eff.profile;

@@ -14,6 +14,7 @@ RL.Health = (function () {
     else if (fam.quintile >= 5) a += 0.15; else if (fam.quintile >= 4) a += 0.07; else if (fam.quintile <= 1) a -= 0.07;
     if (s.person.job && s.person.job.employed && s.person.job.dms && RL.DATA.old) a += RL.DATA.old.dmsAccess;
     if (fam.deprivation > 1.5) a -= 0.08;
+    if (RL.Social && RL.Social.best(s, ['doctor'])) a += 0.1; // знакомый врач: без очереди, к нужному специалисту
     if (s.person.migrant && s.person.migrant.status === 'undocumented') a -= 0.25;
     if (s.person.migrant && s.person.migrant.status === 'legal') a -= 0.1;
     return U.clamp(a, 0.1, 1);
@@ -133,7 +134,7 @@ RL.Health = (function () {
         var surv = byYear(d.survival5y, y) * (0.55 + acc * 0.5) + (c.early ? (d.earlyBonus || 0) : 0) + (c.careBonus || 0);
         var hz = -Math.log(U.clamp(surv, 0.05, 0.99)) / d.durationMonths * (c.treated ? 1 : 2.5);
         if (rng.chance(hz)) death = condName(c);
-        else if (c.months >= d.durationMonths) { c.cured = true; S.log(s, 'Онкогематологи сказали главное слово: ремиссия.', 'good'); }
+        else if (c.months >= d.durationMonths) { c.cured = true; S.log(s, (c.id === 'cancer_adult' ? 'Онкологи' : 'Онкогематологи') + ' сказали главное слово: ремиссия.', 'good'); }
         return;
       }
       if (d.durationMonths && c.months >= d.durationMonths && c.treated) { c.cured = true; S.log(s, condName(c) + (c.id === 'cataract' ? ': операция по ОМС, видишь снова.' : ': вылечили.'), 'good'); return; }

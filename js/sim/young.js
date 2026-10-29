@@ -243,7 +243,7 @@ RL.Young = (function () {
     if (o.kind === 'gap') { ed.stage = 'gap'; ed.prep = (ed.prep || 0) + 4; S.log(s, 'Год подготовки: работа днём, пробники вечером.', 'edu'); return; }
     if (o.kind === 'army') { startService(s, 'conscript', rng); return; }
     if (o.kind === 'serve') { startService(s, 'conscript', rng); return; }
-    if (o.kind === 'evade') { p.flags.evader = 1; S.log(s, tx(s, 'Ты не [пошёл|пошла] в военкомат. Повестки лежат в почтовом ящике.'), 'bad'); return; }
+    if (o.kind === 'evade') { p.flags.evader = 1; p.flags.evaderEver = 1; S.log(s, tx(s, 'Ты не [пошёл|пошла] в военкомат. Повестки лежат в почтовом ящике.'), 'bad'); return; }
     if (o.kind === 'ticket') {
       var cost = D.army.whiteTicketCost * AVG(s);
       payCash(s, cost);
@@ -335,7 +335,7 @@ RL.Young = (function () {
   }
   function draftCheck(s, rng) {
     var p = s.person, y = s.date.year, m = s.date.month, A = D.army, a = S.age(s);
-    if (p.sex !== 'm' || p.flags.served || p.army || p.flags.officerReserve) return;
+    if (p.sex !== 'm' || p.flags.served || p.army || p.flags.officerReserve || (RL.Emigration && RL.Emigration.abroad(s))) return;
     if (['А', 'Б'].indexOf(p.flags.militaryCat || 'Б') < 0) return;
     if (a < 18 || a >= era(A.upperAge, y)) return;
     var st = p.education.stage;
@@ -446,7 +446,7 @@ RL.Young = (function () {
     var entry = U.interpYear(D.young.entryWage, Math.min(25, a));
     var q = dip ? 1 + (dip.q - 55) / 150 + (dip.red ? 0.05 : 0) + (dip.top ? 0.2 : 0) : 1;
     if (s.flags.internship) q *= 1.08;
-    var base = pr.wage * D.economy.wageScale * L.region.wage * st.wage * entry * q * (mul || 1) * rng.lognorm(pr.sd);
+    var base = pr.wage * D.economy.wageScale * L.region.wage * st.wage * entry * q * (mul || 1) * rng.lognorm(pr.sd) * (RL.Emigration ? RL.Emigration.wageMul(s) : 1);
     var shadowP = U.clamp(pr.shadow * U.interpYear(D.economy.shadowLevel, Math.min(s.date.year, 2024)) / 0.15 * 0.6, 0, 0.9);
     return {prof: profId, base: Math.round(base), shadow: rng.chance(shadowP) ? rng.range(0.3, 1) : 0, employed: true, raise: 1, since: S.ageMonths(s), monthsUnemployed: 0};
   }
@@ -468,26 +468,31 @@ RL.Young = (function () {
       // пенсионер ищет работу, только если сам этого хочет (фокус) или не хватает денег
       if (p.pension && p.focus !== 'jobhunt' && !(p.stats.money < 25 && S.age(s) < 70)) seeking = false;
       if (!seeking) return;
-      var aa = S.age(s), ageK = aa >= 75 ? 0 : aa >= 70 ? 0.02 : aa >= 65 ? 0.08 : aa >= 60 ? 0.2 : aa >= 55 ? 0.4 : 1; // после 55 работу находят редко
+      var aa = S.age(s), ageK = aa >= 75 ? 0 : aa >= 70 ? 0.02 : aa >= 65 ? 0.08 : aa >= 60 ? 0.2 : aa >= 55 ? 0.4 : aa >= 45 ? 0.7 : 1; // после 45 ищут дольше, после 55 — находят редко
       var h = ageK * 0.16 * [0.8, 1, 1.2][eduLevel(s)] / Math.sqrt(L.region.unemployment) * (p.focus === 'jobhunt' ? 1.8 : 1) * Math.sqrt(Math.max(10, p.stats.social) / 50)
         / Math.sqrt(ctx.flags.jobLoss || 1) * ((hb.drugs || 0) >= 2 ? 0.3 : 1) * ((hb.alcohol || 0) >= 2 ? 0.6 : 1) * (p.flags.criminalRecord ? 0.5 : 1);
+      h *= (RL.Character ? RL.Character.mul(s, 'jobFind') : 1);
       var conn = S.adultsHome(s).some(function (m) { return m.job && ['official', 'police', 'manager', 'business', 'doctor'].indexOf(m.job.prof) >= 0; });
       if (conn) h *= 1.3;
+      var tieAny = RL.Social && RL.Social.best(s, ['business', 'official', 'bank', 'police', 'doctor', 'school']);
+      if (tieAny) h *= 1.5;
       if (p.job) p.job.monthsUnemployed = (p.job.monthsUnemployed || 0) + 1;
       if (rng.chance(h)) {
         var first = !p.flags.firstJob;
         var viaConn = conn && rng.chance(0.4);
-        p.job = makeJob(s, choosePro(s, rng), rng, viaConn ? 1.1 : 1);
+        var viaTie = !viaConn && RL.Social ? RL.Social.jobHelp(s, rng) : null;
+        p.job = makeJob(s, choosePro(s, rng), rng, (viaConn ? 1.1 : viaTie ? 1.15 : 1) * (aa >= 45 && !first ? 0.8 : 1));
         p.flags.firstJob = 1;
         var pr = S.prof({job: p.job});
-        S.log(s, (first ? 'Первая работа: ' : 'Новая работа: ') + pr[p.sex] + (viaConn ? ' (устроили знакомые родителей)' : '') + ', ' + RL.World.money(s, netWage(s)) + ' в месяц' + (p.job.shadow > 0.5 ? ' в конверте' : '') + '.', 'money');
+        S.log(s, (first ? 'Первая работа: ' : 'Новая работа: ') + pr[p.sex] + (viaConn ? ' (устроили знакомые родителей)' : viaTie ? ' (по знакомству: ' + RL.Social.label(viaTie) + ')' : '') + ', ' + RL.World.money(s, netWage(s)) + ' в месяц' + (p.job.shadow > 0.5 ? ' в конверте' : '') + '.', 'money');
       }
       return;
     }
     // работает
     var prr = D.economy.professions.filter(function (x) { return x.id === p.job.prof; })[0] || {};
     var u = U.clamp(ctx.unemployment * L.region.unemployment, 0.005, 0.5);
-    var loss = u / (1 - u) / 7 * (prr.unempl || 1) * (ctx.flags.jobLoss || 1) * 1.3 * ((hb.alcohol || 0) >= 2 ? 2 : 1) * ((hb.drugs || 0) >= 2 ? 3 : 1) * (p.focus === 'career' ? 0.6 : 1);
+    var loss = u / (1 - u) / 7 * (prr.unempl || 1) * (ctx.flags.jobLoss || 1) * 1.3 * ((hb.alcohol || 0) >= 3 ? 3.5 : (hb.alcohol || 0) >= 2 ? 2 : 1) * ((hb.drugs || 0) >= 2 ? 3 : 1) * (p.focus === 'career' ? 0.6 : 1);
+    loss *= (RL.Character ? RL.Character.mul(s, 'jobLoss') : 1);
     if (p.job.prof === 'athlete' || p.job.prof === 'deputy') loss = 0; // у них своя логика (RL.Careers, RL.Politics)
     if (rng.chance(loss)) { p.job.employed = false; p.job.monthsUnemployed = 0; S.log(s, 'Потерял работу.'.replace('Потерял', p.sex === 'f' ? 'Потеряла' : 'Потерял'), 'bad'); S.adj(s, 'mental', -6); return; }
     // рост за опыт: быстрый в начале карьеры, после 25 — медленнее (дальше растут повышениями, RL.Adult)
@@ -612,6 +617,13 @@ RL.Young = (function () {
   }
   function borrow(s, amt, wage, y) {
     var o = own(s), E = D.economy, kind;
+    // больше никто не даёт: долги без залога больше года доходов — платежи не вносятся (просрочка), живёшь впроголодь
+    var unsec = o.debts.filter(function (d) { return d.kind !== 'mortgage' && d.kind !== 'edu'; }).reduce(function (t, d) { return t + d.balance; }, 0);
+    if (unsec > 12 * Math.max(wage, 0.3 * AVG(s))) {
+      o.debts.forEach(function (d) { if (amt <= 0 || !d.payment) return; var c = Math.min(d.payment, amt); d.payment -= c; amt -= c; d.overdue = (d.overdue || 0) + c; });
+      o.deprivation = 3; o.defaulted = true;
+      return;
+    }
     var mfo = o.debts.filter(function (d) { return d.kind === 'mfo'; }).reduce(function (t, d) { return t + d.balance; }, 0);
     if (y >= E.bankCardFrom && wage > 0 && !o.badCredit) kind = 'bank';
     else if (y >= E.mfoFrom && mfo < Math.max(15000, wage * 1.5 + 15000)) kind = 'mfo';
@@ -636,6 +648,13 @@ RL.Young = (function () {
       own(s).living = 'rent_room';
       if (s.person.job) s.person.job.employed = false;
       S.log(s, 'Переезд в ' + mainCity(r) + ': комната на окраине, поиск работы заново.', 'family');
+    }
+    if (eff.cityMove && s.person.education.stage !== 'vuz') {
+      var hr = loc(s).region, cc = hr.cities, st2 = cc.million ? 'million' : cc.big ? 'big' : cc.megapolis ? 'megapolis' : 'medium';
+      s.person.loc = {regionId: hr.id, settlement: st2, city: (cc[st2] || [mainCity(hr)])[0]};
+      own(s).living = 'rent_room';
+      if (s.person.job) s.person.job.employed = false;
+      S.log(s, 'Переезд в ' + s.person.loc.city + ': комната в общежитии гостиничного типа, работа — заново.', 'family');
     }
     if (eff.quitJob && s.person.job) s.person.job.employed = false;
   }
