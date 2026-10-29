@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1 из 146 миллионов</title>
+<link rel="stylesheet" href="css/style.css?v=18">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23a3321f'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23fbf8f2'%3E1%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<main id="app">
+
+<section id="setup" class="screen">
+  <div class="hero">
+    <div class="eyebrow">Симулятор жизни в России, родиться можно с 1985 по 2035 год</div>
+    <h1>1 из <span>146</span> миллионов</h1>
+    <p class="lead">Ты выбираешь только пол, имя, фамилию и год рождения. Регион, семья, деньги, здоровье и задатки — случай, взятый из статистики Росстата и Минздрава. Дальше — жизнь по месяцам до самого конца.</p>
+    <div class="ticker">Пока ты на этой странице, в России родилось <b id="bornNow">0</b> <span id="bornWord">детей</span></div>
+    <div class="facts">
+      <div><b>85</b>субъектов</div>
+      <div><b id="evCount">~150</b>событий с выбором</div>
+      <div><b id="achTotal">?</b>скрытых достижений</div>
+    </div>
+  </div>
+  <div>
+    <div class="card cert">
+      <div class="cert-title">Свидетельство о рождении</div>
+      <form id="birthForm">
+        <div class="row">
+          <label><input type="radio" name="sex" value="m" checked> Мальчик</label>
+          <label><input type="radio" name="sex" value="f"> Девочка</label>
+        </div>
+        <label>Имя <input id="fName" required maxlength="30" value="Алексей"></label>
+        <label>Фамилия <input id="lName" required maxlength="40" value="Смирнов"></label>
+        <button type="button" id="btnRandName" class="rand">🎲 Случайное имя и фамилия</button>
+        <label>Год рождения <input id="bYear" type="number" min="1985" max="2035" value="2003" required></label>
+        <details><summary>Дополнительно</summary>
+          <label>Seed (число, для воспроизводимой жизни) <input id="seed" type="number" placeholder="случайный"></label>
+        </details>
+        <button type="submit" class="primary">Родиться</button>
+      </form>
+      <div class="stamp" aria-hidden="true"><span>ЗАГС</span><b>★</b><span>РФ</span></div>
+    </div>
+    <div class="saves-block">
+      <h3 id="achHead">Достижения</h3>
+      <div id="achLobby" class="ach-grid"></div>
+    </div>
+    <div class="saves-block">
+      <h3>Сохранения</h3>
+      <div id="saves" class="muted">—</div>
+      <label class="filebtn">Загрузить из файла <input type="file" id="importFile" accept=".json"></label>
+    </div>
+  </div>
+</section>
+
+<section id="game" class="screen hidden">
+  <header class="top">
+    <div class="controls">
+      <button id="btnPlay" title="Пауза / продолжить (пробел)">▶</button>
+      <span class="speeds" id="speeds"></span>
+      <span class="small muted ctl" id="spdNote">дней в секунду</span><span id="spy" hidden></span><span id="spyVal" hidden></span>
+      <label class="small ctl" title="Клавиша A"><input type="checkbox" id="auto"> Автопилот</label>
+      <label class="small ctl" title="Рутинные решения (врачи, отпуск, ГИБДД) принимаются сами, важные — спрашиваются"><input type="checkbox" id="minorAuto" checked> Мелочи — сами</label>
+    </div>
+    <div class="controls">
+      <button id="btnStep" title="Один месяц">+1 месяц</button>
+      <button id="btnAch" title="Достижения этой жизни">Достижения <b id="achN">0</b></button>
+      <button id="btnFocus" title="Выбрать, чем заниматься, не дожидаясь дня рождения (F)">Сменить фокус</button>
+      <button id="btnSave">Сохранить</button>
+      <button id="btnExport">Экспорт</button>
+      <button id="btnNew">Новая жизнь</button>
+    </div>
+  </header>
+  <div class="layout">
+    <aside class="passport" id="passport">
+      <div class="pp-head"><span>Российская Федерация</span><span id="ppNo"></span></div>
+      <div class="pp-body">
+        <div class="pp-photo" id="ppPhoto"></div>
+        <dl class="pp-fields" id="ppFields"></dl>
+      </div>
+      <div id="hName" class="pp-name"></div>
+      <div id="hInfo" class="pp-now"></div>
+      <div id="ppJob" class="pp-job"></div>
+      <div id="bars" class="bars"></div>
+      <div id="ppStamps" class="pp-stamps"></div>
+    </aside>
+    <div class="col log" id="log"></div>
+    <div class="col side">
+      <div class="panel"><h3 id="budgetTitle">Бюджет семьи (в месяц)</h3><div id="budget"></div></div>
+      <div class="panel"><h3>Здоровье</h3><div id="health"></div></div>
+      <details class="panel" id="leisurePanel" open><summary><h3>Свободное время</h3><span class="small muted" id="leisFree"></span></summary><div id="leisure"></div></details>
+      <div class="panel"><h3>Семья</h3><div id="family"></div></div>
+      <div class="panel"><h3>Учёба и занятия</h3><div id="edu"></div></div>
+      <div class="panel"><h3>Характер</h3><div id="traits"></div></div>
+    </div>
+  </div>
+</section>
+
+<div id="roulette" class="roulette hidden" aria-live="polite">
+  <div class="rl-card">
+    <h2 id="rlTitle">Где ты родишься</h2>
+    <div class="reels" id="reels"></div>
+    <p class="rl-note" id="rlNote">Регион, город и семья выпадают с теми же шансами, что у настоящих детей, родившихся в этом году.</p>
+    <div class="rl-actions"><button id="rlSkip">Пропустить</button><button id="rlGo" class="primary" disabled>Начать жизнь</button></div>
+  </div>
+</div>
+
+<section id="report" class="screen hidden"></section>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<div id="modal" class="modal hidden"><div class="box" id="modalBox"></div></div>
+</main>
+
+<script src="js/core/rng.js"></script>
+<script src="js/data/regions.js"></script>
+<script src="js/data/subjects.js"></script>
+<script src="js/data/people.js"></script>
+<script src="js/data/demography.js"></script>
+<script src="js/data/economy.js"></script>
+<script src="js/data/history.js"></script>
+<script src="js/data/medical.js"></script>
+<script src="js/data/childhood.js"></script>
+<script src="js/data/events.js"></script>
+<script src="js/data/teen.js"></script>
+<script src="js/data/events_teen.js"></script>
+<script src="js/data/young.js"></script>
+<script src="js/data/events_young.js"></script>
+<script src="js/data/adult.js"></script>
+<script src="js/data/events_adult.js"></script>
+<script src="js/data/ownfamily.js"></script>
+<script src="js/data/events_family.js"></script>
+<script src="js/data/old.js"></script>
+<script src="js/data/events_old.js"></script>
+<script src="js/data/diseases.js"></script>
+<script src="js/data/law.js"></script>
+<script src="js/data/focuses.js"></script>
+<script src="js/data/careers.js"></script>
+<script src="js/data/politics.js"></script>
+<script src="js/data/money.js"></script>
+<script src="js/data/events_life.js"></script>
+<script src="js/data/deathcauses.js"></script>
+<script src="js/data/diseases_ext.js"></script>
+<script src="js/data/ethnic.js"></script>
+<script src="js/data/focuses_ext.js"></script>
+<script src="js/data/sport.js"></script>
+<script src="js/data/universities.js"></script>
+<script src="js/data/elections.js"></script>
+<script src="js/data/events_kin.js"></script>
+<script src="js/data/events_careers.js"></script>
+<script src="js/data/career_focuses.js"></script>
+<script src="js/data/professions_ext.js"></script>
+<script src="js/data/career_focus.js"></script>
+<script src="js/data/ext_glue.js"></script>
+<script src="js/data/leisure.js"></script>
+<script src="js/data/era.js"></script>
+<script src="js/data/fixes.js"></script>
+<script src="js/sim/world.js"></script>
+<script src="js/sim/mortality.js"></script>
+<script src="js/sim/state.js"></script>
+<script src="js/sim/birth.js"></script>
+<script src="js/sim/economy.js"></script>
+<script src="js/sim/health.js"></script>
+<script src="js/sim/family.js"></script>
+<script src="js/sim/childhood.js"></script>
+<script src="js/sim/teen.js"></script>
+<script src="js/sim/young.js"></script>
+<script src="js/sim/adult.js"></script>
+<script src="js/sim/ownfamily.js"></script>
+<script src="js/sim/old.js"></script>
+<script src="js/sim/law.js"></script>
+<script src="js/sim/assets.js"></script>
+<script src="js/sim/careers.js"></script>
+<script src="js/sim/politics.js"></script>
+<script src="js/sim/leisure.js"></script>
+<script src="js/sim/achievements.js"></script>
+<script src="js/sim/events.js"></script>
+<script src="js/sim/engine.js"></script>
+<script src="js/sim/report.js"></script>
+<script src="js/ui/avatar.js"></script>
+<script src="js/ui/ui.js"></script>
+</body>
+</html>

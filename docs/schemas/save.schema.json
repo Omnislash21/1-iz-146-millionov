@@ -1,0 +1,1246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Save / game state",
+  "type": "object",
+  "required": [
+    "version",
+    "seed",
+    "rng",
+    "settings",
+    "date",
+    "birth",
+    "world",
+    "person",
+    "family",
+    "log",
+    "history"
+  ],
+  "$defs": {
+    "stats": {
+      "type": "object",
+      "properties": {
+        "health": {
+          "type": "number"
+        },
+        "money": {
+          "type": "number"
+        },
+        "skills": {
+          "type": "number"
+        },
+        "social": {
+          "type": "number"
+        },
+        "mental": {
+          "type": "number"
+        },
+        "happiness": {
+          "type": "number"
+        }
+      }
+    },
+    "member": {
+      "type": "object",
+      "required": [
+        "id",
+        "role",
+        "sex",
+        "age",
+        "alive",
+        "inHome"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "mother",
+            "father",
+            "stepfather",
+            "grandmother_m",
+            "grandmother_p",
+            "grandfather_m",
+            "grandfather_p",
+            "sibling",
+            "adoptive_mother",
+            "adoptive_father"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "sex": {
+          "enum": [
+            "m",
+            "f"
+          ]
+        },
+        "age": {
+          "type": "number"
+        },
+        "ethnic": {
+          "type": "string"
+        },
+        "alive": {
+          "type": "boolean"
+        },
+        "inHome": {
+          "type": "boolean"
+        },
+        "unknown": {
+          "type": "boolean"
+        },
+        "guardian": {
+          "type": "boolean"
+        },
+        "edu": {
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "alcohol": {
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "smokes": {
+          "type": "boolean"
+        },
+        "violent": {
+          "type": "boolean"
+        },
+        "health": {
+          "type": "number"
+        },
+        "relation": {
+          "type": "number"
+        },
+        "hiv": {
+          "type": "boolean"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "deathCause": {
+          "type": "string"
+        },
+        "deathYear": {
+          "type": "integer"
+        },
+        "job": {
+          "type": "object",
+          "properties": {
+            "prof": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "base": {
+              "type": "number"
+            },
+            "shadow": {
+              "type": "number"
+            },
+            "employed": {
+              "type": "boolean"
+            },
+            "onLeave": {
+              "type": "boolean"
+            },
+            "pension": {
+              "type": "boolean"
+            },
+            "raise": {
+              "type": "number"
+            },
+            "arrearsOwed": {
+              "type": "number"
+            },
+            "monthsUnemployed": {
+              "type": "integer"
+            },
+            "registered": {
+              "type": "boolean"
+            },
+            "deployed": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "mobilized",
+                    "contract"
+                  ]
+                },
+                "months": {
+                  "type": "integer"
+                },
+                "until": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "type": "string"
+        },
+        "settlement": {
+          "enum": [
+            "megapolis",
+            "million",
+            "big",
+            "medium",
+            "small",
+            "village"
+          ]
+        },
+        "city": {
+          "type": "string"
+        }
+      }
+    },
+    "personalJob": {
+      "type": "object",
+      "properties": {
+        "prof": {
+          "type": "string"
+        },
+        "base": {
+          "type": "number"
+        },
+        "shadow": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "employed": {
+          "type": "boolean"
+        },
+        "raise": {
+          "type": "number"
+        },
+        "since": {
+          "type": "integer"
+        },
+        "monthsUnemployed": {
+          "type": "integer"
+        }
+      },
+      "description": "base — рубли 2024, since — возраст в месяцах; shadow — доля зарплаты в конверте."
+    },
+    "personalDebt": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "edu",
+            "bank",
+            "mfo",
+            "relatives"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number"
+        },
+        "principal": {
+          "type": "number"
+        },
+        "rate": {
+          "type": "number"
+        },
+        "payment": {
+          "type": "number"
+        },
+        "deferred": {
+          "type": "boolean"
+        }
+      },
+      "description": "Личный долг; ставка rate — годовая, суммы в рублях 2024."
+    },
+    "personalBudget": {
+      "type": "object",
+      "properties": {
+        "income": {
+          "type": "number"
+        },
+        "wage": {
+          "type": "number"
+        },
+        "stipend": {
+          "type": "number"
+        },
+        "help": {
+          "type": "number"
+        },
+        "items": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "need": {
+          "type": "number"
+        },
+        "cut": {
+          "type": "number"
+        },
+        "debt": {
+          "type": "number"
+        }
+      }
+    },
+    "own": {
+      "type": "object",
+      "properties": {
+        "living": {
+          "enum": [
+            "parents",
+            "dorm",
+            "rent_room",
+            "rent_flat",
+            "army"
+          ]
+        },
+        "savings": {
+          "type": "number"
+        },
+        "debts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/personalDebt"
+          }
+        },
+        "deprivation": {
+          "type": "number"
+        },
+        "lastBudget": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/personalBudget"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "badCredit": {
+          "type": "boolean"
+        }
+      }
+    },
+    "diploma": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "enum": [
+            "СПО",
+            "бакалавр",
+            "специалист",
+            "магистр"
+          ]
+        },
+        "field": {
+          "type": "string"
+        },
+        "inst": {
+          "type": "string"
+        },
+        "q": {
+          "type": "number"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "prof": {
+          "type": "string"
+        },
+        "top": {
+          "type": "boolean"
+        },
+        "red": {
+          "type": "boolean"
+        }
+      }
+    },
+    "army": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "conscript",
+            "ags",
+            "mobilized",
+            "contract"
+          ]
+        },
+        "months": {
+          "type": "integer"
+        },
+        "term": {
+          "type": "integer"
+        },
+        "war": {
+          "type": "boolean"
+        },
+        "returnStage": {
+          "enum": [
+            "vuz",
+            "work"
+          ]
+        },
+        "prevStage": {
+          "type": "string"
+        },
+        "warChecked": {
+          "type": "boolean"
+        },
+        "returnLiving": {
+          "enum": [
+            "parents",
+            "dorm",
+            "rent_room",
+            "rent_flat",
+            "army"
+          ]
+        },
+        "returnLoc": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/location"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "vuz": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "q": {
+          "type": "number"
+        },
+        "type": {
+          "type": "string"
+        },
+        "mil": {
+          "type": "boolean"
+        },
+        "top": {
+          "type": "boolean"
+        },
+        "field": {
+          "type": "string"
+        },
+        "form": {
+          "enum": [
+            "budget",
+            "paid",
+            "target",
+            "zaochno",
+            "magistr"
+          ]
+        },
+        "course": {
+          "type": "integer"
+        },
+        "years": {
+          "type": "integer"
+        },
+        "start": {
+          "type": "integer"
+        },
+        "sessions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "отлично",
+              "хорошо",
+              "удовлетворительно",
+              "долги"
+            ]
+          }
+        },
+        "debts": {
+          "type": "number"
+        },
+        "payer": {
+          "enum": [
+            "family",
+            "credit",
+            "self",
+            null
+          ]
+        },
+        "tuition": {
+          "type": "number"
+        },
+        "level": {
+          "enum": [
+            "бакалавр",
+            "специалист",
+            "магистр"
+          ]
+        },
+        "zaochno": {
+          "type": "boolean"
+        }
+      }
+    },
+    "customOption": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "field",
+            "enroll",
+            "college",
+            "work",
+            "army",
+            "gap",
+            "bribe",
+            "serve",
+            "evade",
+            "ticket",
+            "ags",
+            "magistr",
+            "move",
+            "stay"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number"
+        },
+        "form": {
+          "enum": [
+            "budget",
+            "paid",
+            "target",
+            "zaochno",
+            "magistr"
+          ]
+        },
+        "payer": {
+          "enum": [
+            "family",
+            "credit",
+            "self"
+          ]
+        },
+        "tuition": {
+          "type": "number"
+        },
+        "cost": {
+          "type": "number"
+        },
+        "living": {
+          "enum": [
+            "rent_room",
+            "rent_flat"
+          ]
+        },
+        "v": {
+          "type": "object",
+          "description": "JSON-снимок предложения вуза: name/region/city/type/q и параметры приёма; это не объект текущего обучения education.vuz."
+        }
+      }
+    },
+    "pending": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "focus",
+            "event",
+            "custom"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "vars": {
+          "type": "object"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "opts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/customOption"
+          }
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "i": {
+                "type": "integer"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "description": "Для custom: id admission_plan/admission_result/after_vuz/draft_notice; opts содержит данные решения, choices — подписи и индексы для UI."
+    }
+  },
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "rng": {
+      "type": "integer"
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "secondsPerYear": {
+          "type": "number",
+          "minimum": 5,
+          "maximum": 40
+        },
+        "speed": {
+          "enum": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ]
+        },
+        "auto": {
+          "type": "boolean"
+        }
+      }
+    },
+    "date": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "month": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 11
+        }
+      }
+    },
+    "birth": {
+      "$ref": "#/properties/date"
+    },
+    "world": {
+      "type": "object",
+      "properties": {
+        "future": {
+          "type": "object",
+          "description": "год → {inflation, realGrowth, unemployment, crisis, flags, mobilization, leShift}"
+        }
+      }
+    },
+    "person": {
+      "type": "object",
+      "properties": {
+        "sex": {
+          "enum": [
+            "m",
+            "f"
+          ]
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "patronymic": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "ethnic": {
+          "type": "string"
+        },
+        "religionTradition": {
+          "type": "string"
+        },
+        "migrant": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "origin": {
+              "type": "string"
+            },
+            "status": {
+              "enum": [
+                "citizen",
+                "legal",
+                "undocumented"
+              ]
+            }
+          }
+        },
+        "regionId": {
+          "type": "string"
+        },
+        "settlement": {
+          "enum": [
+            "megapolis",
+            "million",
+            "big",
+            "medium",
+            "small",
+            "village"
+          ]
+        },
+        "city": {
+          "type": "string"
+        },
+        "alive": {
+          "type": "boolean"
+        },
+        "deathCause": {
+          "type": "string"
+        },
+        "deathAge": {
+          "type": "number"
+        },
+        "hidden": {
+          "type": "object",
+          "properties": {
+            "iq": {
+              "type": "number"
+            },
+            "physique": {
+              "type": "number"
+            },
+            "creativity": {
+              "type": "number"
+            },
+            "sociality": {
+              "type": "number"
+            },
+            "resilience": {
+              "type": "number"
+            }
+          }
+        },
+        "appearance": {
+          "type": "number"
+        },
+        "stats": {
+          "$ref": "#/$defs/stats"
+        },
+        "traits": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": -100,
+            "maximum": 100
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "since": {
+                "type": "integer"
+              },
+              "severe": {
+                "type": "boolean"
+              },
+              "treated": {
+                "type": "boolean"
+              },
+              "months": {
+                "type": "integer"
+              },
+              "cured": {
+                "type": "boolean"
+              },
+              "operated": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "disability": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "habits": {
+          "type": "object",
+          "properties": {
+            "smoking": {
+              "type": "integer"
+            },
+            "alcohol": {
+              "type": "integer"
+            },
+            "drugs": {
+              "type": "integer"
+            },
+            "gaming": {
+              "type": "integer"
+            }
+          }
+        },
+        "habitsEver": {
+          "type": "object"
+        },
+        "earnings": {
+          "type": "number"
+        },
+        "education": {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "enum": [
+                "home",
+                "kindergarten",
+                "school",
+                "college",
+                "work",
+                "colony",
+                "graduate",
+                "vuz",
+                "army",
+                "gap"
+              ]
+            },
+            "grade": {
+              "type": "integer"
+            },
+            "oge": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "attestat9": {
+              "type": "number"
+            },
+            "profile": {
+              "type": "string"
+            },
+            "prep": {
+              "type": "number"
+            },
+            "ege": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Последняя попытка выпускных экзаменов. failed учитывает обязательные минимумы и текущее аннулирование; annulled хранится отдельно, чтобы не переносить недействительные баллы при gap-пересдаче.",
+              "properties": {
+                "kind": {"enum": ["ЕГЭ", "выпускные экзамены"]},
+                "year": {"type": "integer"},
+                "scores": {"type": "object", "additionalProperties": {"type": "number"}},
+                "failed": {"type": "boolean"},
+                "annulled": {"type": "boolean"},
+                "profile": {"type": "string"},
+                "attestatAvg": {"type": "number"}
+              }
+            },
+            "medal": {
+              "type": "string"
+            },
+            "dorm": {
+              "type": "boolean"
+            },
+            "school": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "kg": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "performance": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "history": {
+              "type": "array"
+            },
+            "vuz": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/vuz"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "vuzHistory": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "field": {
+                    "type": "string"
+                  },
+                  "result": {
+                    "type": "string"
+                  },
+                  "year": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "admissionDone": {
+              "type": "boolean"
+            },
+            "collegeYears": {
+              "type": "integer"
+            },
+            "entrance": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "focus": {
+          "type": "string"
+        },
+        "focusHistory": {
+          "type": "array"
+        },
+        "flags": {
+          "type": "object"
+        },
+        "mortMult": {
+          "type": "number"
+        },
+        "loc": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/location"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "job": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/personalJob"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "own": {
+          "$ref": "#/$defs/own"
+        },
+        "diplomas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/diploma"
+          }
+        },
+        "army": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/army"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "family": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "married",
+            "cohab",
+            "single_mother",
+            "single_father",
+            "stepfamily",
+            "grandparents",
+            "orphanage",
+            "adoptive",
+            "foster"
+          ]
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/member"
+          }
+        },
+        "housing": {
+          "type": "object"
+        },
+        "car": {
+          "type": "boolean"
+        },
+        "dacha": {
+          "type": "boolean"
+        },
+        "savings": {
+          "type": "number"
+        },
+        "debts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "enum": [
+                  "bank",
+                  "mfo",
+                  "relatives",
+                  "arrears"
+                ]
+              },
+              "balance": {
+                "type": "number"
+              },
+              "principal": {
+                "type": "number"
+              },
+              "rate": {
+                "type": "number"
+              },
+              "payment": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "alimony": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "atmosphere": {
+          "type": "number"
+        },
+        "deprivation": {
+          "type": "number"
+        },
+        "quintile": {
+          "type": "integer"
+        },
+        "poverty": {
+          "type": "boolean"
+        },
+        "lastBudget": {
+          "type": "object"
+        },
+        "flags": {
+          "type": "object"
+        },
+        "childSupport": {
+          "type": "number"
+        },
+        "tuitionMonthly": {
+          "type": "number"
+        }
+      }
+    },
+    "log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "y": {
+            "type": "integer"
+          },
+          "m": {
+            "type": "integer"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "info",
+              "birth",
+              "news",
+              "family",
+              "bad",
+              "good",
+              "health",
+              "edu",
+              "money",
+              "choice",
+              "event",
+              "birthday",
+              "death",
+              "end"
+            ]
+          }
+        }
+      }
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "age": {
+            "type": "integer"
+          },
+          "year": {
+            "type": "integer"
+          },
+          "stats": {
+            "$ref": "#/$defs/stats"
+          },
+          "quintile": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "income": {
+            "type": "number"
+          },
+          "familyType": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "atmosphere": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "pending": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/pending"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "queue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "vars": {
+            "type": "object"
+          },
+          "custom": {
+            "$ref": "#/$defs/pending"
+          }
+        }
+      }
+    },
+    "fired": {
+      "type": "object"
+    },
+    "cooldowns": {
+      "type": "object"
+    },
+    "flags": {
+      "type": "object"
+    },
+    "over": {
+      "type": "boolean"
+    },
+    "endReason": {
+      "enum": [
+        "death",
+        "mvp"
+      ]
+    },
+    "queueFocus": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/pending"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "description": "Сохранение version 1, этапы 0–2 до 25-летия. Новые поля молодости возникают по мере надобности. Схема описывает данные; UI не применяет её автоматически при импорте."
+}

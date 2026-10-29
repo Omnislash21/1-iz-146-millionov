@@ -1,0 +1,272 @@
+{
+  "source": {
+    "root": "work\\session-base-source",
+    "sha256": {
+      "js/core/rng.js": "955512ee698fbcb8eed0e089437c609f8626bf3f0be6a5a9e7a36979ef3f61a4",
+      "js/data/regions.js": "4bd9febf8d0273f788fea3ee491ffad6b967f60abe1cd34b120a065d9d5635d4",
+      "js/data/people.js": "26bd1f417dbe74f4d65c586b9d026f4398b19353171d1849278d959c99f54a9d",
+      "js/data/demography.js": "746563caecd65f8404c400c1198e5324f3c993eedb8beb244774790506de77c6",
+      "js/data/economy.js": "c3e36e97e78b8466b4fd8fff3b80e1eab229789f470e720fffbd3708b89ff6e4",
+      "js/data/history.js": "235b7cdf7b498d2c0e938c35e685a4219f3c891e9d80233fd0d84a8588a9925b",
+      "js/data/medical.js": "17201c3bce41de89f1c1bd5e4ad415d3d5b46e853becf1f421cba70dfbf30e41",
+      "js/data/childhood.js": "40015e57474b19f1e6ab19703f6ba4aff6eac012b5d47864f929106975a07c5a",
+      "js/data/events.js": "52fa3906cdac6be450ce191845fe9432c0fe627bb8e34e9503833db31a22ab09",
+      "js/data/teen.js": "537acd4ad91b60cbe1248da8f046ebea1ba94d5f88b9639a20f9c92c23183e35",
+      "js/data/events_teen.js": "e5b457fbfed74585dc17a9f6934c4c6564a7e0b85cb49ec68a43782a6cf4e70c",
+      "js/data/young.js": "96b89016908718e8b1dc9eb150cac744fd2d3539e36842e0be34f6888356e340",
+      "js/data/events_young.js": "7ce633ffc319a987a76cdaaa4d9b089a3f85cc1a8bbe8135a4e26ac8bf9609fd",
+      "js/sim/world.js": "291c5ae844729ebccae71a8053000e330eb4b57cb766a7db268968cdc391c4ab",
+      "js/sim/mortality.js": "72e29e4627474d5ec5be8370996a3f1ed608e351051153012b4448ff74b1d182",
+      "js/sim/state.js": "2f5c95e7817c9791355fd63aee915e8888e5ab756a327e9f43afc58a1c11e915",
+      "js/sim/birth.js": "6c6d7d444b4b314edfdf771b4e4b537a53606b336b95b4178dd845edfa243610",
+      "js/sim/economy.js": "9733e709cddc7ca25521ad0f072d9312a7bc8f676f274610fa69a7ddd5e04c3a",
+      "js/sim/health.js": "594cb35e1afa66dd1ba7aed8ed4f9e894a94de3eb17e5dad050bc114c595ad33",
+      "js/sim/family.js": "d45bb45c76f9217a26facf6c1edcb822a1b4fb83bb9d34eaf40601305dc643bf",
+      "js/sim/childhood.js": "8fbb330505f145dd370353cd21dfbe8bf3aab49986d645007be0795527c0568d",
+      "js/sim/teen.js": "5009a12f8e4362cec956573a123583c66142da499cc9e2d304c239d044e362e1",
+      "js/sim/young.js": "f506d90084f859d3a4f0e404d7771d2070d02e1a3308a03662d7651e381e3e76",
+      "js/sim/events.js": "430343d176b81e26da69ab057551dd331175b0230ae0294a8678eb3eabe83806",
+      "js/sim/engine.js": "bb66f43494c3378426763d326737f8af13122e0231e57eec37debb6a96bb87b7",
+      "js/sim/report.js": "a23c703cb392e7a221b75005413da15b5f720eb1913f1c5fe41d910a8f1e1b80"
+    },
+    "startsSha256": "47d01520f1f3d94149b58d3fc42d760febe8779473cb9365c06afe3d879fa9fa",
+    "allScriptSha256": {
+      "js/core/rng.js": "955512ee698fbcb8eed0e089437c609f8626bf3f0be6a5a9e7a36979ef3f61a4",
+      "js/data/regions.js": "4bd9febf8d0273f788fea3ee491ffad6b967f60abe1cd34b120a065d9d5635d4",
+      "js/data/people.js": "26bd1f417dbe74f4d65c586b9d026f4398b19353171d1849278d959c99f54a9d",
+      "js/data/demography.js": "746563caecd65f8404c400c1198e5324f3c993eedb8beb244774790506de77c6",
+      "js/data/economy.js": "c3e36e97e78b8466b4fd8fff3b80e1eab229789f470e720fffbd3708b89ff6e4",
+      "js/data/history.js": "235b7cdf7b498d2c0e938c35e685a4219f3c891e9d80233fd0d84a8588a9925b",
+      "js/data/medical.js": "17201c3bce41de89f1c1bd5e4ad415d3d5b46e853becf1f421cba70dfbf30e41",
+      "js/data/childhood.js": "40015e57474b19f1e6ab19703f6ba4aff6eac012b5d47864f929106975a07c5a",
+      "js/data/events.js": "52fa3906cdac6be450ce191845fe9432c0fe627bb8e34e9503833db31a22ab09",
+      "js/data/teen.js": "537acd4ad91b60cbe1248da8f046ebea1ba94d5f88b9639a20f9c92c23183e35",
+      "js/data/events_teen.js": "e5b457fbfed74585dc17a9f6934c4c6564a7e0b85cb49ec68a43782a6cf4e70c",
+      "js/data/young.js": "96b89016908718e8b1dc9eb150cac744fd2d3539e36842e0be34f6888356e340",
+      "js/data/events_young.js": "7ce633ffc319a987a76cdaaa4d9b089a3f85cc1a8bbe8135a4e26ac8bf9609fd",
+      "js/sim/world.js": "291c5ae844729ebccae71a8053000e330eb4b57cb766a7db268968cdc391c4ab",
+      "js/sim/mortality.js": "72e29e4627474d5ec5be8370996a3f1ed608e351051153012b4448ff74b1d182",
+      "js/sim/state.js": "2f5c95e7817c9791355fd63aee915e8888e5ab756a327e9f43afc58a1c11e915",
+      "js/sim/birth.js": "6c6d7d444b4b314edfdf771b4e4b537a53606b336b95b4178dd845edfa243610",
+      "js/sim/economy.js": "9733e709cddc7ca25521ad0f072d9312a7bc8f676f274610fa69a7ddd5e04c3a",
+      "js/sim/health.js": "594cb35e1afa66dd1ba7aed8ed4f9e894a94de3eb17e5dad050bc114c595ad33",
+      "js/sim/family.js": "d45bb45c76f9217a26facf6c1edcb822a1b4fb83bb9d34eaf40601305dc643bf",
+      "js/sim/childhood.js": "8fbb330505f145dd370353cd21dfbe8bf3aab49986d645007be0795527c0568d",
+      "js/sim/teen.js": "5009a12f8e4362cec956573a123583c66142da499cc9e2d304c239d044e362e1",
+      "js/sim/young.js": "f506d90084f859d3a4f0e404d7771d2070d02e1a3308a03662d7651e381e3e76",
+      "js/sim/events.js": "430343d176b81e26da69ab057551dd331175b0230ae0294a8678eb3eabe83806",
+      "js/sim/engine.js": "bb66f43494c3378426763d326737f8af13122e0231e57eec37debb6a96bb87b7",
+      "js/sim/report.js": "a23c703cb392e7a221b75005413da15b5f720eb1913f1c5fe41d910a8f1e1b80",
+      "js/ui/ui.js": "447633071f25b5ff81d6b556b9f47857eacae09927e1c668dd126b61c9d5e3e3"
+    },
+    "aggregateSha256": "cc877b04a5f61230cb8502e0b11d99928832f6e34f6437e9773667d337a7590c",
+    "indexSha256": "feb4878571cef04cabeb96733444dcf12fe9808a7af5360560ea89f2571b252b",
+    "experimentScriptSha256": "ebb8481da38dfe077b1f9ab3d46ff5a3acf6a0e636bf5520f2fd3caef7229f4f",
+    "nodeVersion": "v22.23.2"
+  },
+  "method": {
+    "births": 1020,
+    "seeds": "1000 + i*7919",
+    "cohort": "natural first-degree vuz; entry age + nominal years <=25; identical serialized entry states; retake success unchanged at0.55; stop on first program outcome or age25",
+    "notes": [
+      "Maturity uses entryAge+nominalYears<=25, conservatively excludes a few students whose calendar June graduation would fit.",
+      "First program only; unique persons; includes entrants after SPO, excludes magistr.",
+      "Models differ only in debt threshold; retake success stays0.55. All continuations use identical saved entry state and RNG.",
+      "Entry-focus/IQ/form groups are descriptive; entry focus is not fixed during the course.",
+      "Degrees that finish in the final simulated month are counted from vuzHistory after loop termination."
+    ]
+  },
+  "elapsedSeconds": 49.728,
+  "results": [
+    {
+      "threshold": -1.4,
+      "n": 470,
+      "expelled": 7,
+      "graduated": 450,
+      "dead": 3,
+      "censored": 10,
+      "sessions": 3858,
+      "debts": 25,
+      "groups": {
+        "iqLow": {
+          "n": 130,
+          "expelled": 5
+        },
+        "iqHigh": {
+          "n": 340,
+          "expelled": 2
+        },
+        "entryStudy": {
+          "n": 140,
+          "expelled": 1
+        },
+        "entryOther": {
+          "n": 330,
+          "expelled": 6
+        },
+        "fulltime": {
+          "n": 385,
+          "expelled": 3
+        },
+        "zaochno": {
+          "n": 85,
+          "expelled": 4
+        }
+      },
+      "dropoutRate": 0.014893617021276596,
+      "resolvedDropoutRate": 0.015317286652078774
+    },
+    {
+      "threshold": -0.8,
+      "n": 470,
+      "expelled": 45,
+      "graduated": 413,
+      "dead": 3,
+      "censored": 9,
+      "sessions": 3701,
+      "debts": 102,
+      "groups": {
+        "iqLow": {
+          "n": 130,
+          "expelled": 31
+        },
+        "iqHigh": {
+          "n": 340,
+          "expelled": 14
+        },
+        "entryStudy": {
+          "n": 140,
+          "expelled": 11
+        },
+        "entryOther": {
+          "n": 330,
+          "expelled": 34
+        },
+        "fulltime": {
+          "n": 385,
+          "expelled": 24
+        },
+        "zaochno": {
+          "n": 85,
+          "expelled": 21
+        }
+      },
+      "dropoutRate": 0.09574468085106383,
+      "resolvedDropoutRate": 0.0982532751091703
+    },
+    {
+      "threshold": -0.65,
+      "n": 470,
+      "expelled": 53,
+      "graduated": 404,
+      "dead": 3,
+      "censored": 10,
+      "sessions": 3651,
+      "debts": 122,
+      "groups": {
+        "iqLow": {
+          "n": 130,
+          "expelled": 35
+        },
+        "iqHigh": {
+          "n": 340,
+          "expelled": 18
+        },
+        "entryStudy": {
+          "n": 140,
+          "expelled": 12
+        },
+        "entryOther": {
+          "n": 330,
+          "expelled": 41
+        },
+        "fulltime": {
+          "n": 385,
+          "expelled": 33
+        },
+        "zaochno": {
+          "n": 85,
+          "expelled": 20
+        }
+      },
+      "dropoutRate": 0.1127659574468085,
+      "resolvedDropoutRate": 0.11597374179431072
+    },
+    {
+      "threshold": -0.5,
+      "n": 470,
+      "expelled": 66,
+      "graduated": 394,
+      "dead": 3,
+      "censored": 7,
+      "sessions": 3604,
+      "debts": 162,
+      "groups": {
+        "iqLow": {
+          "n": 130,
+          "expelled": 43
+        },
+        "iqHigh": {
+          "n": 340,
+          "expelled": 23
+        },
+        "entryStudy": {
+          "n": 140,
+          "expelled": 18
+        },
+        "entryOther": {
+          "n": 330,
+          "expelled": 48
+        },
+        "fulltime": {
+          "n": 385,
+          "expelled": 39
+        },
+        "zaochno": {
+          "n": 85,
+          "expelled": 27
+        }
+      },
+      "dropoutRate": 0.14042553191489363,
+      "resolvedDropoutRate": 0.14347826086956522
+    },
+    {
+      "threshold": -0.35,
+      "n": 470,
+      "expelled": 82,
+      "graduated": 380,
+      "dead": 3,
+      "censored": 5,
+      "sessions": 3530,
+      "debts": 200,
+      "groups": {
+        "iqLow": {
+          "n": 130,
+          "expelled": 54
+        },
+        "iqHigh": {
+          "n": 340,
+          "expelled": 28
+        },
+        "entryStudy": {
+          "n": 140,
+          "expelled": 23
+        },
+        "entryOther": {
+          "n": 330,
+          "expelled": 59
+        },
+        "fulltime": {
+          "n": 385,
+          "expelled": 51
+        },
+        "zaochno": {
+          "n": 85,
+          "expelled": 31
+        }
+      },
+      "dropoutRate": 0.17446808510638298,
+      "resolvedDropoutRate": 0.1774891774891775
+    }
+  ]
+}

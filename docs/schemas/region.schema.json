@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Region (RL.DATA.regions[])",
+  "type": "object",
+  "required": ["id", "name", "pop", "birthMul", "tags", "wage", "price", "medicine", "school", "mortality", "alcohol", "unemployment", "urban", "cities", "ethnic"],
+  "properties": {
+    "id": {"type": "string"},
+    "name": {"type": "string"},
+    "fd": {"type": "string", "description": "федеральный округ"},
+    "pop": {"type": "number", "description": "население, тыс. чел."},
+    "birthMul": {"type": "number", "description": "рождаемость относительно РФ"},
+    "tags": {"type": "array", "items": {"enum": ["capital", "capital_area", "megapolis", "south", "ural", "industrial", "volga", "republic", "siberia", "north", "fareast", "remote", "caucasus", "muslim", "chechnya", "oil", "center", "west", "hiv_high"]}},
+    "fromYear": {"type": "integer", "description": "регион в составе РФ с этого года"},
+    "wage": {"type": "number", "description": "средняя ЗП к РФ"},
+    "price": {"type": "number", "description": "уровень цен к РФ"},
+    "medicine": {"type": "number", "minimum": 0, "maximum": 100},
+    "school": {"type": "number", "minimum": 0, "maximum": 100},
+    "mortality": {"type": "number", "description": "множитель смертности к РФ"},
+    "alcohol": {"type": "number"},
+    "unemployment": {"type": "number"},
+    "migrantShare": {"type": "number", "description": "доля рождений у трудовых мигрантов"},
+    "urban": {"type": "object", "description": "доли рождений по типам поселений",
+      "propertyNames": {"enum": ["megapolis", "million", "big", "medium", "small", "village"]}, "additionalProperties": {"type": "number"}},
+    "cities": {"type": "object", "propertyNames": {"enum": ["megapolis", "million", "big", "medium", "small", "village"]},
+      "additionalProperties": {"type": "array", "items": {"type": "string"}, "minItems": 1}},
+    "ethnic": {"type": "object", "description": "id национальности (RL.DATA.ethnic) → доля", "additionalProperties": {"type": "number"}}
+  }
+}

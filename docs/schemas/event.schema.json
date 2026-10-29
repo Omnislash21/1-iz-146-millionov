@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Event (RL.DATA.events[])",
+  "description": "Текст: [мужская|женская] форма по полу ребёнка; подстановки {name} {mom} {man} {city} {sib} {who} и любые переданные системой.",
+  "type": "object",
+  "required": [
+    "id"
+  ],
+  "$defs": {
+    "cond": {
+      "type": "object",
+      "description": "факт → значение: [a,b] диапазон чисел; [\"x\",\"y\"] одно из; true/false; {\">=\":n}; tags/notTags — теги региона; any: [cond]; not: cond",
+      "additionalProperties": true
+    },
+    "mods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "if",
+          "mul"
+        ],
+        "properties": {
+          "if": {
+            "$ref": "#/$defs/cond"
+          },
+          "mul": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "properties": {
+        "health": {
+          "type": "number"
+        },
+        "mental": {
+          "type": "number"
+        },
+        "social": {
+          "type": "number"
+        },
+        "skills": {
+          "type": "number"
+        },
+        "happiness": {
+          "type": "number"
+        },
+        "money": {
+          "type": "number"
+        },
+        "cash": {
+          "type": "number",
+          "description": "деньги семьи, руб. 2024; расходы × цены региона"
+        },
+        "atmosphere": {
+          "type": "number"
+        },
+        "trait": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "relation": {
+          "type": "object",
+          "description": "all | man | mother | роль → изменение",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "condition": {
+          "type": "string",
+          "description": "id из RL.DATA.conditions"
+        },
+        "flag": {
+          "type": "string"
+        },
+        "unflag": {
+          "type": "string"
+        },
+        "queue": {
+          "type": "string",
+          "description": "поставить в очередь событие"
+        },
+        "death": {
+          "type": "string",
+          "description": "причина смерти"
+        },
+        "deathP": {
+          "type": "number"
+        },
+        "habit": {
+          "type": "object",
+          "description": "smoking|alcohol|drugs|gaming → уровень-минимум",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "habitDown": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "track": {
+          "type": "string",
+          "description": "school10 | repeat9 | college:<id> | work"
+        },
+        "profile": {
+          "enum": [
+            "physmath",
+            "humanities",
+            "natural",
+            "socecon",
+            "universal"
+          ]
+        },
+        "prep": {
+          "type": "number"
+        },
+        "crime": {
+          "enum": [
+            "minor",
+            "drugs"
+          ]
+        },
+        "army": {
+          "enum": [
+            "conscript",
+            "contract",
+            "mobilized",
+            "ags"
+          ],
+          "description": "Начать службу через RL.Young.applyEffects; вид влияет на срок и риски."
+        },
+        "moveOut": {
+          "enum": [
+            "rent_room",
+            "rent_flat"
+          ],
+          "description": "Съехать от родителей в комнату или квартиру: person.own.living."
+        },
+        "bigMove": {
+          "type": "string",
+          "description": "ID региона переезда; используемые событиями значения msk/spb. Обновляет person.loc, снимает занятость, включает съём комнаты."
+        },
+        "quitJob": {
+          "type": "boolean",
+          "description": "true снимает флаг person.job.employed, сохраняя прежнюю работу для истории."
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "properties": {
+        "w": {
+          "type": "number"
+        },
+        "mods": {
+          "$ref": "#/$defs/mods"
+        },
+        "text": {
+          "type": "string"
+        },
+        "effects": {
+          "$ref": "#/$defs/effects"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "when": {
+      "$ref": "#/$defs/cond"
+    },
+    "p": {
+      "type": "number",
+      "description": "базовая вероятность в месяц"
+    },
+    "mods": {
+      "$ref": "#/$defs/mods"
+    },
+    "once": {
+      "type": "boolean"
+    },
+    "cooldown": {
+      "type": "integer",
+      "description": "месяцев до повтора"
+    },
+    "trigger": {
+      "type": "boolean",
+      "description": "только через очередь от систем"
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/outcome"
+      }
+    },
+    "choices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "if": {
+            "$ref": "#/$defs/cond"
+          },
+          "traits": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          },
+          "effects": {
+            "$ref": "#/$defs/effects"
+          },
+          "outcomes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/outcome"
+            }
+          }
+        }
+      }
+    }
+  }
+}

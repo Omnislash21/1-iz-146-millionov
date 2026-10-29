@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><title>Портреты: проверка</title>
+<link rel="stylesheet" href="../css/style.css?v=14">
+<style>
+  body { padding: 16px; }
+  .g { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+  .c { text-align: center; font-size: 12px; color: var(--muted); }
+  .c div { width: 192px; height: 240px; margin: 0 auto 4px; border: 1px solid var(--line2); border-radius: 4px; overflow: hidden; }
+  .c svg { width: 100%; height: 100%; display: block; }
+</style></head>
+<body>
+<h2>Портреты персонажей — разные люди и возрасты</h2>
+<div class="g" id="g"></div>
+<script>window.RL = {DATA: {}};</script>
+<script src="../js/core/rng.js"></script>
+<script src="../js/data/people.js"></script>
+<script>RL.S = {age: function () { return 30; }};</script>
+<script src="../js/ui/avatar.js?v=6"></script>
+<script>
+  var eth = ['russian', 'russian', 'tatar', 'chechen', 'avar', 'armenian', 'kazakh', 'uzbek', 'buryat', 'yakut', 'korean', 'ukrainian'];
+  var ages = [0.5, 5, 10, 15, 22, 30, 40, 50, 62, 75, 88];
+  var h = '';
+  for (var i = 0; i < 36; i++) {
+    var sex = i % 2 ? 'm' : 'f', e = eth[i % eth.length], L = RL.Avatar.make(1000 + i * 7919, sex, e), a = ages[i % ages.length];
+    var o = {age: a, happiness: [80, 50, 25][i % 3], mental: i % 7 ? 60 : 20, glasses: i % 9 === 0, obese: i % 11 === 0};
+    h += '<div class="c"><div>' + RL.Avatar.svg(L, o) + '</div>' + (RL.DATA.ethnic[e] ? RL.DATA.ethnic[e][sex] : e) + ', ' + Math.floor(a) + '</div>';
+  }
+  document.getElementById('g').innerHTML = h;
+</script>
+</body></html>

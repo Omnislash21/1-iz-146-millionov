@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Profession (RL.DATA.economy.professions[])",
+  "type": "object",
+  "required": ["id", "m", "f", "edu", "wage", "sd", "shadow", "sector", "sex"],
+  "properties": {
+    "id": {"type": "string"},
+    "m": {"type": "string", "description": "название, мужской род"},
+    "f": {"type": "string", "description": "название, женский род"},
+    "edu": {"enum": [0, 1, 2], "description": "минимум: 0 школа, 1 СПО, 2 высшее"},
+    "wage": {"type": "number", "description": "средняя ЗП 2024 по РФ, руб./мес до НДФЛ (умножается на wageScale)"},
+    "sd": {"type": "number", "description": "σ логнормального разброса"},
+    "shadow": {"type": "number", "minimum": 0, "maximum": 1, "description": "склонность к серой зарплате"},
+    "sector": {"enum": ["budget", "state", "private"]},
+    "arrears": {"type": "number", "description": "подверженность задержкам ЗП в 90-е"},
+    "sex": {"type": "object", "properties": {"m": {"type": "number"}, "f": {"type": "number"}}},
+    "alcohol": {"type": "number"}, "injury": {"type": "number"}, "unempl": {"type": "number"},
+    "corrupt": {"type": "number", "description": "шанс «неофициального» дохода в месяц"},
+    "fromYear": {"type": "integer"}, "cityOnly": {"type": "boolean"}, "village": {"type": "boolean"},
+    "away": {"type": "boolean", "description": "вахта: подолгу не дома"},
+    "volatile": {"type": "boolean", "description": "нестабильный доход (ИП)"}
+  }
+}

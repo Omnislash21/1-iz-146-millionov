@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Condition (RL.DATA.conditions[id])",
+  "type": "object",
+  "required": ["name", "kind", "text"],
+  "properties": {
+    "name": {"type": "string"},
+    "kind": {"enum": ["congenital", "chronic", "acute"]},
+    "birthP": {"type": "number", "description": "вероятность при рождении"},
+    "birthPIf": {"type": "object", "description": "факт → минимальная вероятность при рождении", "additionalProperties": {"type": "number"}},
+    "severeShare": {"type": "number"},
+    "perYear": {"type": "number", "description": "годовая заболеваемость"},
+    "ages": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+    "byYear": {"type": "object", "description": "год → множитель заболеваемости", "additionalProperties": {"type": "number"}},
+    "mods": {"type": "object", "description": "факт → множитель", "additionalProperties": {"type": "number"}},
+    "cap": {"type": "number", "description": "потолок здоровья (без лечения; с лечением +8)"},
+    "drain": {"type": "number", "description": "потеря здоровья в месяц"},
+    "mort": {"type": "number", "description": "множитель смертности"},
+    "mortInfant": {"type": "number"}, "mortToddler": {"type": "number"}, "mortSevere": {"type": "number"}, "mortMild": {"type": "number"},
+    "mortArt": {"type": "number"}, "mortNoArt": {"type": "number"}, "artFrom": {"type": "integer"}, "mort90s": {"type": "number"},
+    "needsSurgery": {"type": "boolean"}, "surgerySuccess": {"type": "object", "additionalProperties": {"type": "number"}},
+    "survival5y": {"type": "object", "additionalProperties": {"type": "number"}},
+    "durationMonths": {"type": "number"}, "resolveAge": {"type": "number"},
+    "cost": {"type": "number", "description": "лечение в месяц, руб. 2024"},
+    "freeShare": {"type": "number", "description": "доля, покрываемая ОМС/льготами"},
+    "disability": {"type": "number"}, "cureYear": {"type": "number"},
+    "iqSet": {"type": "number"}, "iqShift": {"type": "number"}, "skillsPenalty": {"type": "number"}, "socialPenalty": {"type": "number"},
+    "text": {"type": "string", "description": "строка в ленту при появлении"}
+  }
+}

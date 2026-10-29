@@ -1,0 +1,4227 @@
+{
+ "report": {
+  "title": "Анна Олеговна Смирнова",
+  "born": 2003,
+  "ended": 2028,
+  "age": 25,
+  "dead": false,
+  "cause": null,
+  "place": "пос. Тиксикан, Дальний Восток",
+  "birthPlace": "Ты родилась 15 февраля 2003 года: Казань, Республика Татарстан (город-миллионник).",
+  "lifeExpBirth": 71.8,
+  "remainingLE": 54.9,
+  "familyPath": [
+   "0 лет — полная семья (брак)",
+   "14 лет — мама и отчим"
+  ],
+  "stats": {
+   "health": 74.60285410607617,
+   "money": 55.84394024318969,
+   "skills": 49.53101701813924,
+   "social": 56.16843321644181,
+   "mental": 50.516039205340505,
+   "happiness": 63.51081900177906
+  },
+  "history": [
+   {
+    "age": 0,
+    "year": 2003,
+    "stats": {
+     "health": 85,
+     "money": 50,
+     "skills": 50,
+     "social": 45,
+     "mental": 72,
+     "happiness": 70
+    },
+    "quintile": null,
+    "income": 0,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 60
+   },
+   {
+    "age": 1,
+    "year": 2004,
+    "stats": {
+     "health": 68.76972193683471,
+     "money": 7.637218957755142,
+     "skills": 48.96871954951571,
+     "social": 43.793738902322026,
+     "mental": 66.76548018737606,
+     "happiness": 64.72672364901453
+    },
+    "quintile": 2,
+    "income": 35904.96647976572,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 60
+   },
+   {
+    "age": 2,
+    "year": 2005,
+    "stats": {
+     "health": 58.57429500772176,
+     "money": 0.4114805175238009,
+     "skills": 48.624117667467175,
+     "social": 42.95678385433218,
+     "mental": 62.65725505643268,
+     "happiness": 57.811685628789384
+    },
+    "quintile": 1,
+    "income": 38846.88774532348,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 60
+   },
+   {
+    "age": 3,
+    "year": 2006,
+    "stats": {
+     "health": 47.41550554405348,
+     "money": 0.013034201724133866,
+     "skills": 46.88912961185598,
+     "social": 42.37606898778787,
+     "mental": 49.55283739856696,
+     "happiness": 48.45504641466419
+    },
+    "quintile": 2,
+    "income": 54981.11948851522,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 55
+   },
+   {
+    "age": 4,
+    "year": 2007,
+    "stats": {
+     "health": 53.62431889745878,
+     "money": 0.0004128759621665135,
+     "skills": 46.51827291663043,
+     "social": 45.35921806179222,
+     "mental": 56.21185047579835,
+     "happiness": 47.690739545163446
+    },
+    "quintile": 2,
+    "income": 63681.91463234503,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 56
+   },
+   {
+    "age": 5,
+    "year": 2008,
+    "stats": {
+     "health": 59.2870287549705,
+     "money": 0.2482776442209912,
+     "skills": 46.680754812683205,
+     "social": 45.96327664402133,
+     "mental": 55.787296439617364,
+     "happiness": 49.40857348115489
+    },
+    "quintile": 1,
+    "income": 59029.7720685766,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 52
+   },
+   {
+    "age": 6,
+    "year": 2009,
+    "stats": {
+     "health": 59.71147707555944,
+     "money": 3.1460504227396995,
+     "skills": 46.806720482845485,
+     "social": 48.39584001534847,
+     "mental": 60.06857015479252,
+     "happiness": 50.54570533370428
+    },
+    "quintile": 2,
+    "income": 75683.97573182444,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 55
+   },
+   {
+    "age": 7,
+    "year": 2010,
+    "stats": {
+     "health": 52.36126531136467,
+     "money": 4.974944552752296,
+     "skills": 50.70969391006447,
+     "social": 51.57589756422317,
+     "mental": 55.449669159806426,
+     "happiness": 51.00160137373494
+    },
+    "quintile": 3,
+    "income": 82164.10581504402,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 56
+   },
+   {
+    "age": 8,
+    "year": 2011,
+    "stats": {
+     "health": 60.62344602663042,
+     "money": 5.682542352521079,
+     "skills": 49.81237916821515,
+     "social": 57.57257517072683,
+     "mental": 56.18425874296373,
+     "happiness": 55.84618727754181
+    },
+    "quintile": 3,
+    "income": 83459.50272030714,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 51
+   },
+   {
+    "age": 9,
+    "year": 2012,
+    "stats": {
+     "health": 57.702764461189666,
+     "money": 0.6608602190727645,
+     "skills": 49.228746390163955,
+     "social": 60.29553811266935,
+     "mental": 57.53475954658949,
+     "happiness": 55.19010111721167
+    },
+    "quintile": 2,
+    "income": 73069.01795607992,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 50
+   },
+   {
+    "age": 10,
+    "year": 2013,
+    "stats": {
+     "health": 46.84134688039832,
+     "money": 4.178088445785177,
+     "skills": 47.27342995407713,
+     "social": 64.16607423173905,
+     "mental": 54.2166108903833,
+     "happiness": 53.064050983989375
+    },
+    "quintile": 2,
+    "income": 76089.80750901837,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 53
+   },
+   {
+    "age": 11,
+    "year": 2014,
+    "stats": {
+     "health": 50.865217423436206,
+     "money": 0.8253997425372379,
+     "skills": 51.304255257974454,
+     "social": 63.555291658645935,
+     "mental": 52.56553305097099,
+     "happiness": 52.44018350555097
+    },
+    "quintile": 1,
+    "income": 62623.7850463366,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 51
+   },
+   {
+    "age": 12,
+    "year": 2015,
+    "stats": {
+     "health": 53.298789526559226,
+     "money": 10.82948747914147,
+     "skills": 54.44587446625221,
+     "social": 56.23043167010352,
+     "mental": 49.58108868317724,
+     "happiness": 51.788453444301076
+    },
+    "quintile": 2,
+    "income": 73084.19862463958,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 48
+   },
+   {
+    "age": 13,
+    "year": 2016,
+    "stats": {
+     "health": 56.33106079563757,
+     "money": 16.653850051633825,
+     "skills": 55.92109462608643,
+     "social": 65.90488349429579,
+     "mental": 54.058995464149916,
+     "happiness": 59.06676593811575
+    },
+    "quintile": 2,
+    "income": 73751.69744585031,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 52
+   },
+   {
+    "age": 14,
+    "year": 2017,
+    "stats": {
+     "health": 56.415788374423535,
+     "money": 10.850995808150605,
+     "skills": 53.395474050363774,
+     "social": 67.92370124742287,
+     "mental": 46.70952364602122,
+     "happiness": 56.61913116323435
+    },
+    "quintile": 3,
+    "income": 76166.00453368612,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 36
+   },
+   {
+    "age": 15,
+    "year": 2018,
+    "stats": {
+     "health": 52.437267578614325,
+     "money": 1.4700616623497238,
+     "skills": 57.49433601731962,
+     "social": 65.41013231812192,
+     "mental": 45.88595985525333,
+     "happiness": 53.297791268376955
+    },
+    "quintile": 1,
+    "income": 31143.24302366468,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 31
+   },
+   {
+    "age": 16,
+    "year": 2019,
+    "stats": {
+     "health": 53.157778737700866,
+     "money": 0.04656619071369168,
+     "skills": 55.136416628756976,
+     "social": 62.15962192038185,
+     "mental": 16.425926599532204,
+     "happiness": 36.832892707117836
+    },
+    "quintile": 1,
+    "income": 48586.82993119892,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 21
+   },
+   {
+    "age": 17,
+    "year": 2020,
+    "stats": {
+     "health": 54.8689233382314,
+     "money": 0.001475047049467267,
+     "skills": 52.387744901952516,
+     "social": 71.40006812707902,
+     "mental": 38.685525019748454,
+     "happiness": 45.346233790859664
+    },
+    "quintile": 1,
+    "income": 23866.84904638424,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 29
+   },
+   {
+    "age": 18,
+    "year": 2021,
+    "stats": {
+     "health": 54.69209665581504,
+     "money": 11.053025299705357,
+     "skills": 49.54348564825602,
+     "social": 72.36483791361357,
+     "mental": 41.6571604789782,
+     "happiness": 50.83270322134041
+    },
+    "quintile": 2,
+    "income": 63951.95966055014,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 33
+   },
+   {
+    "age": 19,
+    "year": 2022,
+    "stats": {
+     "health": 58.787182768787446,
+     "money": 30.51147170071059,
+     "skills": 52.56868035359511,
+     "social": 68.91171871862763,
+     "mental": 18.226105433072604,
+     "happiness": 41.735834692264575
+    },
+    "quintile": 3,
+    "income": 87651.66450110852,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 30
+   },
+   {
+    "age": 20,
+    "year": 2023,
+    "stats": {
+     "health": 71.53671772839616,
+     "money": 41.0596899080664,
+     "skills": 52.0384416066021,
+     "social": 63.79708429158513,
+     "mental": 33.323494941444324,
+     "happiness": 48.866298179345655
+    },
+    "quintile": 2,
+    "income": 57131.57458892766,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 44
+   },
+   {
+    "age": 21,
+    "year": 2024,
+    "stats": {
+     "health": 72.02885959303588,
+     "money": 46.7825954290839,
+     "skills": 51.695680851320006,
+     "social": 60.248334265097405,
+     "mental": 46.24880247337661,
+     "happiness": 54.510058069465245
+    },
+    "quintile": 2,
+    "income": 76247.59397715141,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 52
+   },
+   {
+    "age": 22,
+    "year": 2025,
+    "stats": {
+     "health": 71.62449451044645,
+     "money": 53.89767790352553,
+     "skills": 50.834601477460374,
+     "social": 60.7725974905249,
+     "mental": 55.02613209731129,
+     "happiness": 62.45941615478109
+    },
+    "quintile": 2,
+    "income": 83591.44502079797,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 57
+   },
+   {
+    "age": 23,
+    "year": 2026,
+    "stats": {
+     "health": 74.50441459946326,
+     "money": 59.58646598366983,
+     "skills": 50.80871425119213,
+     "social": 58.179208335594666,
+     "mental": 52.298604380533,
+     "happiness": 60.69909305265792
+    },
+    "quintile": 3,
+    "income": 93934.27174856541,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 56
+   },
+   {
+    "age": 24,
+    "year": 2027,
+    "stats": {
+     "health": 72.76157539997115,
+     "money": 60.111086497764184,
+     "skills": 51.92508020375675,
+     "social": 57.87456872752455,
+     "mental": 56.48710809187379,
+     "happiness": 63.24406015906083
+    },
+    "quintile": 2,
+    "income": 91973.04523858958,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 59
+   },
+   {
+    "age": 25,
+    "year": 2028,
+    "stats": {
+     "health": 74.60285410607617,
+     "money": 55.84394024318969,
+     "skills": 49.53101701813924,
+     "social": 56.16843321644181,
+     "mental": 50.516039205340505,
+     "happiness": 63.51081900177906
+    },
+    "quintile": 1,
+    "income": 68792.8022048526,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 62
+   }
+  ],
+  "traits": [
+   "общительная (52)",
+   "смелая (49)",
+   "трудолюбивая (30)",
+   "сдержанная (18)",
+   "чуткая (14)"
+  ],
+  "hidden": {
+   "iq": 101,
+   "physique": 50,
+   "creativity": 54,
+   "sociality": 53,
+   "resilience": 40
+  },
+  "appearance": 52,
+  "conditions": [
+   "Близорукость"
+  ],
+  "disability": null,
+  "education": [
+   {
+    "grade": 1,
+    "result": "троечница",
+    "year": 2011
+   },
+   {
+    "grade": 2,
+    "result": "троечница",
+    "year": 2012
+   },
+   {
+    "grade": 3,
+    "result": "троечница",
+    "year": 2013
+   },
+   {
+    "grade": 4,
+    "result": "троечница",
+    "year": 2014
+   },
+   {
+    "grade": 5,
+    "result": "троечница",
+    "year": 2015
+   },
+   {
+    "grade": 6,
+    "result": "хорошистка",
+    "year": 2016
+   },
+   {
+    "grade": 7,
+    "result": "троечница",
+    "year": 2017
+   },
+   {
+    "grade": 8,
+    "result": "троечница",
+    "year": 2018
+   },
+   {
+    "grade": 9,
+    "result": "хорошистка",
+    "year": 2019
+   },
+   {
+    "grade": 10,
+    "result": "троечница",
+    "year": 2020
+   },
+   {
+    "grade": 11,
+    "result": "хорошистка",
+    "year": 2021
+   }
+  ],
+  "school": "обычная общеобразовательная школа",
+  "focusHistory": [
+   "3 года: Ничего особенного",
+   "4 года: Здоровье",
+   "5 лет: Здоровье",
+   "6 лет: Книжки и развивашки",
+   "7 лет: Здоровье",
+   "8 лет: Двор и улица",
+   "9 лет: Двор и улица",
+   "10 лет: Учёба",
+   "11 лет: Учёба",
+   "12 лет: Самообразование",
+   "13 лет: Компания друзей",
+   "14 лет: Учёба",
+   "15 лет: Держаться поближе к семье",
+   "16 лет: Компания друзей",
+   "17 лет: Компания друзей",
+   "18 лет: Учёба",
+   "19 лет: Здоровье",
+   "20 лет: Искать работу",
+   "21 год: Отношения",
+   "22 года: Здоровье",
+   "23 года: Карьера",
+   "24 года: Здоровье"
+  ],
+  "keyEvents": [
+   "2 (2005): Пневмония: неделю в инфекционке, лекарства пришлось докупать самим.",
+   "2 (2005): мама вышла из декрета на работу (уборщица).",
+   "2 (2005): В садик очередь: сотни детей впереди.",
+   "2 (2006): Умер дедушка (Михаил), 63 года. Причина: алкогольная болезнь печени и отравление.",
+   "3 (2006): Ты пошла в детский сад.",
+   "3 (2006): Очередь в садик наконец подошла.",
+   "4 (2007): мама потеряла работу.",
+   "5 (2008): мама нашла работу: уборщица.",
+   "6 (2010): Семья взяла микрозаём, чтобы дотянуть до зарплаты.",
+   "7 (2010): 1 сентября. Ты пошла в первый класс: обычная общеобразовательная школа.",
+   "8 (2011): мама потеряла работу.",
+   "8 (2011): Ты перешла в 2 класс.",
+   "8 (2011): Семья переехала: Казань → пос. Тиксикан (Дальний Восток).",
+   "9 (2012): Пневмония: неделю в инфекционке, лекарства пришлось докупать самим.",
+   "9 (2012): Ты перешла в 3 класс.",
+   "10 (2013): мама потеряла работу.",
+   "10 (2013): Ты перешла в 4 класс.",
+   "11 (2014): мама нашла работу: уборщица.",
+   "11 (2014): Ты перешла в 5 класс.",
+   "12 (2015): Ты перешла в 6 класс.",
+   "13 (2016): Родители развелись. Ты остаёшься с мамой, папа пропал из жизни.",
+   "13 (2016): Окончен 6 класс: хорошистка.",
+   "13 (2016): У мамы появился Иван, 46 лет, сотрудник полиции. Теперь он живёт с вами.",
+   "13 (2016): Ты перешла в 7 класс.",
+   "13 (2016): Окулист выписал очки: близорукость.",
+   "13 (2017): мама потеряла работу.",
+   "14 (2017): отчим потерял работу (запои).",
+   "14 (2017): Ты перешла в 8 класс.",
+   "15 (2018): мама нашла работу: продавец-кассир.",
+   "15 (2018): Ты перешла в 9 класс.",
+   "15 (2018): Умер отчим (Иван), 48 лет. Причина: онкологическое заболевание.",
+   "16 (2019): Окончен 9 класс: хорошистка.",
+   "16 (2019): ОГЭ: русский — 3, математика — 3. Средний балл аттестата: 3.7.",
+   "16 (2019): Остаёшься в школе: 10 класс.",
+   "16 (2019): Ты перешла в 10 класс.",
+   "16 (2019): Профиль 10–11 класса: естественно-научный.",
+   "16 (2019): мама потеряла работу.",
+   "17 (2020): Школа ушла на «дистант»: уроки по WhatsApp и Zoom.",
+   "17 (2020): мама нашла работу: продавец-кассир.",
+   "17 (2020): Ты перешла в 11 класс.",
+   "18 (2021): Окончен 11 класс: хорошистка.",
+   "18 (2021): ЕГЭ: Русский язык — 54, Математика — 27, Биология — 21, Химия — 30.",
+   "18 (2021): Первая работа: разнорабочая, 28 100 ₽ в месяц.",
+   "18 (2021): Умер папа (Олег), 49 лет. Причина: прочие причины.",
+   "19 (2022): Потеряла работу.",
+   "20 (2023): Новая работа: доярка, 15 200 ₽ в месяц.",
+   "22 (2025): Умерла бабушка (Юлия), 82 года. Причина: старость и деменция.",
+   "23 (2026): Алкоголь: выпивает по выходным.",
+   "24 (2027): Потеряла работу.",
+   "24 (2027): Новая работа: продавец-кассир, 78 600 ₽ в месяц.",
+   "24 (2027): Потеряла работу.",
+   "25 (2028): Тебе 25. Молодость позади. Дальше — следующий этап разработки: карьера, своя семья, деньги взрослого."
+  ],
+  "quintileFinal": 1
+ },
+ "state": {
+  "version": 1,
+  "seed": 1001,
+  "rng": 2297569215,
+  "settings": {
+   "secondsPerYear": 5,
+   "speed": 16,
+   "auto": true
+  },
+  "date": {
+   "year": 2028,
+   "month": 1
+  },
+  "world": {
+   "future": {
+    "2026": {
+     "inflation": 7.964377402501147,
+     "realGrowth": 3.543645333035897,
+     "unemployment": 2.209816006622645,
+     "crisis": false,
+     "flags": {
+      "svo": 1
+     },
+     "mobilization": null,
+     "leShift": 0.47248263963179404
+    },
+    "2027": {
+     "inflation": 7.467842000657324,
+     "realGrowth": 1.0776143463222403,
+     "unemployment": 3.5522159933651367,
+     "crisis": false,
+     "flags": {
+      "svo": 1
+     },
+     "mobilization": null,
+     "leShift": 0.4713038919646846
+    },
+    "2028": {
+     "inflation": 5.1297827431686835,
+     "realGrowth": 0.6738145554449152,
+     "unemployment": 1.9966026906954684,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.1783850769561481
+    },
+    "2029": {
+     "inflation": 5.300240835998615,
+     "realGrowth": 4.095304797430623,
+     "unemployment": 5.512275890884386,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.02437302627574678
+    },
+    "2030": {
+     "inflation": 9.312868236781464,
+     "realGrowth": 0.6114598387444982,
+     "unemployment": 4.35594196934434,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.1767028094247415
+    },
+    "2031": {
+     "inflation": 8.96270765333375,
+     "realGrowth": 5.466184362502307,
+     "unemployment": 2.3878370445550847,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.1726985230955233
+    },
+    "2032": {
+     "inflation": 9.279933378274311,
+     "realGrowth": -0.6019453406839657,
+     "unemployment": 1.5405250760143223,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.11962372904288912
+    },
+    "2033": {
+     "inflation": 4.9455599990322305,
+     "realGrowth": -0.7842130901648003,
+     "unemployment": 4.309243016849871,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.11734051394012054
+    },
+    "2034": {
+     "inflation": 6.855598181701635,
+     "realGrowth": 3.505867431672153,
+     "unemployment": 3.4813154385926595,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.33794903497673784
+    },
+    "2035": {
+     "inflation": 7.490139408531716,
+     "realGrowth": 2.5485697042604403,
+     "unemployment": 3.3710689285245827,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.06172796656470236
+    },
+    "2036": {
+     "inflation": 12.853504161397204,
+     "realGrowth": -1.9861822890379246,
+     "unemployment": 3.554040758164476,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": 0.23650415760920274
+    },
+    "2037": {
+     "inflation": 8.25027844914066,
+     "realGrowth": -0.9228260766018899,
+     "unemployment": 5.201689430748392,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.14078137134012705
+    },
+    "2038": {
+     "inflation": 3.728668654639028,
+     "realGrowth": 1.8080648216214679,
+     "unemployment": 4.675085941956068,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.3527984751913301
+    },
+    "2039": {
+     "inflation": 7.155592616686522,
+     "realGrowth": 3.3401388448166403,
+     "unemployment": 2.3128491921900913,
+     "crisis": false,
+     "flags": {
+      "epidemic": "pandemic"
+     },
+     "mobilization": null,
+     "leShift": 0.4375831338379065
+    },
+    "2040": {
+     "inflation": 5.4157389979582256,
+     "realGrowth": -3.151514657680279,
+     "unemployment": 4.314077789065475,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.23931873011808494
+    },
+    "2041": {
+     "inflation": 5.935569562235759,
+     "realGrowth": -0.34902362196620484,
+     "unemployment": 3.4422536216794044,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.6416118294369764
+    },
+    "2042": {
+     "inflation": 7.646884290092102,
+     "realGrowth": -2.050198909536425,
+     "unemployment": 2.216476685570739,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.3951738426528085
+    },
+    "2043": {
+     "inflation": 4.28841638828764,
+     "realGrowth": 0.5164617693175748,
+     "unemployment": 4.813621000459748,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.23487205834153072
+    },
+    "2044": {
+     "inflation": 3.9008245145434577,
+     "realGrowth": 1.8230831881181244,
+     "unemployment": 2.5552725343701472,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.07119427912190573
+    },
+    "2045": {
+     "inflation": 1.991985645061999,
+     "realGrowth": 0.8106150204534502,
+     "unemployment": 3.988354285681539,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.2913991306795223
+    },
+    "2046": {
+     "inflation": 8.053932840639607,
+     "realGrowth": -4.286825800887764,
+     "unemployment": 2.8969398857031115,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.12610484683817727
+    },
+    "2047": {
+     "inflation": 2.3759342416246185,
+     "realGrowth": -0.0013403399702889285,
+     "unemployment": 3.3996916655949367,
+     "crisis": false,
+     "flags": {
+      "epidemic": "pandemic"
+     },
+     "mobilization": null,
+     "leShift": 0.15815196046484659
+    },
+    "2048": {
+     "inflation": 8.584709214305745,
+     "realGrowth": 5.220735003314334,
+     "unemployment": 4.198094844949989,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.2874735205509599
+    },
+    "2049": {
+     "inflation": 5.366596252266911,
+     "realGrowth": 2.7887054793943684,
+     "unemployment": 4.4323670655599186,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.18848006264299744
+    },
+    "2050": {
+     "inflation": 4.6229476194489845,
+     "realGrowth": 0.15262721996843798,
+     "unemployment": 3.54607218915649,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.045187153424237125
+    },
+    "2051": {
+     "inflation": 6.824191352268327,
+     "realGrowth": 5.090879533703761,
+     "unemployment": 3.039548440677583,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.07719054531083933
+    },
+    "2052": {
+     "inflation": 1,
+     "realGrowth": 3.7590924662925427,
+     "unemployment": 2.7187618374580778,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.3008263210563663
+    },
+    "2053": {
+     "inflation": 12.414587138081213,
+     "realGrowth": -4.4006209110737355,
+     "unemployment": 6.230167289682598,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": 0.18834106188256966
+    },
+    "2054": {
+     "inflation": 6.250049340119719,
+     "realGrowth": 0.046347904157852504,
+     "unemployment": 4.234623635226216,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.4738000634718562
+    },
+    "2055": {
+     "inflation": 6.146319993931192,
+     "realGrowth": 5.110032306319326,
+     "unemployment": 3.2479703066811125,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.30807249456159447
+    },
+    "2056": {
+     "inflation": 4.929007972774268,
+     "realGrowth": 5.639982564527293,
+     "unemployment": 4.4747783283322775,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.3518345606632821
+    },
+    "2057": {
+     "inflation": 8.040197848835732,
+     "realGrowth": 0.6241681520846342,
+     "unemployment": 5.78664204272239,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.58905857607691
+    },
+    "2058": {
+     "inflation": 3.595731107983053,
+     "realGrowth": 3.0202902280786463,
+     "unemployment": 4.185416453814084,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.05213924979526402
+    },
+    "2059": {
+     "inflation": 10.068821251797509,
+     "realGrowth": -1.1500305531953297,
+     "unemployment": 2.150296031763123,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.11638467241209902
+    },
+    "2060": {
+     "inflation": 8.862012399678012,
+     "realGrowth": 1.8874781271491372,
+     "unemployment": 5.204057589179269,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.19189501197154843
+    },
+    "2061": {
+     "inflation": 10.116591308092373,
+     "realGrowth": -9.816459431676634,
+     "unemployment": 5.430519063646855,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": 0.06512052039417816
+    },
+    "2062": {
+     "inflation": 5.319145892200691,
+     "realGrowth": -0.6936571932165312,
+     "unemployment": 3.6340456293503482,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.09762200338574892
+    },
+    "2063": {
+     "inflation": 10.620953062179105,
+     "realGrowth": -8.399756658370316,
+     "unemployment": 5.721736547986648,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": 0.4777775857344305
+    },
+    "2064": {
+     "inflation": 7.938652020474743,
+     "realGrowth": 4.463784176901319,
+     "unemployment": 3.7673441711277134,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.33164262105558506
+    },
+    "2065": {
+     "inflation": 6.962862683197834,
+     "realGrowth": 1.0543241154217322,
+     "unemployment": 3.002435393090736,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.33775462533624667
+    },
+    "2066": {
+     "inflation": 15.995099102830887,
+     "realGrowth": -2.8509000416222934,
+     "unemployment": 6.479708495667448,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": -0.028751147201230925
+    },
+    "2067": {
+     "inflation": 14.57370597303822,
+     "realGrowth": -4.172987488443843,
+     "unemployment": 5.981372548584851,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": -0.09790328873185625
+    },
+    "2068": {
+     "inflation": 4.762185150361958,
+     "realGrowth": -0.15791158183129417,
+     "unemployment": 2.8643022924126376,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.05416644783218501
+    },
+    "2069": {
+     "inflation": 9.619837136673336,
+     "realGrowth": 7.678833394227453,
+     "unemployment": 3.0166682993116836,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.11081001402971205
+    },
+    "2070": {
+     "inflation": 4.543182168883087,
+     "realGrowth": -1.4080091010055793,
+     "unemployment": 5.177066053604781,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.21008776711586843
+    },
+    "2071": {
+     "inflation": 7.350148599264708,
+     "realGrowth": 5.660987747658777,
+     "unemployment": 3.723430296293654,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.19676794350577045
+    },
+    "2072": {
+     "inflation": 3.595398022808973,
+     "realGrowth": 0.29836234407691964,
+     "unemployment": 4.051182546577316,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.7963423786114155
+    },
+    "2073": {
+     "inflation": 15.675748935977321,
+     "realGrowth": -6.1790871919231405,
+     "unemployment": 5.868408373884494,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": 0.10031407990913424
+    },
+    "2074": {
+     "inflation": 8.826497985238921,
+     "realGrowth": -0.17889806434417377,
+     "unemployment": 7.4732636492510665,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": -0.16498621277474465
+    },
+    "2075": {
+     "inflation": 6.144070792921593,
+     "realGrowth": 1.7219638365307324,
+     "unemployment": 3.545345392675526,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.16897652761268628
+    },
+    "2076": {
+     "inflation": 3.8519920972344828,
+     "realGrowth": -3.0402254288886317,
+     "unemployment": 3.147859629131035,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.0925983430687991
+    },
+    "2077": {
+     "inflation": 5.861691406065917,
+     "realGrowth": 0.7995109229469896,
+     "unemployment": 3.03308945400399,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.25264788676512884
+    },
+    "2078": {
+     "inflation": 5.530150469709052,
+     "realGrowth": -2.626356094648189,
+     "unemployment": 3.0136775354193404,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.3398663444803707
+    },
+    "2079": {
+     "inflation": 8.153119571209148,
+     "realGrowth": -1.2255926968453603,
+     "unemployment": 2.387860077277472,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.35814360315783633
+    },
+    "2080": {
+     "inflation": 7.321282943009029,
+     "realGrowth": 3.0792605319370687,
+     "unemployment": 2.726066169436168,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.39545721938364087
+    },
+    "2081": {
+     "inflation": 13.384013698285099,
+     "realGrowth": -1.8637679412686392,
+     "unemployment": 7.319226099831023,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": -0.35762890600696595
+    },
+    "2082": {
+     "inflation": 1,
+     "realGrowth": -0.7439929604718274,
+     "unemployment": 2.313970615959434,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.17143294283129157
+    },
+    "2083": {
+     "inflation": 7.544364643456183,
+     "realGrowth": 0.5447671055770987,
+     "unemployment": 4.0571629320277225,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.20698331274454554
+    },
+    "2084": {
+     "inflation": 11.346171491117406,
+     "realGrowth": -1.9251123065528777,
+     "unemployment": 5.6723020360520735,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": 0.031151503188805094
+    },
+    "2085": {
+     "inflation": 6.342194613247243,
+     "realGrowth": 1.850524466534992,
+     "unemployment": 3.581659152647633,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.09983225451446168
+    },
+    "2086": {
+     "inflation": 8.98671052999693,
+     "realGrowth": 3.29613596117587,
+     "unemployment": 3.4728469108201536,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.17636278616025586
+    },
+    "2087": {
+     "inflation": 3.863235304483191,
+     "realGrowth": 2.6221926747041953,
+     "unemployment": 4.07999135241847,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.841761780188753
+    },
+    "2088": {
+     "inflation": 5.272229141813702,
+     "realGrowth": 4.1005110489427645,
+     "unemployment": 2.9246239198854336,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.601684696368416
+    },
+    "2089": {
+     "inflation": 8.004581427643483,
+     "realGrowth": 1.979427922358786,
+     "unemployment": 3.114171952998521,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.531753734346542
+    },
+    "2090": {
+     "inflation": 1.4650603951625927,
+     "realGrowth": 0.23252431656610129,
+     "unemployment": 4.56979689542027,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.11780098045336077
+    },
+    "2091": {
+     "inflation": 5.295968757611727,
+     "realGrowth": -1.5325089197628925,
+     "unemployment": 2.355574676908203,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.22830226724054756
+    },
+    "2092": {
+     "inflation": 13.983218692459506,
+     "realGrowth": -1.9906230658894817,
+     "unemployment": 7.011463838315278,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": 0.24348251546178945
+    },
+    "2093": {
+     "inflation": 7.033418934044442,
+     "realGrowth": 3.900507812291181,
+     "unemployment": 4.035353582985525,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.20567268616977488
+    },
+    "2094": {
+     "inflation": 7.496288989297623,
+     "realGrowth": 2.217510427193444,
+     "unemployment": 2.1573585909378705,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.02199423847885293
+    },
+    "2095": {
+     "inflation": 5.058256439443643,
+     "realGrowth": 0.7723377326007413,
+     "unemployment": 2.790381671067068,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.28027578202258774
+    },
+    "2096": {
+     "inflation": 6.86987786580035,
+     "realGrowth": -0.8257327184879215,
+     "unemployment": 3.106895584589923,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.43664355685255984
+    },
+    "2097": {
+     "inflation": 14.862906976115926,
+     "realGrowth": -6.628539769115829,
+     "unemployment": 6.296711930317448,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": 0.1075888000833233
+    },
+    "2098": {
+     "inflation": 2.108735052160045,
+     "realGrowth": 2.9159664318222323,
+     "unemployment": 3.313062558903703,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.6034565447387615
+    },
+    "2099": {
+     "inflation": 2.7056422539316425,
+     "realGrowth": 1.4393267836039587,
+     "unemployment": 3.317092331982262,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.1408835858976004
+    },
+    "2100": {
+     "inflation": 7.3588294562088965,
+     "realGrowth": -0.05439647465366049,
+     "unemployment": 3.9290259500738935,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.4401714580573737
+    },
+    "2101": {
+     "inflation": 10.844808251927706,
+     "realGrowth": 5.177515951563111,
+     "unemployment": 2.5396889664321054,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.6570835700265004
+    },
+    "2102": {
+     "inflation": 10.754524991760631,
+     "realGrowth": -0.2161033083357058,
+     "unemployment": 2.014688968614534,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.5608962235737281
+    },
+    "2103": {
+     "inflation": 7.70604910038464,
+     "realGrowth": 2.650324712384098,
+     "unemployment": 3.6448057208282525,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.4250891799072005
+    },
+    "2104": {
+     "inflation": 7.446573780269837,
+     "realGrowth": -0.9951518034193847,
+     "unemployment": 3.892131487783641,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.17540422136246295
+    },
+    "2105": {
+     "inflation": 8.015790264248347,
+     "realGrowth": -1.1444522942649993,
+     "unemployment": 3.923356273200553,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.17532512774451478
+    },
+    "2106": {
+     "inflation": 8.759904744695085,
+     "realGrowth": 4.121443974499522,
+     "unemployment": 4.075742698098418,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.3425831297370697
+    },
+    "2107": {
+     "inflation": 4.599959139652974,
+     "realGrowth": 3.4765106973490285,
+     "unemployment": 3.3148964402122623,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.3370659530916923
+    },
+    "2108": {
+     "inflation": 7.83584688055738,
+     "realGrowth": 2.360886526527849,
+     "unemployment": 4.056147050220012,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.30295763314978064
+    },
+    "2109": {
+     "inflation": 4.417963987126047,
+     "realGrowth": 2.457592469165598,
+     "unemployment": 2.0868328087723453,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.07317306223209277
+    },
+    "2110": {
+     "inflation": 5.743511395599801,
+     "realGrowth": 0.9633608318523763,
+     "unemployment": 4.976781203635534,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.06487010580004629
+    },
+    "2111": {
+     "inflation": 4.586975406667836,
+     "realGrowth": 0.4838187316269804,
+     "unemployment": 3.7750286069360177,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.6736208347717482
+    },
+    "2112": {
+     "inflation": 6.6366290589620265,
+     "realGrowth": 1.4277537501014543,
+     "unemployment": 4.720494410764549,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": -0.3787622254988593
+    },
+    "2113": {
+     "inflation": 2.2447531237850407,
+     "realGrowth": -0.6776855974866454,
+     "unemployment": 3.535375958719536,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.16137519629070357
+    },
+    "2114": {
+     "inflation": 9.022156185247244,
+     "realGrowth": 5.5642159070945,
+     "unemployment": 3.1252818405907674,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.2231012228521404
+    },
+    "2115": {
+     "inflation": 5.240005908189785,
+     "realGrowth": -1.203651303300131,
+     "unemployment": 1.7266691781730368,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.7414800580910359
+    },
+    "2116": {
+     "inflation": 15.202588128278288,
+     "realGrowth": -3.94465849391433,
+     "unemployment": 5.826689702225684,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": 0.4775727303311982
+    },
+    "2117": {
+     "inflation": 13.232582923242273,
+     "realGrowth": -5.921877121882519,
+     "unemployment": 7.534455341873109,
+     "crisis": true,
+     "flags": {
+      "jobLoss": 1.6,
+      "alcohol": 1.1
+     },
+     "mobilization": null,
+     "leShift": -0.23367767131076386
+    },
+    "2118": {
+     "inflation": 7.1521032632442285,
+     "realGrowth": -1.7484045221849551,
+     "unemployment": 2.804082085396,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.20994294043970643
+    },
+    "2119": {
+     "inflation": 9.54242229011594,
+     "realGrowth": 8.984496011474317,
+     "unemployment": 3.37876294792507,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.39465929833199015
+    },
+    "2120": {
+     "inflation": 7.477615443465895,
+     "realGrowth": -1.4997027430030512,
+     "unemployment": 5.691567865056864,
+     "crisis": false,
+     "flags": {},
+     "mobilization": null,
+     "leShift": 0.18154161751145062
+    }
+   }
+  },
+  "person": {
+   "sex": "f",
+   "firstName": "Анна",
+   "lastName": "Смирнова",
+   "regionId": "dv",
+   "settlement": "village",
+   "city": "пос. Тиксикан",
+   "alive": true,
+   "age": 0,
+   "migrant": null,
+   "ethnic": "other",
+   "religionTradition": "none",
+   "hidden": {
+    "iq": 101,
+    "physique": 50,
+    "creativity": 54,
+    "sociality": 53,
+    "resilience": 40
+   },
+   "appearance": 52,
+   "traits": {
+    "courage": 48.55666666666665,
+    "aggression": 2.28,
+    "conformity": 2.533333333333333,
+    "curiosity": 6.13,
+    "diligence": 29.90466666666663,
+    "sociability": 52.418333333333386,
+    "empathy": 13.593333333333325,
+    "honesty": 10.136666666666667,
+    "selfControl": 17.681333333333317
+   },
+   "conditions": [
+    {
+     "id": "myopia",
+     "since": 165,
+     "severe": false,
+     "treated": false,
+     "months": 135
+    }
+   ],
+   "stats": {
+    "health": 74.60285410607617,
+    "money": 55.84394024318969,
+    "skills": 49.53101701813924,
+    "social": 56.16843321644181,
+    "mental": 50.516039205340505,
+    "happiness": 63.51081900177906
+   },
+   "education": {
+    "stage": "work",
+    "grade": 11,
+    "school": {
+     "type": "regular",
+     "name": "обычная общеобразовательная школа",
+     "q": 58.57285812898998
+    },
+    "kg": null,
+    "performance": "хорошистка",
+    "history": [
+     {
+      "grade": 1,
+      "result": "троечница",
+      "year": 2011
+     },
+     {
+      "grade": 2,
+      "result": "троечница",
+      "year": 2012
+     },
+     {
+      "grade": 3,
+      "result": "троечница",
+      "year": 2013
+     },
+     {
+      "grade": 4,
+      "result": "троечница",
+      "year": 2014
+     },
+     {
+      "grade": 5,
+      "result": "троечница",
+      "year": 2015
+     },
+     {
+      "grade": 6,
+      "result": "хорошистка",
+      "year": 2016
+     },
+     {
+      "grade": 7,
+      "result": "троечница",
+      "year": 2017
+     },
+     {
+      "grade": 8,
+      "result": "троечница",
+      "year": 2018
+     },
+     {
+      "grade": 9,
+      "result": "хорошистка",
+      "year": 2019
+     },
+     {
+      "grade": 10,
+      "result": "троечница",
+      "year": 2020
+     },
+     {
+      "grade": 11,
+      "result": "хорошистка",
+      "year": 2021
+     }
+    ],
+    "passed": true,
+    "oge": {
+     "russian": 3,
+     "math": 3,
+     "year": 2019,
+     "modern": true,
+     "failed": false,
+     "retake": false
+    },
+    "attestat9": 3.72,
+    "ogeFailed": false,
+    "after9Done": true,
+    "profile": "natural",
+    "prep": 3.75,
+    "ege": {
+     "kind": "ЕГЭ",
+     "year": 2021,
+     "scores": {
+      "russian": 54,
+      "math": 27,
+      "biology": 21,
+      "chemistry": 30
+     },
+     "failed": false,
+     "annulled": false,
+     "profile": "natural"
+    },
+    "admissionDone": true,
+    "entrance": {}
+   },
+   "focus": "health",
+   "flags": {
+    "schoolAge": 6.6,
+    "had_pneumonia": true,
+    "had_chickenpox": true,
+    "passport": 1,
+    "distLog2020": 1,
+    "had_covid": true,
+    "firstJob": 1
+   },
+   "patronymic": "Олеговна",
+   "mortMult": 0.22472388823432957,
+   "sickDays": 93,
+   "focusHistory": [
+    {
+     "age": 3,
+     "focus": "none"
+    },
+    {
+     "age": 4,
+     "focus": "health"
+    },
+    {
+     "age": 5,
+     "focus": "health"
+    },
+    {
+     "age": 6,
+     "focus": "reading"
+    },
+    {
+     "age": 7,
+     "focus": "health"
+    },
+    {
+     "age": 8,
+     "focus": "yard"
+    },
+    {
+     "age": 9,
+     "focus": "yard"
+    },
+    {
+     "age": 10,
+     "focus": "study"
+    },
+    {
+     "age": 11,
+     "focus": "study"
+    },
+    {
+     "age": 12,
+     "focus": "selfedu"
+    },
+    {
+     "age": 13,
+     "focus": "friends"
+    },
+    {
+     "age": 14,
+     "focus": "study"
+    },
+    {
+     "age": 15,
+     "focus": "family"
+    },
+    {
+     "age": 16,
+     "focus": "friends"
+    },
+    {
+     "age": 17,
+     "focus": "friends"
+    },
+    {
+     "age": 18,
+     "focus": "study"
+    },
+    {
+     "age": 19,
+     "focus": "health"
+    },
+    {
+     "age": 20,
+     "focus": "jobhunt"
+    },
+    {
+     "age": 21,
+     "focus": "love"
+    },
+    {
+     "age": 22,
+     "focus": "health"
+    },
+    {
+     "age": 23,
+     "focus": "career"
+    },
+    {
+     "age": 24,
+     "focus": "health"
+    }
+   ],
+   "habits": {
+    "smoking": 0,
+    "alcohol": 2,
+    "drugs": 0,
+    "gaming": 0
+   },
+   "earnings": 0,
+   "own": {
+    "living": "parents",
+    "savings": 0,
+    "debts": [],
+    "deprivation": 0,
+    "lastBudget": null
+   },
+   "diplomas": [],
+   "habitsEver": {
+    "alcohol": 2
+   },
+   "loc": null,
+   "job": {
+    "prof": "seller",
+    "base": 66756,
+    "shadow": 0,
+    "employed": false,
+    "raise": 1,
+    "since": 291,
+    "monthsUnemployed": 4
+   }
+  },
+  "family": {
+   "members": [
+    {
+     "id": "p1_5753",
+     "role": "mother",
+     "sex": "f",
+     "name": "Людмила",
+     "age": 54.00000000000058,
+     "ethnic": "other",
+     "alive": true,
+     "inHome": true,
+     "edu": 0,
+     "job": {
+      "prof": "seller",
+      "base": 51483,
+      "shadow": 0.8513828389113769,
+      "employed": true,
+      "onLeave": false,
+      "arrearsOwed": 0,
+      "deployed": null,
+      "monthsUnemployed": 6,
+      "raise": 1.2163827239742273,
+      "registered": true
+     },
+     "alcohol": 0,
+     "smokes": false,
+     "violent": false,
+     "health": 71.11347722159474,
+     "relation": 51.425140221963424,
+     "hiv": false
+    },
+    {
+     "id": "p2_1631",
+     "role": "father",
+     "sex": "m",
+     "name": "Олег",
+     "age": 49.91666666666716,
+     "ethnic": "other",
+     "alive": false,
+     "inHome": false,
+     "edu": 1,
+     "job": {
+      "prof": "builder",
+      "base": 76712,
+      "shadow": 0.3507097210967913,
+      "employed": true,
+      "onLeave": false,
+      "arrearsOwed": 0,
+      "deployed": null,
+      "monthsUnemployed": 0,
+      "raise": 1.1928923830456175
+     },
+     "alcohol": 1,
+     "smokes": true,
+     "violent": false,
+     "health": 72.90761634742726,
+     "relation": 74.79825436202196,
+     "hiv": false,
+     "contact": "none",
+     "inHomeBefore": false,
+     "deathCause": "Прочие причины",
+     "deathYear": 2021
+    },
+    {
+     "id": "g3_5741",
+     "role": "grandmother_m",
+     "sex": "f",
+     "name": "Юлия",
+     "age": 82.83333333333238,
+     "ethnic": "other",
+     "alive": false,
+     "inHome": false,
+     "edu": 0,
+     "job": {
+      "prof": null,
+      "base": 0,
+      "shadow": 0,
+      "employed": false,
+      "pension": true
+     },
+     "alcohol": 0,
+     "smokes": false,
+     "violent": false,
+     "health": 58.919151544889445,
+     "relation": 78.25426708444934,
+     "inHomeBefore": false,
+     "deathCause": "Старость и деменция",
+     "deathYear": 2025
+    },
+    {
+     "id": "g4_4535",
+     "role": "grandfather_m",
+     "sex": "m",
+     "name": "Михаил",
+     "age": 63.000000000000085,
+     "ethnic": "other",
+     "alive": false,
+     "inHome": false,
+     "edu": 0,
+     "job": {
+      "prof": null,
+      "base": 0,
+      "shadow": 0,
+      "employed": false,
+      "pension": true
+     },
+     "alcohol": 1,
+     "smokes": true,
+     "violent": false,
+     "health": 60.36947251622715,
+     "relation": 78.79963368310446,
+     "inHomeBefore": false,
+     "deathCause": "Алкогольная болезнь печени и отравление",
+     "deathYear": 2006
+    },
+    {
+     "id": "g5_3413",
+     "role": "grandmother_p",
+     "sex": "f",
+     "name": "Анна",
+     "age": 82.99999999999909,
+     "ethnic": "other",
+     "alive": true,
+     "inHome": false,
+     "edu": 0,
+     "job": {
+      "prof": null,
+      "base": 0,
+      "shadow": 0,
+      "employed": false,
+      "pension": true
+     },
+     "alcohol": 0,
+     "smokes": false,
+     "violent": false,
+     "health": 55.12927738998219,
+     "relation": 54.17802843636376
+    },
+    {
+     "id": "s6_5665",
+     "role": "sibling",
+     "sex": "f",
+     "name": "Вера",
+     "age": 27.999999999999872,
+     "ethnic": "other",
+     "alive": true,
+     "inHome": true,
+     "health": 83.11359530565721,
+     "relation": 78.34059742491729,
+     "edu": 0,
+     "job": {
+      "employed": false,
+      "base": 0
+     }
+    },
+    {
+     "id": "p7_5727",
+     "role": "stepfather",
+     "sex": "m",
+     "name": "Иван",
+     "age": 48.16666666666673,
+     "ethnic": "other",
+     "alive": false,
+     "inHome": false,
+     "edu": 2,
+     "job": {
+      "prof": "police",
+      "base": 89718,
+      "shadow": 0,
+      "employed": false,
+      "onLeave": false,
+      "arrearsOwed": 0,
+      "deployed": null,
+      "monthsUnemployed": 15,
+      "raise": 0.9710017637111106,
+      "registered": true
+     },
+     "alcohol": 3,
+     "smokes": true,
+     "violent": false,
+     "health": 50.767670170299624,
+     "relation": 77.62927506934271,
+     "hiv": false,
+     "inHomeBefore": true,
+     "deathCause": "Онкологическое заболевание",
+     "deathYear": 2018
+    }
+   ],
+   "flags": {
+    "vaccineRefusal": false,
+    "badCredit": true,
+    "kgWaitLogged": 1,
+    "partnerSince": 163
+   },
+   "type": "stepfamily",
+   "atmosphere": 61.501866481888285,
+   "housing": {
+    "type": "private_house",
+    "rooms": 3,
+    "area": 106,
+    "owned": true,
+    "rentKey": null,
+    "mortgage": null,
+    "condition": 41,
+    "name": "частный дом с печным/газовым отоплением"
+   },
+   "car": false,
+   "dacha": false,
+   "savings": 679029.0126756392,
+   "debts": [],
+   "alimony": {
+    "mode": "none",
+    "share": 0.33
+   },
+   "deprivation": 0,
+   "comfort": 17199.601653639445,
+   "quintile": 1,
+   "poverty": false,
+   "lastBudget": {
+    "income": 68792.8022048526,
+    "benefits": 2942.372296012707,
+    "expense": 45860.00000000001,
+    "need": 45860.00000000001,
+    "items": {
+     "food": 28050.000000000004,
+     "utilities": 6050.000000000001,
+     "transport": 1650,
+     "clothes": 4620,
+     "communications": 1200,
+     "medicine": 2640,
+     "focus": 1650.0000000000002,
+     "childMisc": 0
+    },
+    "perCapita": 22930.9340682842,
+    "pm": 22303.55923099376,
+    "median": 35365.05163476812,
+    "debt": 0,
+    "notes": [],
+    "cut": 0
+   },
+   "childSupport": 0,
+   "tuitionMonthly": 0
+  },
+  "log": [
+   {
+    "y": 2003,
+    "m": 1,
+    "age": 0,
+    "text": "Ты родилась 15 февраля 2003 года: Казань, Республика Татарстан (город-миллионник).",
+    "type": "birth"
+   },
+   {
+    "y": 2003,
+    "m": 1,
+    "age": 0,
+    "text": "Ты — Анна Олеговна Смирнова. Национальность: другая национальность.",
+    "type": "birth"
+   },
+   {
+    "y": 2003,
+    "m": 1,
+    "age": 0,
+    "text": "Родители женаты.",
+    "type": "birth"
+   },
+   {
+    "y": 2003,
+    "m": 1,
+    "age": 0,
+    "text": "Мама — Людмила, 29 лет, без высшего и проф. образования, уборщица (в декрете).",
+    "type": "birth"
+   },
+   {
+    "y": 2003,
+    "m": 1,
+    "age": 0,
+    "text": "Папа — Олег, 31 лет, со средним профессиональным, строитель.",
+    "type": "birth"
+   },
+   {
+    "y": 2003,
+    "m": 1,
+    "age": 0,
+    "text": "Старшие: сестра Вера (3).",
+    "type": "birth"
+   },
+   {
+    "y": 2003,
+    "m": 1,
+    "age": 0,
+    "text": "Жильё: съёмная 2-комнатная квартира.",
+    "type": "birth"
+   },
+   {
+    "y": 2003,
+    "m": 3,
+    "age": 0,
+    "text": "Плановые прививки по календарю: БЦЖ ещё в роддоме, теперь АКДС и полиомиелит.",
+    "type": "event"
+   },
+   {
+    "y": 2004,
+    "m": 0,
+    "age": 0,
+    "text": "Первые шаги: от дивана до мамы, и сразу шлёпнуться.",
+    "type": "event"
+   },
+   {
+    "y": 2004,
+    "m": 1,
+    "age": 1,
+    "text": "Тебе 1 год.",
+    "type": "birthday"
+   },
+   {
+    "y": 2004,
+    "m": 6,
+    "age": 1,
+    "text": "Первое слово — «мама». Ну, или «дай».",
+    "type": "event"
+   },
+   {
+    "y": 2004,
+    "m": 8,
+    "age": 1,
+    "text": "Теракт в школе Беслана.",
+    "type": "news"
+   },
+   {
+    "y": 2005,
+    "m": 0,
+    "age": 1,
+    "text": "Монетизация льгот: протесты пенсионеров.",
+    "type": "news"
+   },
+   {
+    "y": 2005,
+    "m": 1,
+    "age": 2,
+    "text": "Тебе 2 года.",
+    "type": "birthday"
+   },
+   {
+    "y": 2005,
+    "m": 7,
+    "age": 2,
+    "text": "Пневмония: неделю в инфекционке, лекарства пришлось докупать самим.",
+    "type": "health"
+   },
+   {
+    "y": 2005,
+    "m": 9,
+    "age": 2,
+    "text": "мама вышла из декрета на работу (уборщица).",
+    "type": "family"
+   },
+   {
+    "y": 2005,
+    "m": 11,
+    "age": 2,
+    "text": "В садик очередь: сотни детей впереди.",
+    "type": "edu"
+   },
+   {
+    "y": 2006,
+    "m": 0,
+    "age": 2,
+    "text": "Умер дедушка (Михаил), 63 года. Причина: алкогольная болезнь печени и отравление.",
+    "type": "death"
+   },
+   {
+    "y": 2006,
+    "m": 1,
+    "age": 3,
+    "text": "Тебе 3 года.",
+    "type": "birthday"
+   },
+   {
+    "y": 2006,
+    "m": 1,
+    "age": 3,
+    "text": "Фокус года: Ничего особенного.",
+    "type": "choice"
+   },
+   {
+    "y": 2006,
+    "m": 3,
+    "age": 3,
+    "text": "Ты пошла в детский сад.",
+    "type": "edu"
+   },
+   {
+    "y": 2006,
+    "m": 3,
+    "age": 3,
+    "text": "Очередь в садик наконец подошла.",
+    "type": "edu"
+   },
+   {
+    "y": 2006,
+    "m": 4,
+    "age": 3,
+    "text": "Объявлено о материнском капитале с 2007 года.",
+    "type": "news"
+   },
+   {
+    "y": 2007,
+    "m": 0,
+    "age": 3,
+    "text": "Утренник: Выйти и громко рассказать",
+    "type": "choice"
+   },
+   {
+    "y": 2007,
+    "m": 0,
+    "age": 3,
+    "text": "Получилось! Подарок, аплодисменты, мама снимает на телефон.",
+    "type": "event"
+   },
+   {
+    "y": 2007,
+    "m": 0,
+    "age": 3,
+    "text": "Материнский капитал на второго ребёнка — 250 тыс. руб.",
+    "type": "news"
+   },
+   {
+    "y": 2007,
+    "m": 1,
+    "age": 4,
+    "text": "Тебе 4 года.",
+    "type": "birthday"
+   },
+   {
+    "y": 2007,
+    "m": 1,
+    "age": 4,
+    "text": "Фокус года: Здоровье.",
+    "type": "choice"
+   },
+   {
+    "y": 2007,
+    "m": 11,
+    "age": 4,
+    "text": "мама потеряла работу.",
+    "type": "bad"
+   },
+   {
+    "y": 2008,
+    "m": 0,
+    "age": 4,
+    "text": "Утренник: Выйти и громко рассказать",
+    "type": "choice"
+   },
+   {
+    "y": 2008,
+    "m": 0,
+    "age": 4,
+    "text": "Забыла слова на середине, но Дед Мороз подсказал.",
+    "type": "event"
+   },
+   {
+    "y": 2008,
+    "m": 1,
+    "age": 5,
+    "text": "Тебе 5 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2008,
+    "m": 1,
+    "age": 5,
+    "text": "Фокус года: Здоровье.",
+    "type": "choice"
+   },
+   {
+    "y": 2008,
+    "m": 4,
+    "age": 5,
+    "text": "мама нашла работу: уборщица.",
+    "type": "family"
+   },
+   {
+    "y": 2008,
+    "m": 7,
+    "age": 5,
+    "text": "Война в Южной Осетии.",
+    "type": "news"
+   },
+   {
+    "y": 2008,
+    "m": 9,
+    "age": 5,
+    "text": "Мировой финансовый кризис докатился до России: сокращения на заводах.",
+    "type": "news"
+   },
+   {
+    "y": 2009,
+    "m": 0,
+    "age": 5,
+    "text": "Утренник: Выйти и громко рассказать",
+    "type": "choice"
+   },
+   {
+    "y": 2009,
+    "m": 0,
+    "age": 5,
+    "text": "Получилось! Подарок, аплодисменты, мама снимает на телефон.",
+    "type": "event"
+   },
+   {
+    "y": 2009,
+    "m": 0,
+    "age": 5,
+    "text": "Безработица растёт, рубль ослаб на треть.",
+    "type": "news"
+   },
+   {
+    "y": 2009,
+    "m": 1,
+    "age": 6,
+    "text": "Тебе 6 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2009,
+    "m": 1,
+    "age": 6,
+    "text": "Фокус года: Книжки и развивашки.",
+    "type": "choice"
+   },
+   {
+    "y": 2009,
+    "m": 7,
+    "age": 6,
+    "text": "Собаки: Схватить палку и кричать",
+    "type": "choice"
+   },
+   {
+    "y": 2009,
+    "m": 7,
+    "age": 6,
+    "text": "Собаки озверели — покусали руку.",
+    "type": "event"
+   },
+   {
+    "y": 2009,
+    "m": 8,
+    "age": 6,
+    "text": "Детский сад: Предложить играть вместе",
+    "type": "choice"
+   },
+   {
+    "y": 2009,
+    "m": 8,
+    "age": 6,
+    "text": "Получилось! Теперь у тебя новый друг.",
+    "type": "event"
+   },
+   {
+    "y": 2010,
+    "m": 0,
+    "age": 6,
+    "text": "Семья взяла микрозаём, чтобы дотянуть до зарплаты.",
+    "type": "bad"
+   },
+   {
+    "y": 2010,
+    "m": 1,
+    "age": 7,
+    "text": "Тебе 7 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2010,
+    "m": 1,
+    "age": 7,
+    "text": "Фокус года: Здоровье.",
+    "type": "choice"
+   },
+   {
+    "y": 2010,
+    "m": 3,
+    "age": 7,
+    "text": "Гаражи: Полезть",
+    "type": "choice"
+   },
+   {
+    "y": 2010,
+    "m": 3,
+    "age": 7,
+    "text": "Прыгнула! Теперь ты своя.",
+    "type": "event"
+   },
+   {
+    "y": 2010,
+    "m": 6,
+    "age": 7,
+    "text": "Аномальная жара и лесные пожары, смог в Москве.",
+    "type": "news"
+   },
+   {
+    "y": 2010,
+    "m": 7,
+    "age": 7,
+    "text": "Речка: Пойти и купаться",
+    "type": "choice"
+   },
+   {
+    "y": 2010,
+    "m": 7,
+    "age": 7,
+    "text": "Ныряла с тарзанки до синих губ. Лучший день лета.",
+    "type": "event"
+   },
+   {
+    "y": 2010,
+    "m": 7,
+    "age": 7,
+    "text": "Коллекторы звонят маме по десять раз в день и пишут на двери подъезда.",
+    "type": "event"
+   },
+   {
+    "y": 2010,
+    "m": 8,
+    "age": 7,
+    "text": "1 сентября. Ты пошла в первый класс: обычная общеобразовательная школа.",
+    "type": "edu"
+   },
+   {
+    "y": 2010,
+    "m": 8,
+    "age": 7,
+    "text": "Белая рубашка, гладиолусы, линейка. Тебя ведёт за руку Людмила.",
+    "type": "event"
+   },
+   {
+    "y": 2010,
+    "m": 9,
+    "age": 7,
+    "text": "Родительский чат: сдать на шторы, подарок учителю, охрану, рабочие тетради и «фонд класса».",
+    "type": "event"
+   },
+   {
+    "y": 2011,
+    "m": 1,
+    "age": 8,
+    "text": "Тебе 8 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2011,
+    "m": 1,
+    "age": 8,
+    "text": "Фокус года: Двор и улица.",
+    "type": "choice"
+   },
+   {
+    "y": 2011,
+    "m": 3,
+    "age": 8,
+    "text": "Травля: Найти друзей-защитников",
+    "type": "choice"
+   },
+   {
+    "y": 2011,
+    "m": 3,
+    "age": 8,
+    "text": "Вы с ребятами из параллели держитесь вместе. Отстали.",
+    "type": "event"
+   },
+   {
+    "y": 2011,
+    "m": 4,
+    "age": 8,
+    "text": "Окончен 1 класс: троечница.",
+    "type": "info"
+   },
+   {
+    "y": 2011,
+    "m": 5,
+    "age": 8,
+    "text": "Лагерь: Остаться дома",
+    "type": "choice"
+   },
+   {
+    "y": 2011,
+    "m": 5,
+    "age": 8,
+    "text": "Лето во дворе.",
+    "type": "event"
+   },
+   {
+    "y": 2011,
+    "m": 5,
+    "age": 8,
+    "text": "мама потеряла работу.",
+    "type": "bad"
+   },
+   {
+    "y": 2011,
+    "m": 7,
+    "age": 8,
+    "text": "Окно: Признаться",
+    "type": "choice"
+   },
+   {
+    "y": 2011,
+    "m": 7,
+    "age": 8,
+    "text": "Мама заплатила за стекло и долго ругалась. Сосед потом здоровался уважительно.",
+    "type": "event"
+   },
+   {
+    "y": 2011,
+    "m": 8,
+    "age": 8,
+    "text": "Ты перешла в 2 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2011,
+    "m": 8,
+    "age": 8,
+    "text": "Гимназия просит «добровольный» взнос на ремонт — 15 тысяч. Не сдать неудобно.",
+    "type": "event"
+   },
+   {
+    "y": 2011,
+    "m": 10,
+    "age": 8,
+    "text": "Семья переехала: Казань → пос. Тиксикан (Дальний Восток).",
+    "type": "family"
+   },
+   {
+    "y": 2011,
+    "m": 11,
+    "age": 8,
+    "text": "Переезд: Сразу знакомиться",
+    "type": "choice"
+   },
+   {
+    "y": 2011,
+    "m": 11,
+    "age": 8,
+    "text": "Через неделю ты уже свой во дворе.",
+    "type": "event"
+   },
+   {
+    "y": 2011,
+    "m": 11,
+    "age": 8,
+    "text": "Протесты на Болотной площади.",
+    "type": "news"
+   },
+   {
+    "y": 2012,
+    "m": 1,
+    "age": 9,
+    "text": "Тебе 9 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2012,
+    "m": 1,
+    "age": 9,
+    "text": "Фокус года: Двор и улица.",
+    "type": "choice"
+   },
+   {
+    "y": 2012,
+    "m": 4,
+    "age": 9,
+    "text": "Майские указы: обещание повысить зарплаты бюджетникам.",
+    "type": "news"
+   },
+   {
+    "y": 2012,
+    "m": 4,
+    "age": 9,
+    "text": "Окончен 2 класс: троечница.",
+    "type": "info"
+   },
+   {
+    "y": 2012,
+    "m": 5,
+    "age": 9,
+    "text": "Контрольная: Дать списать",
+    "type": "choice"
+   },
+   {
+    "y": 2012,
+    "m": 5,
+    "age": 9,
+    "text": "Учительница заметила — двойки обоим.",
+    "type": "event"
+   },
+   {
+    "y": 2012,
+    "m": 6,
+    "age": 9,
+    "text": "Пневмония: неделю в инфекционке, лекарства пришлось докупать самим.",
+    "type": "health"
+   },
+   {
+    "y": 2012,
+    "m": 8,
+    "age": 9,
+    "text": "Ты перешла в 3 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2012,
+    "m": 8,
+    "age": 9,
+    "text": "Гимназия просит «добровольный» взнос на ремонт — 15 тысяч. Не сдать неудобно.",
+    "type": "event"
+   },
+   {
+    "y": 2013,
+    "m": 0,
+    "age": 9,
+    "text": "Запрет курения в общественных местах (с июня).",
+    "type": "news"
+   },
+   {
+    "y": 2013,
+    "m": 1,
+    "age": 10,
+    "text": "Тебе 10 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2013,
+    "m": 1,
+    "age": 10,
+    "text": "Травля: Найти друзей-защитников",
+    "type": "choice"
+   },
+   {
+    "y": 2013,
+    "m": 1,
+    "age": 10,
+    "text": "Вы с ребятами из параллели держитесь вместе. Отстали.",
+    "type": "event"
+   },
+   {
+    "y": 2013,
+    "m": 1,
+    "age": 10,
+    "text": "Фокус года: Учёба.",
+    "type": "choice"
+   },
+   {
+    "y": 2013,
+    "m": 4,
+    "age": 10,
+    "text": "мама потеряла работу.",
+    "type": "bad"
+   },
+   {
+    "y": 2013,
+    "m": 4,
+    "age": 10,
+    "text": "Окончен 3 класс: троечница.",
+    "type": "info"
+   },
+   {
+    "y": 2013,
+    "m": 8,
+    "age": 10,
+    "text": "Ты перешла в 4 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2013,
+    "m": 9,
+    "age": 10,
+    "text": "Родительский чат: сдать на шторы, подарок учителю, охрану, рабочие тетради и «фонд класса».",
+    "type": "event"
+   },
+   {
+    "y": 2014,
+    "m": 1,
+    "age": 11,
+    "text": "Тебе 11 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2014,
+    "m": 1,
+    "age": 11,
+    "text": "Фокус года: Учёба.",
+    "type": "choice"
+   },
+   {
+    "y": 2014,
+    "m": 1,
+    "age": 11,
+    "text": "Олимпиада в Сочи.",
+    "type": "news"
+   },
+   {
+    "y": 2014,
+    "m": 1,
+    "age": 11,
+    "text": "мама нашла работу: уборщица.",
+    "type": "family"
+   },
+   {
+    "y": 2014,
+    "m": 2,
+    "age": 11,
+    "text": "Присоединение Крыма. Начало санкций.",
+    "type": "news"
+   },
+   {
+    "y": 2014,
+    "m": 4,
+    "age": 11,
+    "text": "Окончен 4 класс: троечница.",
+    "type": "info"
+   },
+   {
+    "y": 2014,
+    "m": 6,
+    "age": 11,
+    "text": "Коллекторы звонят маме по десять раз в день и пишут на двери подъезда.",
+    "type": "event"
+   },
+   {
+    "y": 2014,
+    "m": 8,
+    "age": 11,
+    "text": "Ты перешла в 5 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2014,
+    "m": 8,
+    "age": 11,
+    "text": "Гимназия просит «добровольный» взнос на ремонт — 15 тысяч. Не сдать неудобно.",
+    "type": "event"
+   },
+   {
+    "y": 2014,
+    "m": 10,
+    "age": 11,
+    "text": "Компания: Отказаться",
+    "type": "choice"
+   },
+   {
+    "y": 2014,
+    "m": 10,
+    "age": 11,
+    "text": "Тебя перестали звать гулять.",
+    "type": "event"
+   },
+   {
+    "y": 2014,
+    "m": 11,
+    "age": 11,
+    "text": "«Чёрный вторник» 16 декабря: доллар выше 70 руб.",
+    "type": "news"
+   },
+   {
+    "y": 2015,
+    "m": 0,
+    "age": 11,
+    "text": "Реальные доходы падают второй год подряд. Продуктовые контрсанкции.",
+    "type": "news"
+   },
+   {
+    "y": 2015,
+    "m": 1,
+    "age": 12,
+    "text": "Тебе 12 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2015,
+    "m": 1,
+    "age": 12,
+    "text": "Фокус года: Самообразование.",
+    "type": "choice"
+   },
+   {
+    "y": 2015,
+    "m": 3,
+    "age": 12,
+    "text": "Травля: Найти друзей-защитников",
+    "type": "choice"
+   },
+   {
+    "y": 2015,
+    "m": 3,
+    "age": 12,
+    "text": "Вы с ребятами из параллели держитесь вместе. Отстали.",
+    "type": "event"
+   },
+   {
+    "y": 2015,
+    "m": 4,
+    "age": 12,
+    "text": "Окончен 5 класс: троечница.",
+    "type": "info"
+   },
+   {
+    "y": 2015,
+    "m": 5,
+    "age": 12,
+    "text": "Лагерь: Ехать",
+    "type": "choice"
+   },
+   {
+    "y": 2015,
+    "m": 5,
+    "age": 12,
+    "text": "Костры, дискотеки, «королевская ночь». Вернулась другим человеком.",
+    "type": "event"
+   },
+   {
+    "y": 2015,
+    "m": 6,
+    "age": 12,
+    "text": "Речка: Пойти и купаться",
+    "type": "choice"
+   },
+   {
+    "y": 2015,
+    "m": 6,
+    "age": 12,
+    "text": "Ныряла с тарзанки до синих губ. Лучший день лета.",
+    "type": "event"
+   },
+   {
+    "y": 2015,
+    "m": 8,
+    "age": 12,
+    "text": "Ты перешла в 6 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2016,
+    "m": 1,
+    "age": 13,
+    "text": "Тебе 13 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2016,
+    "m": 1,
+    "age": 13,
+    "text": "Фокус года: Компания друзей.",
+    "type": "choice"
+   },
+   {
+    "y": 2016,
+    "m": 2,
+    "age": 13,
+    "text": "Родители развелись. Ты остаёшься с мамой, папа пропал из жизни.",
+    "type": "family"
+   },
+   {
+    "y": 2016,
+    "m": 3,
+    "age": 13,
+    "text": "Развод: Ждать папу по выходным",
+    "type": "choice"
+   },
+   {
+    "y": 2016,
+    "m": 3,
+    "age": 13,
+    "text": "Иногда он приезжает. Иногда — нет.",
+    "type": "event"
+   },
+   {
+    "y": 2016,
+    "m": 4,
+    "age": 13,
+    "text": "Окончен 6 класс: хорошистка.",
+    "type": "edu"
+   },
+   {
+    "y": 2016,
+    "m": 5,
+    "age": 13,
+    "text": "За гаражами: Отказаться",
+    "type": "choice"
+   },
+   {
+    "y": 2016,
+    "m": 5,
+    "age": 13,
+    "text": "Подкалывали неделю.",
+    "type": "event"
+   },
+   {
+    "y": 2016,
+    "m": 8,
+    "age": 13,
+    "text": "Два часа ночи: Честно рассказать, где была",
+    "type": "choice"
+   },
+   {
+    "y": 2016,
+    "m": 8,
+    "age": 13,
+    "text": "Поругались, но поверили.",
+    "type": "event"
+   },
+   {
+    "y": 2016,
+    "m": 8,
+    "age": 13,
+    "text": "У мамы появился Иван, 46 лет, сотрудник полиции. Теперь он живёт с вами.",
+    "type": "family"
+   },
+   {
+    "y": 2016,
+    "m": 8,
+    "age": 13,
+    "text": "Ты перешла в 7 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2016,
+    "m": 9,
+    "age": 13,
+    "text": "Отчим: Принять его",
+    "type": "choice"
+   },
+   {
+    "y": 2016,
+    "m": 9,
+    "age": 13,
+    "text": "Он научил тебя кататься на велосипеде. Кажется, нормальный.",
+    "type": "event"
+   },
+   {
+    "y": 2016,
+    "m": 9,
+    "age": 13,
+    "text": "Гимназия просит «добровольный» взнос на ремонт — 15 тысяч. Не сдать неудобно.",
+    "type": "event"
+   },
+   {
+    "y": 2016,
+    "m": 10,
+    "age": 13,
+    "text": "Окулист выписал очки: близорукость.",
+    "type": "health"
+   },
+   {
+    "y": 2017,
+    "m": 0,
+    "age": 13,
+    "text": "мама потеряла работу.",
+    "type": "bad"
+   },
+   {
+    "y": 2017,
+    "m": 1,
+    "age": 14,
+    "text": "Тебе 14 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2017,
+    "m": 1,
+    "age": 14,
+    "text": "Фокус года: Учёба.",
+    "type": "choice"
+   },
+   {
+    "y": 2017,
+    "m": 1,
+    "age": 14,
+    "text": "Получила паспорт гражданина РФ.",
+    "type": "info"
+   },
+   {
+    "y": 2017,
+    "m": 4,
+    "age": 14,
+    "text": "Вписка: Пить колу и делать вид",
+    "type": "choice"
+   },
+   {
+    "y": 2017,
+    "m": 4,
+    "age": 14,
+    "text": "Никто не заметил. Ты наблюдала со стороны.",
+    "type": "event"
+   },
+   {
+    "y": 2017,
+    "m": 4,
+    "age": 14,
+    "text": "Окончен 7 класс: троечница.",
+    "type": "info"
+   },
+   {
+    "y": 2017,
+    "m": 6,
+    "age": 14,
+    "text": "Работа на лето: Работать всё лето",
+    "type": "choice"
+   },
+   {
+    "y": 2017,
+    "m": 6,
+    "age": 14,
+    "text": "Первые настоящие деньги. Часть — маме.",
+    "type": "event"
+   },
+   {
+    "y": 2017,
+    "m": 7,
+    "age": 14,
+    "text": "отчим потерял работу (запои).",
+    "type": "bad"
+   },
+   {
+    "y": 2017,
+    "m": 8,
+    "age": 14,
+    "text": "Ты перешла в 8 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2017,
+    "m": 9,
+    "age": 14,
+    "text": "Гимназия просит «добровольный» взнос на ремонт — 15 тысяч. Не сдать неудобно.",
+    "type": "event"
+   },
+   {
+    "y": 2018,
+    "m": 1,
+    "age": 15,
+    "text": "Тебе 15 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2018,
+    "m": 1,
+    "age": 15,
+    "text": "Фокус года: Держаться поближе к семье.",
+    "type": "choice"
+   },
+   {
+    "y": 2018,
+    "m": 4,
+    "age": 15,
+    "text": "Окончен 8 класс: троечница.",
+    "type": "info"
+   },
+   {
+    "y": 2018,
+    "m": 5,
+    "age": 15,
+    "text": "Чемпионат мира по футболу в России.",
+    "type": "news"
+   },
+   {
+    "y": 2018,
+    "m": 6,
+    "age": 15,
+    "text": "Работа на лето: Работать всё лето",
+    "type": "choice"
+   },
+   {
+    "y": 2018,
+    "m": 6,
+    "age": 15,
+    "text": "Первые настоящие деньги. Часть — маме.",
+    "type": "event"
+   },
+   {
+    "y": 2018,
+    "m": 6,
+    "age": 15,
+    "text": "Объявлена пенсионная реформа: пенсионный возраст повышается.",
+    "type": "news"
+   },
+   {
+    "y": 2018,
+    "m": 7,
+    "age": 15,
+    "text": "За гаражами: Соврать, что уже бросила",
+    "type": "choice"
+   },
+   {
+    "y": 2018,
+    "m": 7,
+    "age": 15,
+    "text": "Прокатило.",
+    "type": "event"
+   },
+   {
+    "y": 2018,
+    "m": 7,
+    "age": 15,
+    "text": "мама нашла работу: продавец-кассир.",
+    "type": "family"
+   },
+   {
+    "y": 2018,
+    "m": 8,
+    "age": 15,
+    "text": "Ты перешла в 9 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2018,
+    "m": 9,
+    "age": 15,
+    "text": "Лёгкие деньги: Заблокировать",
+    "type": "choice"
+   },
+   {
+    "y": 2018,
+    "m": 9,
+    "age": 15,
+    "text": "Через месяц парня из параллели посадили на восемь лет.",
+    "type": "event"
+   },
+   {
+    "y": 2018,
+    "m": 10,
+    "age": 15,
+    "text": "Первая любовь: Написать первым",
+    "type": "choice"
+   },
+   {
+    "y": 2018,
+    "m": 10,
+    "age": 15,
+    "text": "«Давай останемся друзьями». Больно.",
+    "type": "event"
+   },
+   {
+    "y": 2018,
+    "m": 10,
+    "age": 15,
+    "text": "Умер отчим (Иван), 48 лет. Причина: онкологическое заболевание.",
+    "type": "death"
+   },
+   {
+    "y": 2018,
+    "m": 11,
+    "age": 15,
+    "text": "Потеря: Плакать и говорить об этом",
+    "type": "choice"
+   },
+   {
+    "y": 2018,
+    "m": 11,
+    "age": 15,
+    "text": "Тебя обнимали. Стало немного легче.",
+    "type": "event"
+   },
+   {
+    "y": 2019,
+    "m": 0,
+    "age": 15,
+    "text": "НДС поднят до 20%.",
+    "type": "news"
+   },
+   {
+    "y": 2019,
+    "m": 1,
+    "age": 16,
+    "text": "Тебе 16 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2019,
+    "m": 1,
+    "age": 16,
+    "text": "Фокус года: Компания друзей.",
+    "type": "choice"
+   },
+   {
+    "y": 2019,
+    "m": 2,
+    "age": 16,
+    "text": "Травля: Найти друзей-защитников",
+    "type": "choice"
+   },
+   {
+    "y": 2019,
+    "m": 2,
+    "age": 16,
+    "text": "Вы с ребятами из параллели держитесь вместе. Отстали.",
+    "type": "event"
+   },
+   {
+    "y": 2019,
+    "m": 4,
+    "age": 16,
+    "text": "Тяжело: Позвонить на телефон доверия",
+    "type": "choice"
+   },
+   {
+    "y": 2019,
+    "m": 4,
+    "age": 16,
+    "text": "Голос на том конце не осуждал. Ты договорилась прийти к школьному психологу.",
+    "type": "event"
+   },
+   {
+    "y": 2019,
+    "m": 4,
+    "age": 16,
+    "text": "Окончен 9 класс: хорошистка.",
+    "type": "edu"
+   },
+   {
+    "y": 2019,
+    "m": 5,
+    "age": 16,
+    "text": "ОГЭ: русский — 3, математика — 3. Средний балл аттестата: 3.7.",
+    "type": "edu"
+   },
+   {
+    "y": 2019,
+    "m": 8,
+    "age": 16,
+    "text": "После 9 класса: Остаться в школе — 10 класс",
+    "type": "choice"
+   },
+   {
+    "y": 2019,
+    "m": 8,
+    "age": 16,
+    "text": "Взяли в десятый.",
+    "type": "event"
+   },
+   {
+    "y": 2019,
+    "m": 8,
+    "age": 16,
+    "text": "Остаёшься в школе: 10 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2019,
+    "m": 8,
+    "age": 16,
+    "text": "Ты перешла в 10 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2019,
+    "m": 9,
+    "age": 16,
+    "text": "Профиль: Естественно-научный (био-хим, «на врача»)",
+    "type": "choice"
+   },
+   {
+    "y": 2019,
+    "m": 9,
+    "age": 16,
+    "text": "Профиль 10–11 класса: естественно-научный.",
+    "type": "edu"
+   },
+   {
+    "y": 2019,
+    "m": 11,
+    "age": 16,
+    "text": "мама потеряла работу.",
+    "type": "bad"
+   },
+   {
+    "y": 2020,
+    "m": 1,
+    "age": 17,
+    "text": "Тебе 17 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2020,
+    "m": 1,
+    "age": 17,
+    "text": "Фокус года: Компания друзей.",
+    "type": "choice"
+   },
+   {
+    "y": 2020,
+    "m": 2,
+    "age": 17,
+    "text": "Пандемия COVID-19: нерабочие дни, школы на «дистанте».",
+    "type": "news"
+   },
+   {
+    "y": 2020,
+    "m": 3,
+    "age": 17,
+    "text": "Выплаты семьям с детьми: по 5 и 10 тыс. руб.",
+    "type": "news"
+   },
+   {
+    "y": 2020,
+    "m": 3,
+    "age": 17,
+    "text": "Школа ушла на «дистант»: уроки по WhatsApp и Zoom.",
+    "type": "edu"
+   },
+   {
+    "y": 2020,
+    "m": 4,
+    "age": 17,
+    "text": "Окончен 10 класс: троечница.",
+    "type": "info"
+   },
+   {
+    "y": 2020,
+    "m": 5,
+    "age": 17,
+    "text": "мама нашла работу: продавец-кассир.",
+    "type": "family"
+   },
+   {
+    "y": 2020,
+    "m": 8,
+    "age": 17,
+    "text": "Ты перешла в 11 класс.",
+    "type": "edu"
+   },
+   {
+    "y": 2020,
+    "m": 9,
+    "age": 17,
+    "text": "Коллекторы звонят маме по десять раз в день и пишут на двери подъезда.",
+    "type": "event"
+   },
+   {
+    "y": 2020,
+    "m": 11,
+    "age": 17,
+    "text": "На Новый год тебе впервые налили бокал шампанского.",
+    "type": "info"
+   },
+   {
+    "y": 2021,
+    "m": 1,
+    "age": 18,
+    "text": "Тебе 18 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2021,
+    "m": 1,
+    "age": 18,
+    "text": "Фокус года: Учёба.",
+    "type": "choice"
+   },
+   {
+    "y": 2021,
+    "m": 4,
+    "age": 18,
+    "text": "Окончен 11 класс: хорошистка.",
+    "type": "edu"
+   },
+   {
+    "y": 2021,
+    "m": 5,
+    "age": 18,
+    "text": "Шпаргалки: Учить всю ночь",
+    "type": "choice"
+   },
+   {
+    "y": 2021,
+    "m": 5,
+    "age": 18,
+    "text": "ЕГЭ: Русский язык — 54, Математика — 27, Биология — 21, Химия — 30.",
+    "type": "edu"
+   },
+   {
+    "y": 2021,
+    "m": 6,
+    "age": 18,
+    "text": "Выпускной: Гулять до утра",
+    "type": "choice"
+   },
+   {
+    "y": 2021,
+    "m": 6,
+    "age": 18,
+    "text": "Лучшая ночь школьной жизни.",
+    "type": "event"
+   },
+   {
+    "y": 2021,
+    "m": 7,
+    "age": 18,
+    "text": "Что дальше: Поступать: агрономия и ветеринария (твой балл ≈ 36)",
+    "type": "choice"
+   },
+   {
+    "y": 2021,
+    "m": 7,
+    "age": 18,
+    "text": "Приёмная кампания: Не поступать — работать",
+    "type": "choice"
+   },
+   {
+    "y": 2021,
+    "m": 7,
+    "age": 18,
+    "text": "Ищешь работу.",
+    "type": "info"
+   },
+   {
+    "y": 2021,
+    "m": 9,
+    "age": 18,
+    "text": "Пик смертности от COVID-19.",
+    "type": "news"
+   },
+   {
+    "y": 2021,
+    "m": 9,
+    "age": 18,
+    "text": "Первая работа: разнорабочая, 28 100 ₽ в месяц.",
+    "type": "money"
+   },
+   {
+    "y": 2021,
+    "m": 10,
+    "age": 18,
+    "text": "Права: Потом",
+    "type": "choice"
+   },
+   {
+    "y": 2021,
+    "m": 11,
+    "age": 18,
+    "text": "Умер папа (Олег), 49 лет. Причина: прочие причины.",
+    "type": "death"
+   },
+   {
+    "y": 2022,
+    "m": 1,
+    "age": 19,
+    "text": "Тебе 19 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2022,
+    "m": 1,
+    "age": 19,
+    "text": "Фокус года: Здоровье.",
+    "type": "choice"
+   },
+   {
+    "y": 2022,
+    "m": 1,
+    "age": 19,
+    "text": "Начало специальной военной операции. Санкции, уход западных компаний.",
+    "type": "news"
+   },
+   {
+    "y": 2022,
+    "m": 6,
+    "age": 19,
+    "text": "Потеряла работу.",
+    "type": "bad"
+   },
+   {
+    "y": 2022,
+    "m": 8,
+    "age": 19,
+    "text": "Объявлена частичная мобилизация.",
+    "type": "news"
+   },
+   {
+    "y": 2023,
+    "m": 0,
+    "age": 19,
+    "text": "Введено единое пособие на детей.",
+    "type": "news"
+   },
+   {
+    "y": 2023,
+    "m": 1,
+    "age": 20,
+    "text": "Тебе 20 лет.",
+    "type": "birthday"
+   },
+   {
+    "y": 2023,
+    "m": 1,
+    "age": 20,
+    "text": "Фокус года: Искать работу.",
+    "type": "choice"
+   },
+   {
+    "y": 2023,
+    "m": 6,
+    "age": 20,
+    "text": "Права: Потом",
+    "type": "choice"
+   },
+   {
+    "y": 2023,
+    "m": 6,
+    "age": 20,
+    "text": "Новая работа: доярка, 15 200 ₽ в месяц.",
+    "type": "money"
+   },
+   {
+    "y": 2024,
+    "m": 0,
+    "age": 20,
+    "text": "Пособие по уходу за ребёнком до 1,5 лет — 100% заработка.",
+    "type": "news"
+   },
+   {
+    "y": 2024,
+    "m": 1,
+    "age": 21,
+    "text": "Тебе 21 год.",
+    "type": "birthday"
+   },
+   {
+    "y": 2024,
+    "m": 1,
+    "age": 21,
+    "text": "Фокус года: Отношения.",
+    "type": "choice"
+   },
+   {
+    "y": 2024,
+    "m": 5,
+    "age": 21,
+    "text": "В столицу: Остаться дома",
+    "type": "choice"
+   },
+   {
+    "y": 2024,
+    "m": 6,
+    "age": 21,
+    "text": "Отменена массовая льготная ипотека. Ключевая ставка — 18–21%.",
+    "type": "news"
+   },
+   {
+    "y": 2024,
+    "m": 10,
+    "age": 21,
+    "text": "Права: Потом",
+    "type": "choice"
+   },
+   {
+    "y": 2025,
+    "m": 0,
+    "age": 21,
+    "text": "Прогрессивная шкала НДФЛ (13–22%).",
+    "type": "news"
+   },
+   {
+    "y": 2025,
+    "m": 1,
+    "age": 22,
+    "text": "Тебе 22 года.",
+    "type": "birthday"
+   },
+   {
+    "y": 2025,
+    "m": 1,
+    "age": 22,
+    "text": "Фокус года: Здоровье.",
+    "type": "choice"
+   },
+   {
+    "y": 2025,
+    "m": 10,
+    "age": 22,
+    "text": "Умерла бабушка (Юлия), 82 года. Причина: старость и деменция.",
+    "type": "death"
+   },
+   {
+    "y": 2025,
+    "m": 11,
+    "age": 22,
+    "text": "Права: Потом",
+    "type": "choice"
+   },
+   {
+    "y": 2026,
+    "m": 1,
+    "age": 23,
+    "text": "Тебе 23 года.",
+    "type": "birthday"
+   },
+   {
+    "y": 2026,
+    "m": 1,
+    "age": 23,
+    "text": "Фокус года: Карьера.",
+    "type": "choice"
+   },
+   {
+    "y": 2026,
+    "m": 2,
+    "age": 23,
+    "text": "В столицу: Остаться дома",
+    "type": "choice"
+   },
+   {
+    "y": 2026,
+    "m": 9,
+    "age": 23,
+    "text": "Алкоголь: выпивает по выходным.",
+    "type": "health"
+   },
+   {
+    "y": 2027,
+    "m": 1,
+    "age": 24,
+    "text": "Тебе 24 года.",
+    "type": "birthday"
+   },
+   {
+    "y": 2027,
+    "m": 1,
+    "age": 24,
+    "text": "Фокус года: Здоровье.",
+    "type": "choice"
+   },
+   {
+    "y": 2027,
+    "m": 2,
+    "age": 24,
+    "text": "«Служба безопасности банка»: Положить трубку",
+    "type": "choice"
+   },
+   {
+    "y": 2027,
+    "m": 3,
+    "age": 24,
+    "text": "Потеряла работу.",
+    "type": "bad"
+   },
+   {
+    "y": 2027,
+    "m": 4,
+    "age": 24,
+    "text": "Новая работа: продавец-кассир, 78 600 ₽ в месяц.",
+    "type": "money"
+   },
+   {
+    "y": 2027,
+    "m": 8,
+    "age": 24,
+    "text": "Потеряла работу.",
+    "type": "bad"
+   },
+   {
+    "y": 2028,
+    "m": 1,
+    "age": 25,
+    "text": "Тебе 25. Молодость позади. Дальше — следующий этап разработки: карьера, своя семья, деньги взрослого.",
+    "type": "end"
+   }
+  ],
+  "history": [
+   {
+    "age": 0,
+    "year": 2003,
+    "stats": {
+     "health": 85,
+     "money": 50,
+     "skills": 50,
+     "social": 45,
+     "mental": 72,
+     "happiness": 70
+    },
+    "quintile": null,
+    "income": 0,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 60
+   },
+   {
+    "age": 1,
+    "year": 2004,
+    "stats": {
+     "health": 68.76972193683471,
+     "money": 7.637218957755142,
+     "skills": 48.96871954951571,
+     "social": 43.793738902322026,
+     "mental": 66.76548018737606,
+     "happiness": 64.72672364901453
+    },
+    "quintile": 2,
+    "income": 35904.96647976572,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 60
+   },
+   {
+    "age": 2,
+    "year": 2005,
+    "stats": {
+     "health": 58.57429500772176,
+     "money": 0.4114805175238009,
+     "skills": 48.624117667467175,
+     "social": 42.95678385433218,
+     "mental": 62.65725505643268,
+     "happiness": 57.811685628789384
+    },
+    "quintile": 1,
+    "income": 38846.88774532348,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 60
+   },
+   {
+    "age": 3,
+    "year": 2006,
+    "stats": {
+     "health": 47.41550554405348,
+     "money": 0.013034201724133866,
+     "skills": 46.88912961185598,
+     "social": 42.37606898778787,
+     "mental": 49.55283739856696,
+     "happiness": 48.45504641466419
+    },
+    "quintile": 2,
+    "income": 54981.11948851522,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 55
+   },
+   {
+    "age": 4,
+    "year": 2007,
+    "stats": {
+     "health": 53.62431889745878,
+     "money": 0.0004128759621665135,
+     "skills": 46.51827291663043,
+     "social": 45.35921806179222,
+     "mental": 56.21185047579835,
+     "happiness": 47.690739545163446
+    },
+    "quintile": 2,
+    "income": 63681.91463234503,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 56
+   },
+   {
+    "age": 5,
+    "year": 2008,
+    "stats": {
+     "health": 59.2870287549705,
+     "money": 0.2482776442209912,
+     "skills": 46.680754812683205,
+     "social": 45.96327664402133,
+     "mental": 55.787296439617364,
+     "happiness": 49.40857348115489
+    },
+    "quintile": 1,
+    "income": 59029.7720685766,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 52
+   },
+   {
+    "age": 6,
+    "year": 2009,
+    "stats": {
+     "health": 59.71147707555944,
+     "money": 3.1460504227396995,
+     "skills": 46.806720482845485,
+     "social": 48.39584001534847,
+     "mental": 60.06857015479252,
+     "happiness": 50.54570533370428
+    },
+    "quintile": 2,
+    "income": 75683.97573182444,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 55
+   },
+   {
+    "age": 7,
+    "year": 2010,
+    "stats": {
+     "health": 52.36126531136467,
+     "money": 4.974944552752296,
+     "skills": 50.70969391006447,
+     "social": 51.57589756422317,
+     "mental": 55.449669159806426,
+     "happiness": 51.00160137373494
+    },
+    "quintile": 3,
+    "income": 82164.10581504402,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 56
+   },
+   {
+    "age": 8,
+    "year": 2011,
+    "stats": {
+     "health": 60.62344602663042,
+     "money": 5.682542352521079,
+     "skills": 49.81237916821515,
+     "social": 57.57257517072683,
+     "mental": 56.18425874296373,
+     "happiness": 55.84618727754181
+    },
+    "quintile": 3,
+    "income": 83459.50272030714,
+    "familyType": "married",
+    "city": "Казань",
+    "atmosphere": 51
+   },
+   {
+    "age": 9,
+    "year": 2012,
+    "stats": {
+     "health": 57.702764461189666,
+     "money": 0.6608602190727645,
+     "skills": 49.228746390163955,
+     "social": 60.29553811266935,
+     "mental": 57.53475954658949,
+     "happiness": 55.19010111721167
+    },
+    "quintile": 2,
+    "income": 73069.01795607992,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 50
+   },
+   {
+    "age": 10,
+    "year": 2013,
+    "stats": {
+     "health": 46.84134688039832,
+     "money": 4.178088445785177,
+     "skills": 47.27342995407713,
+     "social": 64.16607423173905,
+     "mental": 54.2166108903833,
+     "happiness": 53.064050983989375
+    },
+    "quintile": 2,
+    "income": 76089.80750901837,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 53
+   },
+   {
+    "age": 11,
+    "year": 2014,
+    "stats": {
+     "health": 50.865217423436206,
+     "money": 0.8253997425372379,
+     "skills": 51.304255257974454,
+     "social": 63.555291658645935,
+     "mental": 52.56553305097099,
+     "happiness": 52.44018350555097
+    },
+    "quintile": 1,
+    "income": 62623.7850463366,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 51
+   },
+   {
+    "age": 12,
+    "year": 2015,
+    "stats": {
+     "health": 53.298789526559226,
+     "money": 10.82948747914147,
+     "skills": 54.44587446625221,
+     "social": 56.23043167010352,
+     "mental": 49.58108868317724,
+     "happiness": 51.788453444301076
+    },
+    "quintile": 2,
+    "income": 73084.19862463958,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 48
+   },
+   {
+    "age": 13,
+    "year": 2016,
+    "stats": {
+     "health": 56.33106079563757,
+     "money": 16.653850051633825,
+     "skills": 55.92109462608643,
+     "social": 65.90488349429579,
+     "mental": 54.058995464149916,
+     "happiness": 59.06676593811575
+    },
+    "quintile": 2,
+    "income": 73751.69744585031,
+    "familyType": "married",
+    "city": "пос. Тиксикан",
+    "atmosphere": 52
+   },
+   {
+    "age": 14,
+    "year": 2017,
+    "stats": {
+     "health": 56.415788374423535,
+     "money": 10.850995808150605,
+     "skills": 53.395474050363774,
+     "social": 67.92370124742287,
+     "mental": 46.70952364602122,
+     "happiness": 56.61913116323435
+    },
+    "quintile": 3,
+    "income": 76166.00453368612,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 36
+   },
+   {
+    "age": 15,
+    "year": 2018,
+    "stats": {
+     "health": 52.437267578614325,
+     "money": 1.4700616623497238,
+     "skills": 57.49433601731962,
+     "social": 65.41013231812192,
+     "mental": 45.88595985525333,
+     "happiness": 53.297791268376955
+    },
+    "quintile": 1,
+    "income": 31143.24302366468,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 31
+   },
+   {
+    "age": 16,
+    "year": 2019,
+    "stats": {
+     "health": 53.157778737700866,
+     "money": 0.04656619071369168,
+     "skills": 55.136416628756976,
+     "social": 62.15962192038185,
+     "mental": 16.425926599532204,
+     "happiness": 36.832892707117836
+    },
+    "quintile": 1,
+    "income": 48586.82993119892,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 21
+   },
+   {
+    "age": 17,
+    "year": 2020,
+    "stats": {
+     "health": 54.8689233382314,
+     "money": 0.001475047049467267,
+     "skills": 52.387744901952516,
+     "social": 71.40006812707902,
+     "mental": 38.685525019748454,
+     "happiness": 45.346233790859664
+    },
+    "quintile": 1,
+    "income": 23866.84904638424,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 29
+   },
+   {
+    "age": 18,
+    "year": 2021,
+    "stats": {
+     "health": 54.69209665581504,
+     "money": 11.053025299705357,
+     "skills": 49.54348564825602,
+     "social": 72.36483791361357,
+     "mental": 41.6571604789782,
+     "happiness": 50.83270322134041
+    },
+    "quintile": 2,
+    "income": 63951.95966055014,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 33
+   },
+   {
+    "age": 19,
+    "year": 2022,
+    "stats": {
+     "health": 58.787182768787446,
+     "money": 30.51147170071059,
+     "skills": 52.56868035359511,
+     "social": 68.91171871862763,
+     "mental": 18.226105433072604,
+     "happiness": 41.735834692264575
+    },
+    "quintile": 3,
+    "income": 87651.66450110852,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 30
+   },
+   {
+    "age": 20,
+    "year": 2023,
+    "stats": {
+     "health": 71.53671772839616,
+     "money": 41.0596899080664,
+     "skills": 52.0384416066021,
+     "social": 63.79708429158513,
+     "mental": 33.323494941444324,
+     "happiness": 48.866298179345655
+    },
+    "quintile": 2,
+    "income": 57131.57458892766,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 44
+   },
+   {
+    "age": 21,
+    "year": 2024,
+    "stats": {
+     "health": 72.02885959303588,
+     "money": 46.7825954290839,
+     "skills": 51.695680851320006,
+     "social": 60.248334265097405,
+     "mental": 46.24880247337661,
+     "happiness": 54.510058069465245
+    },
+    "quintile": 2,
+    "income": 76247.59397715141,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 52
+   },
+   {
+    "age": 22,
+    "year": 2025,
+    "stats": {
+     "health": 71.62449451044645,
+     "money": 53.89767790352553,
+     "skills": 50.834601477460374,
+     "social": 60.7725974905249,
+     "mental": 55.02613209731129,
+     "happiness": 62.45941615478109
+    },
+    "quintile": 2,
+    "income": 83591.44502079797,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 57
+   },
+   {
+    "age": 23,
+    "year": 2026,
+    "stats": {
+     "health": 74.50441459946326,
+     "money": 59.58646598366983,
+     "skills": 50.80871425119213,
+     "social": 58.179208335594666,
+     "mental": 52.298604380533,
+     "happiness": 60.69909305265792
+    },
+    "quintile": 3,
+    "income": 93934.27174856541,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 56
+   },
+   {
+    "age": 24,
+    "year": 2027,
+    "stats": {
+     "health": 72.76157539997115,
+     "money": 60.111086497764184,
+     "skills": 51.92508020375675,
+     "social": 57.87456872752455,
+     "mental": 56.48710809187379,
+     "happiness": 63.24406015906083
+    },
+    "quintile": 2,
+    "income": 91973.04523858958,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 59
+   },
+   {
+    "age": 25,
+    "year": 2028,
+    "stats": {
+     "health": 74.60285410607617,
+     "money": 55.84394024318969,
+     "skills": 49.53101701813924,
+     "social": 56.16843321644181,
+     "mental": 50.516039205340505,
+     "happiness": 63.51081900177906
+    },
+    "quintile": 1,
+    "income": 68792.8022048526,
+    "familyType": "stepfamily",
+    "city": "пос. Тиксикан",
+    "atmosphere": 62
+   }
+  ],
+  "pending": null,
+  "queue": [],
+  "over": true,
+  "flags": {
+   "sectionsCheck_Казань": 1,
+   "recentJobLoss": 0,
+   "sectionsCheck_пос. Тиксикан": 0,
+   "schoolDone": 1,
+   "promDone": 1
+  },
+  "cooldowns": {
+   "vaccination": 2,
+   "first_steps": 11,
+   "first_words": 17,
+   "matinee": 70,
+   "stray_dogs": 77,
+   "kg_toy_conflict": 78,
+   "yard_garages": 85,
+   "river_swim": 148,
+   "collectors": 212,
+   "first_september": 91,
+   "class_fees": 176,
+   "school_bully": 192,
+   "summer_camp": 147,
+   "broken_window": 101,
+   "moving": 105,
+   "copy_test": 111,
+   "bad_company": 140,
+   "parents_divorce": 157,
+   "first_cigarette": 185,
+   "curfew": 162,
+   "stepfather_arrives": 163,
+   "first_party": 170,
+   "summer_job": 184,
+   "zakladchik": 187,
+   "first_love": 188,
+   "loss_parent": 189,
+   "dark_mood": 194,
+   "after_9": 198,
+   "profile_choice": 199,
+   "exam_cheat": 219,
+   "prom_11": 220,
+   "driving_license": 273,
+   "big_move": 276,
+   "scam_call": 288
+  },
+  "fired": {
+   "vaccination": 1,
+   "first_steps": 1,
+   "first_words": 1,
+   "matinee": 3,
+   "stray_dogs": 1,
+   "kg_toy_conflict": 1,
+   "yard_garages": 1,
+   "river_swim": 2,
+   "collectors": 3,
+   "first_september": 1,
+   "class_fees": 7,
+   "school_bully": 4,
+   "summer_camp": 2,
+   "broken_window": 1,
+   "moving": 1,
+   "copy_test": 1,
+   "bad_company": 1,
+   "parents_divorce": 1,
+   "first_cigarette": 2,
+   "curfew": 1,
+   "stepfather_arrives": 1,
+   "first_party": 1,
+   "summer_job": 2,
+   "zakladchik": 1,
+   "first_love": 1,
+   "loss_parent": 1,
+   "dark_mood": 1,
+   "after_9": 1,
+   "profile_choice": 1,
+   "exam_cheat": 1,
+   "prom_11": 1,
+   "driving_license": 4,
+   "big_move": 2,
+   "scam_call": 1
+  },
+  "birth": {
+   "year": 2003,
+   "month": 1
+  },
+  "queueFocus": null,
+  "endReason": "mvp"
+ }
+}

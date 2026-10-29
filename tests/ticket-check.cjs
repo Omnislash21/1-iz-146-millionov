@@ -1,0 +1,10 @@
+// Узкие проверки условной игровой покупки билета. node tests/ticket-check.cjs
+// Проверяются календарные границы и исходы модели; вероятности естественного прогона не меняются.
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');const p=path.resolve(__dirname,'..');for(const m of fs.readFileSync(path.join(p,'index.html'),'utf8').matchAll(/src="(js\/[^\"]+)"/g)){if(!m[1].startsWith('js/ui'))vm.runInThisContext(fs.readFileSync(path.join(p,m[1]),'utf8'));}
+const RL=globalThis.RL;
+function fixture(year){const s=RL.Game.create({sex:'m',firstName:'Тест',lastName:'Билет',birthYear:1985},77);s.birth={year:year-20,month:0};s.date={year,month:3};s.person.flags={militaryCat:'Б'};s.person.army=null;s.person.education={stage:'work'};s.person.job={prof:'worker',employed:true,base:50000,shadow:0,raise:1};s.person.diplomas=[];s.person.earnings=0;s.person.own={living:'parents',savings:0,debts:[],deprivation:0,lastBudget:null};s.family.savings=1000000;s.family.lastBudget={income:200000,need:100000};s.pending=null;s.queue=[];return s;}
+const outputs=[];
+for(const year of [1991,1992,2019,2020]){const s=fixture(year),r=new RL.RNG(2);r.chance=()=>true;RL.Young.monthly(s,r);assert(s.pending&&s.pending.id==='draft_notice');const offered=s.pending.opts.some(o=>o.kind==='ticket');assert.strictEqual(offered,year>=1992&&year<=2019);outputs.push({year,ticketOffered:offered});}
+for(const [roll,outcome] of [[.74,'success'],[.75,'disappeared'],[.89,'disappeared'],[.9,'caught']]){const s=fixture(2005);s.pending={kind:'custom',id:'draft_notice',title:'Тест',opts:[{kind:'ticket',text:'Билет'}]};const r=new RL.RNG(3);r.next=()=>roll;RL.Young.resolve(s,0,r);const log=s.log.map(x=>x.text).join('\n');const actual=s.person.flags.boughtTicket?'success':/Посредник исчез/.test(log)?'disappeared':/Схема вскрылась/.test(log)?'caught':'unknown';assert.strictEqual(actual,outcome);outputs.push({roll,outcome:actual,cat:s.person.flags.militaryCat,inArmy:!!s.person.army});}
+console.log(JSON.stringify(outputs,null,2));console.log('Билет: '+outputs.length+' проверок, 0 ошибок.');
+
