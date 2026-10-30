@@ -10,12 +10,14 @@ RL.World = (function () {
   function buildFuture(seed) {
     var rng = new RL.RNG((seed ^ 0x5EED) >>> 0);
     var F = H().future, out = {}, svoActive = true;
+    // конец СВО — отдельный ГСЧ, чтобы не сдвигать остальной сценарий
+    var r2 = new RL.RNG((seed ^ 0x5F0E) >>> 0), endY = +r2.weightedKey(F.svoEndYear || {2027: 1}), endM = r2.int(0, 11);
     for (var y = LAST_HIST + 1; y <= 2160; y++) {
       var crisis = rng.chance(F.crisisChance);
       var infl = Math.max(1, rng.normal(F.inflationMean, F.inflationSd) + (crisis ? F.crisisInflationAdd : 0));
       var realGrowth = rng.normal(F.realWageGrowthMean, F.realWageGrowthSd) + (crisis ? F.crisisWageHit : 0);
       var unemp = Math.max(1.5, rng.normal(F.unemploymentMean, F.unemploymentSd) + (crisis ? 2.5 : 0));
-      if (svoActive && rng.chance(F.svoEndChancePerYear)) svoActive = false;
+      if (y > endY) svoActive = false;
       var flags = {};
       if (crisis) flags.jobLoss = F.crisisJobLoss;
       if (crisis) flags.alcohol = 1.1;
@@ -24,6 +26,7 @@ RL.World = (function () {
       var mob = svoActive && rng.chance(F.mobilizationChancePerYear) ? {month: rng.int(0, 11), months: 3} : null;
       out[y] = {inflation: infl, realGrowth: realGrowth, unemployment: unemp, crisis: crisis, flags: flags, mobilization: mob,
         leShift: rng.normal(F.leTrendPerYear, F.leSd)};
+      if (y === endY) { out[y].svoEnd = endM; if (mob && mob.month >= endM) out[y].mobilization = null; } // после окончания мобилизаций нет
     }
     return out;
   }
@@ -80,7 +83,23 @@ RL.World = (function () {
     var h = H().years[y];
     if (h) return {flags: h.flags || {}, news: h.news || [], mobilization: h.mobilization || null};
     var f = fut(state, y);
-    return {flags: f ? f.flags : {}, news: [], mobilization: f ? f.mobilization : null, crisis: f && f.crisis};
+    var news = f && f.svoEnd !== undefined ? [{month: f.svoEnd, text: 'Объявлено об окончании специальной военной операции. Контрактников и мобилизованных возвращают домой.'}] : [];
+    return {flags: f ? f.flags : {}, news: news, mobilization: f ? f.mobilization : null, crisis: f && f.crisis};
+  }
+  // идёт ли СВО в этот месяц: флаг года, а в год окончания — только до месяца окончания
+  function svoOn(state, y, m) {
+    if (!flag(state, y, 'svo', 0)) return false;
+    var f = y > LAST_HIST ? fut(state, y) : null;
+    return !(f && f.svoEnd !== undefined && (m === undefined ? state.date.month : m) >= f.svoEnd);
+  }
+  // когда кончится СВО в этой жизни: {year, month}; старые сохранения — первый год без флага svo
+  function svoEnd(state) {
+    for (var y = LAST_HIST + 1; y <= 2160; y++) {
+      var f = fut(state, y);
+      if (f.svoEnd !== undefined) return {year: y, month: f.svoEnd};
+      if (!f.flags.svo) return {year: y, month: 0};
+    }
+    return null;
   }
   function flag(state, y, name, def) {
     var v = yearData(state, y).flags[name];
@@ -127,7 +146,7 @@ RL.World = (function () {
     return s + ' ' + unit;
   }
 
-  return {buildFuture: buildFuture, price: price, realWageIndex: realWageIndex, unemployment: unemployment,
+  return {svoOn: svoOn, svoEnd: svoEnd, buildFuture: buildFuture, price: price, realWageIndex: realWageIndex, unemployment: unemployment,
     yearData: yearData, flag: flag, ctx: ctx, money: money, inflation: inflation, avgWageYear: avgWageYear,
     resetCache: function () { cache = {}; REF = null; }};
 })();

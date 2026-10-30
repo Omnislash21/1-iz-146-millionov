@@ -1,7 +1,7 @@
 // Сверка этапа 3: жизнь до 35. Запуск: node tests/adult-check.js [N] [--birth-year Y]
 var fs = require('fs'), path = require('path'), vm = require('vm');
 var root = path.join(__dirname, '..');
-fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^"]+)"/g).map(function (m) { return m.slice(5, -1); })
+fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^"]+)"/g).map(function (m) { return m.slice(5, -1).replace(/\?.*$/, ''); })
   .filter(function (f) { return f.indexOf('js/ui') < 0; }).forEach(function (f) { vm.runInThisContext(fs.readFileSync(path.join(root, f), 'utf8'), {filename: f}); });
 var S = RL.S, N = +process.argv[2] || 600, by = process.argv.indexOf('--birth-year') > 0 ? +process.argv[process.argv.indexOf('--birth-year') + 1] : null;
 function pct(a, b) { return b ? (100 * a / b).toFixed(1) + '%' : '—'; }

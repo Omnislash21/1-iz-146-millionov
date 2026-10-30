@@ -76,6 +76,7 @@ RL.Game = (function () {
     if (RL.Chains) RL.Chains.monthly(s, rng);
     if (RL.Hardship) RL.Hardship.monthly(s, rng);
     if (RL.Emigration) RL.Emigration.monthly(s, rng);
+    if (RL.Svo) RL.Svo.monthly(s, rng);
     if (RL.Politics) RL.Politics.monthly(s, rng);
     if (RL.Leisure && !o.daily) RL.Leisure.monthly(s, rng);
     RL.OwnFamily.monthly(s, rng);

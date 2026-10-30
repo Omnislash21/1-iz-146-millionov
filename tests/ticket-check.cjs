@@ -1,6 +1,6 @@
 // Узкие проверки условной игровой покупки билета. node tests/ticket-check.cjs
 // Проверяются календарные границы и исходы модели; вероятности естественного прогона не меняются.
-const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');const p=path.resolve(__dirname,'..');for(const m of fs.readFileSync(path.join(p,'index.html'),'utf8').matchAll(/src="(js\/[^\"]+)"/g)){if(!m[1].startsWith('js/ui'))vm.runInThisContext(fs.readFileSync(path.join(p,m[1]),'utf8'));}
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');const p=path.resolve(__dirname,'..');for(const m of fs.readFileSync(path.join(p,'index.html'),'utf8').matchAll(/src="(js\/[^\"]+)"/g)){if(!m[1].startsWith('js/ui'))vm.runInThisContext(fs.readFileSync(path.join(p,m[1].replace(/\?.*$/,'')),'utf8'));}
 const RL=globalThis.RL;
 function fixture(year){const s=RL.Game.create({sex:'m',firstName:'Тест',lastName:'Билет',birthYear:1985},77);s.birth={year:year-20,month:0};s.date={year,month:3};s.person.flags={militaryCat:'Б'};s.person.army=null;s.person.education={stage:'work'};s.person.job={prof:'worker',employed:true,base:50000,shadow:0,raise:1};s.person.diplomas=[];s.person.earnings=0;s.person.own={living:'parents',savings:0,debts:[],deprivation:0,lastBudget:null};s.family.savings=1000000;s.family.lastBudget={income:200000,need:100000};s.pending=null;s.queue=[];return s;}
 const outputs=[];

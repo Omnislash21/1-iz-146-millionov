@@ -98,7 +98,7 @@ RL.Mortality = (function () {
     {re: /Алкогольная|алкоголем|цирроз|Падение|Утопление|Переохлаждение|Пожар|Убийство|Травма при невыясненных/, k: function (x) { return Math.pow(x.regAlc, 0.8); }},
     {re: /ДТП/, k: function (x) { return x.rural ? 1.4 : 1; }},
     // рак у тех, у кого он диагностирован, уже считает js/sim/health.js — без диагноза табличный рак реже
-    {re: /Рак|опухол|Лейкоз|Лимфом|Меланом/, k: function (x) { return x.cancerDx ? 1 : 0.5; }}
+    {re: /Рак|опухол|Лейкоз|Лимфом|Меланом/, k: function (x) { return x.cancerDx ? 1 : 0.35; }}
   ];
   function lifeOf(s) {
     var p = s.person, h = p.habits || {}, ev = p.habitsEver || {}, L = RL.Young && p.own ? RL.Young.loc(s) : null, R = L ? L.region : RL.S.region(s);

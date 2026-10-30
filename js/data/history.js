@@ -55,7 +55,10 @@ RL.DATA.history = {
     "realWageGrowthMean":1.5,"realWageGrowthSd":2.5,
     "crisisChance":0.10,"crisisInflationAdd":8,"crisisWageHit":-6,"crisisJobLoss":1.6,
     "pandemicChance":0.02,
-    "svoEndChancePerYear":0.25,"mobilizationChancePerYear":0.07,
+    // Когда закончится СВО — своя дата в каждой жизни (не раньше 2027). Оценка [~] на конец 2026 г.: переговоры идут, но позиции далеки;
+    // самый вероятный — 2027, дальше — длинный хвост «замороженного» конфликта.
+    "svoEndYear":{"2027":0.32,"2028":0.24,"2029":0.15,"2030":0.1,"2031":0.06,"2032":0.05,"2033":0.04,"2035":0.04},
+    "mobilizationChancePerYear":0.07,
     "leTrendPerYear":0.15,"leSd":0.3,
     "unemploymentMean":3.5,"unemploymentSd":1.0
   },

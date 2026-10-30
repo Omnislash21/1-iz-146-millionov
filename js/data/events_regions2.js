@@ -17,7 +17,7 @@ RL.DATA.events.push(
    "text":"Родители остались в родном городке. Приезжаешь раз в год, и каждый раз они старше на пять.",
    "effects":{"mental":-3,"relation":{"all":-3}}},
   {"id":"rg_contract_lift","title":"Контракт","major":true,"when":{"sex":"m","age":[20,45],"poorRegion":true,"employed":false,"served":true,"year":[2000,2120]},"p":0.006,"cooldown":60,
-   "mods":[{"if":{"year":[2022,2120]},"mul":3}],
+   "mods":[{"if":{"svoActive":true},"mul":3}],
    "text":"Работы нет. В военкомате — контракт: зарплата в три раза больше любой местной, ипотека, льготы. Половина знакомых уже там.",
    "choices":[
      {"text":"Подписать","traits":{"courage":3,"conformity":2},"effects":{"army":"contract"}},

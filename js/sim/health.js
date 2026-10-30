@@ -188,9 +188,9 @@ RL.Health = (function () {
     // Дополнительные смерти в событиях/на службе остаются отдельными; проверка — когорта 1985 в tests/sim-check.js.
     // взрослые: популяционная нормировка по возрасту (qx уже включает болезни и привычки) — RL.DATA.old.mortNorm
     if (a >= 18 && RL.DATA.old) m /= U.interpYear(RL.DATA.old.mortNorm, a);
-    // у женщин табличный риск ниже, а заболеваемость в данных общая — отдельная поправка после 45 [калибровка tests/life-check.js]
-    if (a >= 45 && p.sex === 'f' && RL.DATA.old) m /= U.interpYear(RL.DATA.old.femaleNorm, a);
-    else if (a >= 18 && a < 36 && RL.DATA.young) m /= RL.DATA.young.mortalityNormalization || 1;
+    // у женщин табличный риск ниже, а заболеваемость в данных общая — отдельная поправка с 35 лет [калибровка tests/life-check.js 1000]
+    if (a >= 35 && p.sex === 'f' && RL.DATA.old) m /= U.interpYear(RL.DATA.old.femaleNorm, a);
+    if (a >= 18 && a < 36 && RL.DATA.young) m /= RL.DATA.young.mortalityNormalization || 1;
     if (a < 1) m *= 1.6; // у младенцев здоровье выше среднего «детского», без поправки смертность занижается
     if (S.region(s).id === 'che' && ((y >= 1994 && y <= 1996) || (y >= 1999 && y <= 2002))) m *= (y === 1995 || y === 2000) ? 4 : 2.2;
     return m;

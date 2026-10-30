@@ -309,7 +309,7 @@ RL.Young = (function () {
       if (a.war && rng.chance(A.warDeathMonthly)) { s.deathNow = 'Погиб в Чечне'; return; }
       if (a.war && rng.chance(0.01)) { S.log(s, 'Ранение: осколок, госпиталь в Моздоке.', 'bad'); S.adj(s, 'health', -20); S.adj(s, 'mental', -12); RL.Health.addCondition(s, 'war_injury', rng); }
       // давление подписать контракт (2022+)
-      if (y >= 2022 && RL.World.flag(s, y, 'svo', 0) && a.months === 3 && rng.chance(0.4)) RL.Events.queue(s, 'army_contract_pressure', {});
+      if (y >= 2022 && RL.World.svoOn(s, y) && a.months === 3 && rng.chance(0.4)) RL.Events.queue(s, 'army_contract_pressure', {});
     }
     if (a.kind === 'mobilized' || a.kind === 'contract') {
       var R = D.history.deploymentRisk;
@@ -478,12 +478,13 @@ RL.Young = (function () {
       if (conn) h *= 1.3;
       var tieAny = RL.Social && RL.Social.best(s, ['business', 'official', 'bank', 'police', 'doctor', 'school']);
       if (tieAny) h *= 1.5;
+      if (p.flags.backFail && S.ageMonths(s) - p.flags.backFail < 24) h *= 0.6; // вернулся из эмиграции ни с чем — «дыра» в резюме
       if (p.job) p.job.monthsUnemployed = (p.job.monthsUnemployed || 0) + 1;
       if (rng.chance(h)) {
         var first = !p.flags.firstJob;
         var viaConn = conn && rng.chance(0.4);
         var viaTie = !viaConn && RL.Social ? RL.Social.jobHelp(s, rng) : null;
-        p.job = makeJob(s, choosePro(s, rng), rng, (viaConn ? 1.1 : viaTie ? 1.15 : 1) * (aa >= 45 && !first ? 0.8 : 1));
+        p.job = makeJob(s, choosePro(s, rng), rng, (viaConn ? 1.1 : viaTie ? 1.15 : 1) * (aa >= 45 && !first ? 0.8 : 1) * (p.flags.backFail && S.ageMonths(s) - p.flags.backFail < 24 ? 0.85 : 1));
         p.flags.firstJob = 1;
         var pr = S.prof({job: p.job});
         S.log(s, (first ? 'Первая работа: ' : 'Новая работа: ') + pr[p.sex] + (viaConn ? ' (устроили знакомые родителей)' : viaTie ? ' (по знакомству: ' + RL.Social.label(viaTie) + ')' : '') + ', ' + RL.World.money(s, netWage(s)) + ' в месяц' + (p.job.shadow > 0.5 ? ' в конверте' : '') + '.', 'money');

@@ -14,7 +14,8 @@ RL.Chains = (function () {
     [].concat(eff.later).forEach(function (l) {
       if (l.p !== undefined && !rng.chance(l.p)) return;
       var y = l.years || [1, 3];
-      (s.later = s.later || []).push({at: S.ageMonths(s) + Math.round(rng.range(y[0], y[1]) * 12), id: l.id});
+      var from = s.curEv ? {t: s.curEv.title, c: s.curEv.choice, y: s.curEv.y} : null;
+      (s.later = s.later || []).push({at: S.ageMonths(s) + Math.round(rng.range(y[0], y[1]) * 12), id: l.id, from: from});
     });
   }
 
@@ -34,7 +35,19 @@ RL.Chains = (function () {
       var due = s.later.filter(function (l) { return am >= l.at; });
       if (due.length) {
         s.later = s.later.filter(function (l) { return am < l.at; });
-        due.forEach(function (l) { if (RL.Events.def(l.id)) { RL.Events.queue(s, l.id, {}); var b = p.bio = p.bio || {incSum: 0, incN: 0}; b.chainsFired = (b.chainsFired || 0) + 1; } });
+        due.forEach(function (l) {
+          var e = RL.Events.def(l.id); if (!e) return;
+          var b = p.bio = p.bio || {incSum: 0, incN: 0};
+          b.chainsFired = (b.chainsFired || 0) + 1;
+          // игрок должен видеть связь: «это аукнулось после того выбора»
+          if (l.from && l.from.y && s.date.year - l.from.y >= 1) {
+            var yrs = s.date.year - l.from.y;
+            S.log(s, 'Аукнулось через ' + yrs + ' ' + RL.Game.years(yrs) + ': «' + (l.from.t ? l.from.t + ' — ' : '') + l.from.c + '» (' + l.from.y + ').', 'chain');
+            (b.chainList = b.chainList || []).push({y0: l.from.y, t: l.from.t, c: l.from.c, y: s.date.year, to: e.title || ''});
+            if (b.chainList.length > 12) b.chainList.shift();
+          }
+          RL.Events.queue(s, l.id, {});
+        });
       }
     }
     // как растил детей: тепло копится, пока ребёнок дома и младше 18

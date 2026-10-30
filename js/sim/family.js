@@ -305,7 +305,7 @@ RL.Family = (function () {
       });
     }
     // контракт (с 2023, пока идёт СВО): чаще бедные, с долгами, без работы
-    if (RL.World.flag(s, y, 'svo', 0) && y >= 2023) {
+    if (RL.World.svoOn(s, y) && y >= 2023) {
       [S.father(s), fam.members.filter(function (m) { return m.role === 'stepfather' && m.alive; })[0]].forEach(function (m) {
         if (!m || !m.alive || m.unknown || m.job.deployed || m.age < 20 || m.age > 55 || m.disabled) return;
         var pc = 0.012 * (fam.poverty ? 2.5 : 1) * ((fam.debts || []).length ? 1.8 : 1) * (!m.job.employed ? 2 : 1) * (m.alcohol >= 2 ? 1.5 : 1);

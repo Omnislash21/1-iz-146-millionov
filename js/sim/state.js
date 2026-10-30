@@ -144,7 +144,7 @@ RL.S = (function () {
       appearance: p.appearance, focus: p.focus, stage: p.education.stage, grade: p.education.grade, schoolType: p.education.school ? p.education.school.type : null,
       kindergarten: p.education.stage === 'kindergarten', school: p.education.stage === 'school',
       unvaccinated: !!fam.flags.vaccineRefusal, chronic: p.conditions.some(function (c) { return !c.cured && RL.DATA.conditions[c.id].kind !== 'acute'; }),
-      disability: !!p.disability, svo: !!RL.World.flag(s, y, 'svo', 0), crisis: RL.World.flag(s, y, 'jobLoss', 1) >= 1.3,
+      disability: !!p.disability, svo: RL.World.svoOn(s, y), crisis: RL.World.flag(s, y, 'jobLoss', 1) >= 1.3,
       deployed: fam.members.some(function (m) { return m.alive && m.job && m.job.deployed; }),
       measlesYear: !!RL.World.flag(s, y, 'measles', 0), epidemic: RL.World.flag(s, y, 'epidemic', 0),
       siberiaFE: r.tags.indexOf('siberia') >= 0 || r.tags.indexOf('fareast') >= 0,
@@ -177,6 +177,7 @@ RL.S = (function () {
     if (RL.Social) RL.Social.facts(s, f);
     if (RL.Hardship) RL.Hardship.facts(s, f);
     if (RL.Chains) RL.Chains.facts(s, f);
+    if (RL.Svo) RL.Svo.facts(s, f);
     if (RL.Emigration) RL.Emigration.facts(s, f);
     if (RL.Leisure) RL.Leisure.facts(s, f);
     f.prof = p.job && p.job.employed ? p.job.prof : null;

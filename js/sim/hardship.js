@@ -141,6 +141,11 @@ RL.Hardship = (function () {
       if (s.person.biz && RL.Adult) RL.Adult.applyEffects(s, {closeBiz: true}, rng);
     }
     // ипотечные каникулы: полгода без платежей
+    // работа ниже статусом после сокращения: охранник, продавец, курьер — за ~55% прежнего [~]
+    if (eff.downJob && s.person.job && !s.person.job.employed) {
+      var j = s.person.job; j.prof = rng.pick(['guard', 'seller', 'courier']); j.base = Math.round(j.base * 0.55); j.raise = 1; j.employed = true; j.since = S.ageMonths(s); j.level = 0;
+      S.log(s, 'Новая работа — ' + RL.S.profName({job: j, sex: s.person.sex}).toLowerCase() + ', ' + RL.World.money(s, RL.Young.netWage(s)) + ' в месяц. Раньше ты получал' + (s.person.sex === 'f' ? 'а' : '') + ' больше.', 'money');
+    }
     // доля зарплаты «в конверте» (выбор при найме): не стаж, меньше пенсия
     if (eff.shadow !== undefined && s.person.job && s.person.job.employed) s.person.job.shadow = eff.shadow;
     if (eff.shiftRelief && s.person.hard) { s.person.hard.relief = 1; s.person.hard.shift = 0; }

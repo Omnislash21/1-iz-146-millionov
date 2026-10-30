@@ -2,7 +2,7 @@
 // (ожидание = сумма месячных рисков по таблице за прожитые месяцы). Запуск: node tests/life-check.js [N]
 var fs = require('fs'), path = require('path'), vm = require('vm');
 var root = path.join(__dirname, '..');
-fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^"]+)"/g).map(function (m) { return m.slice(5, -1); })
+fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^"]+)"/g).map(function (m) { return m.slice(5, -1).replace(/\?.*$/, ''); })
   .filter(function (f) { return f.indexOf('js/ui') < 0; }).forEach(function (f) { vm.runInThisContext(fs.readFileSync(path.join(root, f), 'utf8'), {filename: f}); });
 var S = RL.S, U = RL.util, N = +process.argv[2] || 400;
 var bands = [[0, 18], [18, 35], [35, 50], [50, 65], [65, 80], [80, 120]];

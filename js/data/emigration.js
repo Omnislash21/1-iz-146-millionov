@@ -21,8 +21,8 @@ RL.DATA.abroad.forEach(function (c) {
 });
 
 RL.DATA.events.push(
-  {"id":"emig_offer","title":"Уехать?","major":true,"when":{"age":[20,50],"not":{"tags":["abroad"]},"inPrison":false},"p":0.00013,"cooldown":60,
-   "mods":[{"if":{"higherEdu":true},"mul":2},{"if":{"prof":["it","doctor","engineer","scientist"]},"mul":2},{"if":{"year":[1990,1999]},"mul":1.5},{"if":{"year":[2022,2023]},"mul":6},{"if":{"capitalLoc":true},"mul":1.5}],
+  {"id":"emig_offer","title":"Уехать?","major":true,"when":{"age":[20,50],"not":{"tags":["abroad"]},"inPrison":false},"p":0.00015,"cooldown":60,
+   "mods":[{"if":{"higherEdu":true},"mul":2},{"if":{"prof":["it","doctor","engineer","scientist"]},"mul":2},{"if":{"prof":["it"]},"mul":1.6},{"if":{"age":[20,34]},"mul":1.5},{"if":{"year":[1990,1999]},"mul":1.5},{"if":{"year":[2022,2023]},"mul":9},{"if":{"capitalLoc":true},"mul":1.8},{"if":{"bigCity":true},"mul":1.3}],
    "text":"Знакомые уехали и зовут: «Здесь у тебя будущего нет». Там — другой язык, ноль связей и работа ниже квалификации на первые годы.",
    "choices":[
      {"text":"Уехать","traits":{"courage":3,"conformity":-2},"effects":{"emigrate":true}},

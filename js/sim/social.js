@@ -59,7 +59,7 @@ RL.Social = (function () {
       if (mine) t.theyOwe--;
       else {
         t.owed = (t.owed || 0) + 1; t.yourSex = s.person.sex;
-        if (rng.chance(0.7)) (s.favors = s.favors || []).push({at: S.ageMonths(s) + rng.int(6, 36), tie: t.id});
+        if (rng.chance(0.7)) (s.favors = s.favors || []).push({at: S.ageMonths(s) + rng.int(6, 36), tie: t.id, y: s.date.year});
       }
     }
     return ok;
@@ -76,6 +76,7 @@ RL.Social = (function () {
     var t = byId(s, due.tie);
     if (!t || t.enemy || !t.owed) return;
     s.favorCur = t.id;
+    if (due.y) S.log(s, 'Долг платежом красен: ' + t.name + ' помог' + (t.sex === 'f' ? 'ла' : '') + ' тебе в ' + due.y + '-м — теперь звонит с просьбой.', 'chain');
     RL.Events.queue(s, rng.pick(FAV[t.sphere] || ['fav_money']), {n: t.name, who: label(t), on: t.sex === 'f' ? 'она' : 'он', ego: t.sex === 'f' ? 'её' : 'его', emu: t.sex === 'f' ? 'ей' : 'ему'});
   }
   // враг ждёт случая: донос, проверка, отказ в нужный момент [~ 0,3% в месяц на врага]
@@ -84,8 +85,14 @@ RL.Social = (function () {
     ties(s).forEach(function (t) {
       if (!t.enemy || s.pending || !rng.chance(0.003 * t.rank)) return;
       var v = {n: t.name, who: label(t), on: t.sex === 'f' ? 'она' : 'он'};
-      var hasBiz = !!s.person.biz, job = s.person.job && s.person.job.employed;
-      var id = (t.sphere === 'police' || t.sphere === 'prosecutor') ? 'enemy_report' : t.sphere === 'official' ? (hasBiz ? 'enemy_inspection' : 'enemy_block') : t.sphere === 'bank' ? 'enemy_credit' : job ? 'enemy_rumor' : 'enemy_block';
+      var hasBiz = !!s.person.biz, job = s.person.job && s.person.job.employed, kids = (s.person.kids || []).some(function (k) { return k.alive && k.age < 18; });
+      // месть по сфере и чину: мелкая (слухи, жалобы, «мест нет»), средняя (проверки, сделки, чёрный список), тяжёлая (донос, подстава, суд) [~]
+      var M = {police: [['enemy_neighbor', 3], ['enemy_report', 2], ['enemy_setup', 1]], prosecutor: [['enemy_report', 2], ['enemy_court', 2], ['enemy_setup', 1]],
+        official: [['enemy_block', 3], [hasBiz ? 'enemy_inspection' : 'enemy_tax', 2], ['enemy_court', 1]], bank: [['enemy_credit', 3], ['enemy_court', 1]],
+        business: [['enemy_rumor', job ? 3 : 0], ['enemy_deal', hasBiz ? 3 : 1], ['enemy_job_refuse', 2]], doctor: [['enemy_refuse_service', 3], ['enemy_rumor', 1]],
+        school: [['enemy_kid_school', kids ? 3 : 0], ['enemy_rumor', 2]], military: [['enemy_neighbor', 2], ['enemy_block', 2]]}[t.sphere] || [['enemy_rumor', 1]];
+      var w = {}; M.forEach(function (x) { if (x[1] > 0) w[x[0]] = (w[x[0]] || 0) + x[1] * (/setup|court|report/.test(x[0]) ? t.rank : 1); });
+      var id = Object.keys(w).length ? rng.weightedKey(w) : 'enemy_rumor';
       RL.Events.queue(s, id, v);
       t.enemyHits = (t.enemyHits || 0) + 1;
       if (t.enemyHits >= 2 && rng.chance(0.5)) { t.enemy = false; t.str = 0; } // со временем отстают

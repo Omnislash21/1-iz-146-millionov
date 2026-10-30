@@ -183,6 +183,11 @@
   }
 
   $('btnPlay').onclick = function () { if (state.pending && !state.settings.auto) { showModal(); return; } play(!running); };
+  $('svoPoster').onclick = function () {
+    if (!state || state.over || state.pending || !RL.Svo.canSign(state)) return;
+    play(false);
+    if (RL.Svo.offer(state)) { render(); showModal(); }
+  };
   $('btnStep').onclick = function () {
     if (!state) return;
     play(false);
@@ -222,6 +227,7 @@
     var age = p.alive ? S.age(s) : p.deathAge;
     $('hName').textContent = p.lastName + ' ' + p.firstName + ' ' + p.patronymic;
     renderPassport(s, age);
+    renderSvo(s);
     document.title = (p.alive ? '' : '✝ ') + p.firstName + ', ' + Math.floor(age) + ' · ' + s.date.year + ' — 1 из 146 млн';
     var L = RL.Young.loc(s);
     $('hInfo').textContent = Math.floor(age) + ' ' + RL.Game.years(Math.floor(age)) + ', ' + RL.Game.dayStr(s) + '. ' + L.city + ', ' + L.region.name + (p.loc ? '. Семья — ' + p.city : '');
@@ -483,7 +489,7 @@
     var ep = RL.Report.epitaph(s); if (ep) h += '<p class="epitaph">«' + esc(ep) + '»</p>';
     var soc = RL.Report.sociology ? RL.Report.sociology(s) : []; if (soc.length) h += '<div class="sociology"><h3>Социологический разбор</h3>' + li(soc) + '</div>';
     var ab = RL.Emigration ? RL.Emigration.reportLines(s) : []; if (ab.length) h += '<div class="sociology"><h3>Жизнь за границей</h3>' + li(ab) + '</div>';
-    [['Ты и твоя когорта', RL.Report.cohort], ['Что было бы, если', RL.Report.whatIf], ['Тихие отметки', RL.Report.markers]].forEach(function (b) { var x = b[1] ? b[1](s) : []; if (x.length) h += '<div class="sociology"><h3>' + b[0] + '</h3>' + li(x) + '</div>'; });
+    [['Что аукнулось через годы', RL.Report.echoes], ['Ты и твоя когорта', RL.Report.cohort], ['Что было бы, если', RL.Report.whatIf], ['Тихие отметки', RL.Report.markers]].forEach(function (b) { var x = b[1] ? b[1](s) : []; if (x.length) h += '<div class="sociology"><h3>' + b[0] + '</h3>' + li(x) + '</div>'; });
     var bd = RL.Report.badges(s); if (bd.length) h += '<div class="badges">' + bd.map(function (x, i) { return '<span class="badge' + (x.dark ? ' dark' : '') + '" style="animation-delay:' + (0.3 + i * 0.07) + 's"><i>' + x.icon + '</i>' + esc(x.text) + '</span>'; }).join('') + '</div>';
     h += '<canvas id="chart" width="900" height="260"></canvas>';
     h += '<div class="grid"><div><h3>Итог жизни</h3>' + li(RL.Report.summary(s)) + '</div><div><h3>Жизнь по десятилетиям</h3>' + li(RL.Report.decades(s)) + '</div></div>';
@@ -564,6 +570,28 @@
     else if (e.code === 'KeyA') { var a = $('auto'); a.checked = !a.checked; a.onchange.call(a); }
   });
   // ---------- паспорт ----------
+  // плакат «Служба по контракту» под паспортом: висит, пока идёт СВО; мужчине 18–65 — можно нажать и подписать
+  function renderSvo(s) {
+    var el = $('svoPoster'), on = RL.Svo && RL.Svo.active(s) && !s.over;
+    if (on) {
+      el.hidden = false; el.classList.remove('torn');
+      var can = RL.Svo.canSign(s);
+      el.disabled = !can; el.classList.toggle('clickable', can);
+      var sum = RL.Svo.posterSum(s), k = sum + (can ? 1 : 0);
+      if (el.dataset.k !== k) {
+        el.dataset.k = k;
+        el.innerHTML = '<span class="sp-flag"></span><span class="sp-top"><span class="sp-sum">' + esc(sum) + '</span><span class="sp-g">гарантировано</span>' +
+          '<span class="sp-sub">за первый год по контракту в зоне СВО</span></span>' +
+          '<span class="sp-band"><span class="sp-call">Стань героем —<br>присоединяйся к своим</span><span class="sp-tel">☎ 117</span></span>' +
+          (can ? '<span class="sp-hint">служба по контракту · нажми, чтобы позвонить</span>' : '<span class="sp-hint">служба по контракту</span>');
+      }
+      el.dataset.was = '1';
+    } else if (el.dataset.was === '1' && !el.hidden) {
+      // СВО закончилась: плакат рвут и снимают
+      el.dataset.was = ''; el.classList.add('torn'); el.disabled = true;
+      setTimeout(function () { el.hidden = true; el.classList.remove('torn'); el.dataset.k = ''; }, 1600);
+    } else if (!el.classList.contains('torn')) el.hidden = true;
+  }
   function renderPassport(s, age) {
     var p = s.person, a = Math.floor(age), bd = s.birth;
     $('ppNo').textContent = String(4500 + (s.seed % 4000)).replace(/(\d{2})(\d{2})/, '$1 $2') + ' ' + String(100000 + (s.seed % 899999));

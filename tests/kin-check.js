@@ -2,7 +2,7 @@
 // и сирота должен пройти путь детдом → выпуск → жильё. Запуск: node tests/kin-check.js [N]
 var fs = require('fs'), path = require('path'), vm = require('vm');
 var root = path.join(__dirname, '..');
-fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^"]+)"/g).map(function (m) { return m.slice(5, -1); })
+fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^"]+)"/g).map(function (m) { return m.slice(5, -1).replace(/\?.*$/, ''); })
   .filter(function (f) { return f.indexOf('js/ui') < 0; }).forEach(function (f) { vm.runInThisContext(fs.readFileSync(path.join(root, f), 'utf8'), {filename: f}); });
 var S = RL.S, N = +process.argv[2] || 300;
 var bad = [], errors = 0, orphans = {n: 0, left: 0, flat: 0, queue: 0}, kidsLabels = 0, golden = {n: 0, bad: 0};

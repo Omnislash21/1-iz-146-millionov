@@ -3,7 +3,7 @@
 var fs = require('fs'), path = require('path'), vm = require('vm'), assert = require('assert');
 var root = path.join(__dirname, '..');
 fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^\"]+)"/g).forEach(function (m) {
-  var file = m.slice(5, -1);
+  var file = m.slice(5, -1).replace(/\?.*$/, '');
   if (file.indexOf('js/ui') !== 0) vm.runInThisContext(fs.readFileSync(path.join(root, file), 'utf8'), {filename: file});
 });
 var RL = globalThis.RL, passed = 0, failed = 0;

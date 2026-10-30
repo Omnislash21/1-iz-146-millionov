@@ -270,6 +270,11 @@ RL.Report = (function () {
     if (out.length) out.push('Это не приговор: выборы внутри жизни сдвигают итог сильнее, чем кажется, — но стартовая клетка задаёт, сколько ходов есть.');
     return out;
   }
+  // Что аукнулось: прошлые решения, которые вернулись через годы (до пяти самых далёких)
+  function echoes(s) {
+    var L = ((s.person.bio || {}).chainList || []).slice().sort(function (a, b) { return (b.y - b.y0) - (a.y - a.y0); }).slice(0, 5);
+    return L.map(function (x) { return x.y0 + ': «' + (x.t ? x.t + ' — ' : '') + x.c + '» → ' + x.y + ': ' + (x.to || 'последствие') + ' (через ' + (x.y - x.y0) + ' ' + RL.Game.years(x.y - x.y0) + ').'; });
+  }
   // Тихие отметки: то, что не видно в каждом месяце, но решило жизнь
   function markers(s) {
     var p = s.person, b = p.bio || {}, out = [], f = p.sex === 'f', g = function (m, w) { return f ? w : m; }, T = p.ties || [];
@@ -301,5 +306,5 @@ RL.Report = (function () {
     return 'Прожито ' + Math.floor(rep.age) + ' ' + RL.Game.years(Math.floor(rep.age)) + '. По таблице смертности ' + rep.ended + ' года впереди в среднем ещё ' + Math.round(rep.remainingLE) + ' ' + RL.Game.years(Math.round(rep.remainingLE)) + ' (до ~' + Math.round(rep.age + rep.remainingLE) + ').';
   }
 
-  return {cohort: cohort, whatIf: whatIf, markers: markers, sociology: sociology, build: build, verdict: verdict, badges: badges, epitaph: epitaph, decades: decades, summary: summary, outlived: outlived, traitLabel: traitLabel, examLines: examLines, habitLines: habitLines, lifeLines: lifeLines, STAGES: STAGES, FAM: FAM, STATS: STATS};
+  return {echoes: echoes, cohort: cohort, whatIf: whatIf, markers: markers, sociology: sociology, build: build, verdict: verdict, badges: badges, epitaph: epitaph, decades: decades, summary: summary, outlived: outlived, traitLabel: traitLabel, examLines: examLines, habitLines: habitLines, lifeLines: lifeLines, STAGES: STAGES, FAM: FAM, STATS: STATS};
 })();

@@ -133,7 +133,10 @@ RL.Events = (function () {
     var e = def(pd.id), c = e.choices[idx];
     s.pending = null;
     S.log(s, pd.title ? pd.title + ': ' + text(s, c.text, pd.vars) : text(s, c.text, pd.vars), 'choice');
+    // какое решение сейчас принимается — чтобы отложенные последствия (later) помнили, откуда они
+    s.curEv = {title: pd.title || '', choice: text(s, c.text, pd.vars), y: s.date.year};
     resolveChoice(s, e, c, pd.vars, rng);
+    s.curEv = null;
   }
 
   // Эффекты: показатели ребёнка, деньги семьи (cash — руб. 2024), черты, отношения, состояния, флаги, смерть.
@@ -173,6 +176,7 @@ RL.Events = (function () {
     if (RL.Chains) RL.Chains.applyEffects(s, eff, rng);
     if (RL.Hardship) RL.Hardship.applyEffects(s, eff, rng);
     if (RL.Emigration) RL.Emigration.applyEffects(s, eff, rng);
+    if (RL.Svo) RL.Svo.applyEffects(s, eff, rng);
     if (RL.Politics) RL.Politics.applyEffects(s, eff, rng);
     if (eff.death && (!eff.deathP || rng.chance(eff.deathP))) s.deathNow = eff.death;
   }
@@ -254,5 +258,7 @@ RL.Events = (function () {
     return u;
   }
 
-  return {weakness: weakness, monthly: monthly, queue: queue, resolve: resolve, autoChoose: autoChoose, check: check, applyEffects: applyEffects, text: text, def: def};
+  // показать событие сейчас (кнопка в интерфейсе — плакат «Служба по контракту»)
+  function fireNow(s, id, extra) { var e = def(id); if (!e || s.pending) return; var rng = new RL.RNG(1); rng.s = s.rng; fire(s, e, extra || {}, rng); s.rng = rng.s; }
+  return {fireNow: fireNow, weakness: weakness, monthly: monthly, queue: queue, resolve: resolve, autoChoose: autoChoose, check: check, applyEffects: applyEffects, text: text, def: def};
 })();

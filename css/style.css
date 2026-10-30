@@ -122,7 +122,8 @@ details summary { cursor: pointer; color: var(--muted); font-size: 13.5px; }
 @media (max-width: 780px) { .layout { grid-template-columns: 1fr; } }
 
 /* паспорт: страница с фото и полями */
-.passport { position: sticky; top: 72px; border: 1px solid var(--line); border-radius: 10px; padding: 0 16px 16px; box-shadow: var(--shadow); overflow: hidden; }
+.pp-col { position: sticky; top: 72px; display: flex; flex-direction: column; gap: 10px; }
+.passport { position: relative; top: 0; border: 1px solid var(--line); border-radius: 10px; padding: 0 16px 16px; box-shadow: var(--shadow); overflow: hidden; }
 .pp-head { display: flex; justify-content: space-between; margin: 0 -16px 14px; padding: 9px 16px; background: var(--cover); color: #f6eadf; font: 600 14px var(--disp); }
 .layout > * { min-width: 0; }
 .pp-head { gap: 8px; flex-wrap: wrap; }
@@ -287,9 +288,36 @@ canvas { width: 100%; max-width: 100%; margin-top: 10px; background: var(--paper
 }
 @media (max-width: 780px) {
   .top { position: static; }
-  .passport { position: static; }
+  .passport, .pp-col { position: static; }
   .log { height: 62vh; min-height: 0; }
   #report { padding: 16px; }
   .modal .box { padding: 18px 16px 14px; }
   .reel { grid-template-columns: 1fr; gap: 2px; }
 }
+
+/* плакат «Служба по контракту» под паспортом (висит, пока идёт СВО) */
+.svo-poster { position: relative; display: grid; grid-template-columns: 24% 1fr; padding: 0; border-radius: 8px; border: 1px solid #c9d6ea; background: #eef5ff;
+  color: #1131b8; font-family: var(--disp); text-align: right; cursor: default; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, .25); transform-origin: top center; }
+.svo-poster.clickable { cursor: pointer; }
+.svo-poster.clickable:hover { filter: brightness(1.04); transform: translateY(-1px); }
+.svo-poster:disabled { opacity: 1; }
+.svo-poster .sp-flag { grid-row: 1; grid-column: 1; background: linear-gradient(118deg, #ffffff 0 34%, #2b52c7 34% 64%, #d42a2a 64% 100%); }
+.svo-poster .sp-top { grid-row: 1; grid-column: 2; display: flex; flex-direction: column; align-items: flex-end; padding: 10px 12px 8px; }
+.svo-poster .sp-sum { font: 800 27px/1 var(--disp); letter-spacing: -.5px; color: #1131b8; white-space: nowrap; }
+.svo-poster .sp-g { font: 800 16px/1.1 var(--disp); text-transform: uppercase; color: #1131b8; }
+.svo-poster .sp-sub { font-size: 11.5px; line-height: 1.25; color: #1d3fbf; margin-top: 2px; }
+.svo-poster .sp-band { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 12px; background: #121a33; }
+.svo-poster .sp-call { text-align: left; font: 800 12.5px/1.15 var(--disp); text-transform: uppercase; color: #fff; }
+.svo-poster .sp-call::first-line { color: #fff; }
+.svo-poster .sp-tel { font: 800 21px/1 var(--disp); color: #ff5a4f; white-space: nowrap; }
+.svo-poster .sp-hint { grid-column: 1 / -1; font-size: 10.5px; color: #4b5563; text-align: center; padding: 3px 6px 4px; background: #e3ecf8; }
+.svo-poster.torn { animation: svo-tear 1.5s ease-in forwards; pointer-events: none; }
+@keyframes svo-tear {
+  0% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: rotate(0); opacity: 1; }
+  35% { clip-path: polygon(0 0, 55% 0, 48% 40%, 60% 70%, 52% 100%, 0 100%); transform: rotate(-3deg); }
+  70% { clip-path: polygon(0 0, 30% 0, 22% 45%, 34% 100%, 0 100%); transform: rotate(-8deg) translateY(10px); opacity: .8; }
+  100% { clip-path: polygon(0 0, 8% 0, 4% 60%, 0 100%); transform: rotate(-14deg) translateY(40px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .svo-poster.torn { animation-duration: .01s; } }
+@media (max-height: 820px) { .pp-col { position: static; } }
+.e.chain { border-left: 3px solid var(--cover); padding-left: 8px; font-style: italic; }

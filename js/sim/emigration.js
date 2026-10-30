@@ -26,13 +26,15 @@ RL.Emigration = (function () {
   }
   function go(s, rng) {
     var p = s.person, o = RL.Young.own(s), c = C(pickCountry(s, rng)), prof = p.job && p.job.employed ? p.job.prof : (p.job || {}).prof;
+    var wage0 = RL.Young.netWage(s) || 0, tiesN = (p.ties || []).filter(function (t) { return t.str >= 30 && !t.enemy; }).length;
     p.abroad = {country: c.id, since: s.date.year, adapt: 0.05, home: p.loc ? JSON.parse(JSON.stringify(p.loc)) : null, prof: prof || null,
-      regulated: REG.indexOf(prof) >= 0, dipOk: false, it: prof === 'it', wealth0: RL.Adult ? Math.round(RL.Adult.wealth(s)) : 0};
+      regulated: REG.indexOf(prof) >= 0, dipOk: false, it: prof === 'it', wealth0: RL.Adult ? Math.round(RL.Adult.wealth(s)) : 0,
+      wage0: wage0, cost: Math.round(c.price * 150000), tiesN: tiesN, spouse0: !!p.spouse};
     p.loc = {regionId: c.id, settlement: 'big', city: c.name};
     o.living = 'rent_flat';
     if (p.job) p.job.employed = false;
     if (p.biz && RL.Adult) RL.Adult.applyEffects(s, {closeBiz: true}, rng);
-    RL.Events.applyEffects(s, {cash: -Math.round(c.price * 150000)}, {}, rng);
+    RL.Events.applyEffects(s, {cash: -p.abroad.cost}, {}, rng);
     S.log(s, 'Переезд: ' + c.name + '. Чемодан, съёмная квартира, ' + c.lang + ' с нуля. Всё, что было «там», — теперь только в телефоне.', 'family');
     S.adj(s, 'social', -15); S.adj(s, 'mental', -5);
     // связи в России остывают вдвое
@@ -50,11 +52,16 @@ RL.Emigration = (function () {
     if (p.job) p.job.employed = false;
     // цена неудачи: переезд обратно, «дыра» в резюме, связи остыли
     if (!a.settled) {
-      RL.Events.applyEffects(s, {cash: -120000, mental: -6, social: -5}, {}, rng || {chance: function () { return false; }});
-      (p.ties || []).forEach(function (t) { t.str = Math.round(t.str * 0.7); });
+      var lost = Math.round(120000 + ((C(a.country) || {}).price || 1) * 80000);
+      a.cost = (a.cost || 0) + lost;
+      RL.Events.applyEffects(s, {cash: -lost, mental: -10, social: -6}, {}, rng || {chance: function () { return false; }});
+      (p.ties || []).forEach(function (t) { t.str = Math.round(t.str * 0.6); });
+      // «дыра» в резюме и потерянная квалификация: два года работу ищут дольше и берут дешевле (js/sim/young.js)
+      p.flags.backFail = S.ageMonths(s);
     }
     S.log(s, 'Возвращение в Россию: ' + why + (a.settled ? '' : ' Деньги потрачены, на прежнее место уже взяли другого.'), 'family');
-    p.abroadHist = (p.abroadHist || []).concat([{country: a.country, from: a.since, to: s.date.year, settled: !!a.settled, why: why, adapt: Math.round(a.adapt * 100) / 100, dipOk: a.dipOk}]);
+    p.abroadHist = (p.abroadHist || []).concat([{country: a.country, from: a.since, to: s.date.year, settled: !!a.settled, why: why, adapt: Math.round(a.adapt * 100) / 100, dipOk: a.dipOk,
+      regulated: a.regulated, it: a.it, cost: a.cost, wage0: a.wage0, wage1: a.wage1, tiesN: a.tiesN, spouse0: a.spouse0, spouseLost: a.spouse0 && !p.spouse}]);
     p.abroad = null;
   }
 
@@ -69,7 +76,7 @@ RL.Emigration = (function () {
     a.months = (a.months || 0) + 1;
     // первая работа — ниже уровня (кроме IT на удалёнке)
     if (p.job && p.job.employed && !a.jobNoted) {
-      a.jobNoted = 1;
+      a.jobNoted = 1; a.wage1 = RL.Young.netWage(s) || 0;
       if (!a.it && a.adapt < 0.5) S.log(s, RL.Events.text(s, a.regulated && !a.dipOk ? 'Первая работа здесь — не по специальности: диплом не признают, взяли помощником, «пока не сдашь экзамены».' : 'Первая работа здесь — склад, доставка, уборка. Твой опыт из России никому не интересен.', {}), 'bad');
       else if (a.it) S.log(s, 'Работаешь на удалёнке — на прежнего работодателя или на западную компанию. Статус почти сохранился.', 'good');
     }
@@ -108,13 +115,21 @@ RL.Emigration = (function () {
   function reportLines(s) {
     var p = s.person, out = [], g = function (m, w) { return p.sex === 'f' ? w : m; };
     var hist = (p.abroadHist || []).slice();
-    if (p.abroad) hist.push({country: p.abroad.country, from: p.abroad.since, to: null, settled: !!p.abroad.settled, adapt: p.abroad.adapt, dipOk: p.abroad.dipOk, regulated: p.abroad.regulated, it: p.abroad.it});
+    if (p.abroad) { var A = p.abroad; hist.push({country: A.country, from: A.since, to: null, settled: !!A.settled, adapt: A.adapt, dipOk: A.dipOk, regulated: A.regulated, it: A.it,
+      cost: A.cost, wage0: A.wage0, wage1: A.wage1, tiesN: A.tiesN, spouse0: A.spouse0, spouseLost: A.spouse0 && !p.spouse}); }
     hist.forEach(function (h) {
       var c = C(h.country) || {name: h.country}, yrs = (h.to || s.date.year) - h.from;
       out.push(c.name + ': ' + h.from + '–' + (h.to || (p.alive ? 'сейчас' : s.date.year)) + ' (' + yrs + ' ' + RL.Game.years(yrs) + '). ' +
         (h.settled ? g('Прижился', 'Прижилась') + ': язык, работа, свои люди.' : 'Так и ' + g('остался чужим', 'осталась чужой') + ' — адаптация ' + Math.round((h.adapt || 0) * 100) + '%.'));
       if (h.to) out.push('Вернул' + g('ся', 'ась') + ': ' + (h.why || 'не сложилось') + (h.settled ? '' : ' Потеряны деньги, связи и годы стажа.'));
       if (h.regulated) out.push(h.dipOk ? 'Диплом подтвердил' + g('', 'а') + ' — снова по специальности.' : 'Диплом так и не признали: работа ниже уровня.');
+      // цена решения
+      var price = [];
+      if (h.cost) price.push('деньги — ' + RL.World.money(s, h.cost, h.from));
+      if (h.tiesN) price.push('связи в России — ' + h.tiesN + ' ' + (h.tiesN === 1 ? 'нужный человек остыл' : 'нужных людей остыли'));
+      if (h.spouseLost) price.push('брак не пережил переезд');
+      if (h.wage0 && h.wage1) { var k = h.wage1 / h.wage0 * ((C(h.country) || {}).wage || 1) / ((C(h.country) || {}).price || 1); price.push(k < 0.8 ? 'первая работа там — заметно ниже статусом и по деньгам с поправкой на цены' : 'по деньгам с поправкой на цены — не хуже, чем было'); }
+      if (price.length) out.push('Цена решения: ' + price.join('; ') + '.');
     });
     if (hist.length) {
       if (p.flags.kidsAbroad || s.flags.kidsAbroad) out.push('Дети выросли местными: Россия для них — страна бабушек.');

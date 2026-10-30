@@ -8,7 +8,7 @@ const out = path.join(root, 'docs', 'verification');
 const crypto = require('crypto');
 const digest = value => crypto.createHash('sha256').update(value).digest('hex');
 const indexSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const sourceHashes = Object.fromEntries([...indexSource.matchAll(/src="(js\/[^\"]+)"/g)].map(m=>[m[1],digest(fs.readFileSync(path.join(root,m[1])))]));
+const sourceHashes = Object.fromEntries([...indexSource.matchAll(/src="(js\/[^\"]+)"/g)].map(m=>[m[1],digest(fs.readFileSync(path.join(root,m[1].replace(/\?.*$/,''))))]));
 fs.mkdirSync(out, {recursive:true});
 (async () => {
  const browser = globalThis.testBrowser = await chromium.launch({headless:true, ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? {executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE} : {channel:'chrome'})});

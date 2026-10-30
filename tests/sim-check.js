@@ -2,7 +2,7 @@
 // node tests/sim-check.js [N] [--json report.json] [--birth-year 1985..2035]
 var fs = require('fs'), path = require('path'), vm = require('vm'), crypto = require('crypto');
 var root = path.join(__dirname, '..');
-var files = fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^\"]+)"/g).map(function (m) { return m.slice(5, -1); });
+var files = fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^\"]+)"/g).map(function (m) { return m.slice(5, -1).replace(/\?.*$/, ''); });
 var sourceSha256 = {}, sourceText = {};
 files.forEach(function (f) {
   sourceText[f] = fs.readFileSync(path.join(root, f), 'utf8');

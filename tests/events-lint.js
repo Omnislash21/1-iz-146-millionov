@@ -15,6 +15,9 @@ fs.readdirSync(path.join(root, 'js/sim')).forEach(function (f) {
   while ((m = re.exec(t))) effs[m[1]] = 1;
 });
 ['health', 'mental', 'social', 'skills', 'happiness', 'money'].forEach(function (k) { effs[k] = 1; });
+// динамические факты (js/sim/state.js): focus_<id> — текущий фокус, <id болезни> — болезнь есть и не вылечена
+RL.DATA.focuses.forEach(function (f) { facts['focus_' + f.id] = 1; });
+Object.keys(RL.DATA.conditions).forEach(function (k) { facts[k] = 1; });
 var SPECIAL = {any: 1, not: 1, tags: 1, notTags: 1};
 var bad = [], ids = {};
 RL.DATA.events.forEach(function (e) { ids[e.id] = 1; });
