@@ -88,12 +88,31 @@ RL.World = (function () {
   }
   // идёт ли СВО в этот месяц: флаг года, а в год окончания — только до месяца окончания
   function svoOn(state, y, m) {
+    ensureSvoEnd(state);
     if (!flag(state, y, 'svo', 0)) return false;
     var f = y > LAST_HIST ? fut(state, y) : null;
     return !(f && f.svoEnd !== undefined && (m === undefined ? state.date.month : m) >= f.svoEnd);
   }
   // когда кончится СВО в этой жизни: {year, month}; старые сохранения — первый год без флага svo
+  // починка сценария из сохранений: если в будущем нет даты окончания СВО (жизнь начата до этапа 12 или в браузере
+  // смешались старые и новые файлы — тогда СВО записывалась «навсегда»), разыгрываем дату по тем же правилам и правим флаги
+  function ensureSvoEnd(state) {
+    var F = state.world && state.world.future;
+    if (!F || state.world.svoFixed) return;
+    state.world.svoFixed = 1;
+    for (var k in F) if (F[k] && F[k].svoEnd !== undefined) return;
+    var H0 = H().future, r2 = new RL.RNG((state.seed ^ 0x5F0E) >>> 0), endY = +r2.weightedKey(H0.svoEndYear || {2027: 1}), endM = r2.int(0, 11);
+    // если по старому сценарию СВО кончилась раньше — оставляем её дату
+    for (var y0 = LAST_HIST + 1; y0 < endY; y0++) if (F[y0] && !F[y0].flags.svo) { endY = y0; endM = 0; break; }
+    for (var y = LAST_HIST + 1; y <= 2160; y++) {
+      var f = F[y]; if (!f) continue;
+      if (y < endY) { f.flags.svo = 1; continue; }
+      if (y === endY) { f.flags.svo = 1; f.svoEnd = endM; if (f.mobilization && f.mobilization.month >= endM) f.mobilization = null; continue; }
+      delete f.flags.svo; f.mobilization = null;
+    }
+  }
   function svoEnd(state) {
+    ensureSvoEnd(state);
     for (var y = LAST_HIST + 1; y <= 2160; y++) {
       var f = fut(state, y);
       if (f.svoEnd !== undefined) return {year: y, month: f.svoEnd};

@@ -577,7 +577,7 @@
       el.hidden = false; el.classList.remove('torn');
       var can = RL.Svo.canSign(s);
       el.disabled = !can; el.classList.toggle('clickable', can);
-      var sum = RL.Svo.posterSum(s), k = sum + (can ? 1 : 0);
+      var sum = RL.Svo.posterSum(s), k = sum + (can ? 1 : 0) + s.date.year;
       if (el.dataset.k !== k) {
         el.dataset.k = k;
         el.innerHTML = '<span class="sp-flag"></span><span class="sp-top"><span class="sp-sum">' + esc(sum) + '</span><span class="sp-g">гарантировано</span>' +

@@ -6,7 +6,7 @@ RL.Svo = (function () {
   var S = RL.S, U = RL.util;
   // конец СВО: из сценария будущего; в старых сохранениях — первый год без флага svo
   function end(s) {
-    if (s.world && s.world.svoEnd) return s.world.svoEnd;
+    if (s.world && s.world.svoEnd && s.world.svoFixed) return s.world.svoEnd;
     var e = RL.World.svoEnd ? RL.World.svoEnd(s) : null;
     if (s.world) s.world.svoEnd = e;
     return e;
