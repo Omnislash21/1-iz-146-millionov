@@ -37,6 +37,10 @@ RL.Careers = (function () {
     if (r.minAge && a < r.minAge) return false;
     if (r.noRecord && p.flags.criminalRecord) return false;
     if (RL.Chains && RL.Chains.banned(s, id)) return false;
+    // в селе и малом городе таких работ нет (кроме удалёнки в IT с 2020) [~]
+    var stl = RL.Young.loc(s).settlement;
+    if (stl === 'village' && ['it', 'banker', 'scientist', 'journalist', 'designer', 'lawyer', 'manager', 'actor', 'musician'].indexOf(id) >= 0 && !(id === 'it' && s.date.year >= 2020)) return false;
+    if (stl === 'small' && ['scientist', 'banker', 'journalist', 'designer', 'actor'].indexOf(id) >= 0) return false;
     if (r.level && lvl < r.level && !skillsOk) return false;
     if (r.field && !hasDip(s, r.field, false) && !(r.orCollege && hasDip(s, r.orCollege, true)) && !skillsOk) return false;
     if (!r.field && r.orCollege && !r.level && lvl < 2 && !hasDip(s, r.orCollege, true) && !skillsOk) return false;

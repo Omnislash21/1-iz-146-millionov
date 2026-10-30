@@ -28,8 +28,8 @@ RL.DATA.events.push(
   {"id":"ch_friend_returns","title":"Долг платежом красен","trigger":true,
    "text":"Тот самый друг, которому ты помог[|ла] когда-то, теперь сам на ногах — и не забыл.",
    "outcomes":[
-     {"w":2,"text":"Вернул деньги с лихвой и сказал: «Если что — звони в любое время».","effects":{"cash":60000,"addTie":{"sphere":"business","src":"school","rank":2},"happiness":4}},
-     {"w":1,"text":"Он теперь в областной администрации: «Если что — звони».","effects":{"addTie":{"sphere":"official","src":"school","rank":3},"happiness":3}}]},
+     {"w":2,"text":"Вернул деньги с лихвой и сказал: «Если что — звони в любое время».","effects":{"cash":60000,"addTie":{"sphere":"business","src":"school","rank":2,"theyOwe":1},"happiness":4}},
+     {"w":1,"text":"Он теперь в областной администрации: «Если что — звони».","effects":{"addTie":{"sphere":"official","src":"school","rank":3,"theyOwe":1},"happiness":3}}]},
 
   // подписать «левый» акт — через годы приходит следователь
   {"id":"ch_sign_act","title":"Подпиши акт","major":true,"when":{"age":[26,62],"employed":true,"prof":["official","manager","engineer","builder","teacher","doctor","accountant"]},"p":0.004,"cooldown":72,

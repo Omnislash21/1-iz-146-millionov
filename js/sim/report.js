@@ -200,7 +200,7 @@ RL.Report = (function () {
       out.push('Доход за трудовую жизнь — ' + pc + '% от медианной зарплаты твоих сверстников. ' + (r < 0.8 ? 'Ты ' + g('прожил', 'прожила') + ' жизнь ниже медианы своей когорты.' : r > 1.3 ? 'Ты ' + g('был', 'была') + ' среди обеспеченных своего поколения.' : 'Обычный доход — середина когорты.'));
       var q0 = (s.history.filter(function (h) { return h.quintile && h.age <= 16; })[0] || {}).quintile || null;
       if (q0) out.push('Родил' + g('ся', 'ась') + ' в семье ' + q0 + '-го квинтиля по доходу, взрослую жизнь ' + g('прожил', 'прожила') + ' в ' + q + '-м. ' +
-        (q - q0 >= 2 ? 'Социальный лифт сработал — так бывает у меньшинства.' : q0 - q >= 2 ? 'Падение вниз по лестнице: детство было благополучнее твоей взрослой жизни.' : 'Тот же этаж, что у родителей: в России доход детей сильно повторяет доход родителей.'));
+        (q - q0 >= 2 ? 'Социальный лифт сработал — так бывает у меньшинства.' : q0 - q >= 2 ? 'Падение вниз по лестнице: детство было благополучнее твоей взрослой жизни.' : (q === q0 ? 'Тот же этаж' : 'Почти тот же этаж') + ', что у родителей: в России доход детей сильно повторяет доход родителей.'));
     }
     if (!p.alive && p.deathCause && age >= 15) {
       var T = RL.DATA.deathCauseTable, row = T && T[p.sex] && T[p.sex][Math.min(110, Math.floor(age))], dc = p.deathCause.toLowerCase();
@@ -210,6 +210,11 @@ RL.Report = (function () {
       if ((hb.alcohol || 0) >= 2) life.push('алкоголь');
       if ((hb.drugs || 0) >= 2) life.push('наркотики');
       if (p.stats.money < 30) life.push('бедность');
+      var rgn = RL.Young.loc(s).region;
+      if (!rgn.abroad && (rgn.alcohol || 1) >= 1.2 && /алког|цирроз|Падение|Утопление|Убийство|Самоубийство|Переохлаждение|Пожар/i.test(p.deathCause)) life.push('регион с высокой алкогольной и внешней смертностью (' + rgn.name + ')');
+      if (bio.ignoredYears >= 6) life.push(bio.ignoredYears + ' ' + RL.Game.years(bio.ignoredYears) + ' хронических болезней без нормального лечения');
+      if (s.fired && (s.fired.c2_heart_late || s.fired.ch_late_diagnosis)) life.push('симптомы, которые ты ' + g('проигнорировал', 'проигнорировала'));
+      if (bio.isolated) life.push('одиночество');
       if (sh) out.push('Причина смерти — ' + p.deathCause.toLowerCase() + ': ' + (Math.round(sh * 1000) / 10) + '% смертей ' + g('мужчин', 'женщин') + ' твоего возраста. ' +
         (life.length ? 'В твоей биографии было то, что делает её вероятнее: ' + life.join(', ') + '.' : 'Образ жизни здесь почти ни при чём.'));
       else if (/Самоубийство|Передозировка|Отравление алкоголем/.test(p.deathCause)) out.push('Причина смерти — ' + p.deathCause.toLowerCase() + '. Такие смерти в России — в основном у мужчин 25–55 лет, бедных и пьющих.');
@@ -219,17 +224,66 @@ RL.Report = (function () {
       var hi = RL.Chains && RL.Chains.hasHigher(s), w = kids.reduce(function (t, k) { return t + (k.warmth || 0); }, 0) / kids.length;
       out.push((kids.length > 1 ? 'Твои дети' : (kids[0].sex === 'm' ? 'Твой сын' : 'Твоя дочь')) + ' с высокой вероятностью ' +
         (hi || (bio.incN && bio.incSum / bio.incN > 1.3) ? 'получ' + (kids.length > 1 ? 'ат' : 'ит') + ' высшее образование и ' + (kids.length > 1 ? 'будут' : 'будет') + ' жить не хуже тебя (у детей с высшим у родителей шанс на вуз — около 70%).' : 'повтор' + (kids.length > 1 ? 'ят' : 'ит') + ' твою траекторию: без высшего у родителей в вуз поступает около четверти детей.') +
+        (bio.incN >= 60 ? ' Шанс, что ' + (kids.length > 1 ? 'они останутся' : 'ребёнок останется') + ' в том же квинтиле дохода, что и ты, — около ' + (quint(bio.incSum / bio.incN) <= 2 || quint(bio.incSum / bio.incN) >= 4 ? 45 : 30) + '% [~].' : '') +
         (w > 30 ? ' Детство было тёплым — это видно по тому, как ' + (kids.length > 1 ? 'они рядом' : kids[0].sex === 'm' ? 'он рядом' : 'она рядом') + '.' : w < -20 ? ' Детство было тяжёлым, и ' + (kids.length > 1 ? 'они это помнят' : kids[0].sex === 'm' ? 'он это помнит' : 'она это помнит') + '.' : ''));
     }
     var reg = RL.Young.loc(s).region;
     if (reg && !reg.abroad) out.push('Регион: ' + reg.name + ' — зарплаты ' + Math.round(reg.wage * 100) + '% от средней по России, смертность ' + (reg.mortality > 1.05 ? 'выше' : reg.mortality < 0.95 ? 'ниже' : 'около') + ' средней' + (reg.corruption > 0.6 ? ', «решать вопросы» здесь принято чаще.' : '.'));
-    if (p.abroadHist || p.abroad) out.push('Эмиграция: ' + (p.abroad ? 'жизнь закончилась за границей' : 'уехал' + g('', 'а') + ' и вернул' + g('ся', 'ась')) + '. В России за рубеж уезжают единицы процентов когорты.');
     var fights = (L.match(/Вспыльчивость подвела|Наорал/g) || []).length, schemes = (L.match(/«откат»/g) || []).length, ties = (L.match(/по знакомству|пару звонков|Вопрос решили/g) || []).length;
     if (fights) out.push('Вспыльчивость стоила тебе ' + fights + ' ' + (fights === 1 ? 'серьёзной истории' : 'серьёзных историй') + ': драки, увольнения, протоколы.');
     if (schemes) out.push('Нечестные «схемы»: ' + schemes + ' раз' + (L.indexOf('раскрутила твою «схему»') >= 0 ? ' — пока однажды не поймали.' : ' — и ни разу не поймали.'));
     if (ties) out.push('Связи выручили ' + ties + ' ' + RL.Game.years(ties).replace('лет', 'раз').replace('года', 'раза').replace('год', 'раз') + ' — работа, суд, врач «по знакомству».');
     var gy = RL.Chains ? RL.Chains.grayStazh(s) : 0;
     if (gy >= 3) out.push(gy + ' ' + RL.Game.years(gy) + ' «в конверте» — не стаж: пенсия меньше той, что могла быть.');
+    return out;
+  }
+  // Ты и твоя когорта: доход, образование, семья, возраст смерти — против медианы ровесников [~ Росстат, перепись 2021, ВЦИОМ]
+  var VUZ_BY_Q = {1: 0.25, 2: 0.35, 3: 0.45, 4: 0.6, 5: 0.8}; // шанс на высшее по квинтилю семьи [~ НИУ ВШЭ, «Мониторинг экономики образования»]
+  function cohort(s) {
+    var p = s.person, out = [], f = p.sex === 'f', g = function (m, w) { return f ? w : m; }, bio = p.bio || {}, age = p.alive ? S.age(s) : p.deathAge, by = s.birth.year;
+    var hi = RL.Chains && RL.Chains.hasHigher(s), share = by < 1975 ? 25 : by < 1990 ? 35 : 42;
+    if (age >= 25) out.push('Образование: ' + (hi ? 'высшее — как у ~' + share + '% твоего поколения.' : 'без высшего — как у ~' + (100 - share) + '% твоего поколения.'));
+    if (age >= 45) {
+      var mar = (p.flags.married || 0), div = (p.flags.divorced || 0);
+      out.push('Семья: ' + (mar ? 'браков — ' + mar + (div ? ', разводов — ' + div : '') : 'в браке не ' + g('был', 'была')) + '. Среди ровесников к 50 годам в браке побывали ~85%, развод пережили ~40% [~].');
+      var kn = (p.kids || []).length;
+      out.push('Детей — ' + kn + '. В среднем у ' + g('мужчин', 'женщин') + ' твоего поколения — 1,5–1,7 [~].');
+    }
+    if (!p.alive) {
+      var le = RL.Mortality.lifeExpAt(s, by, p.sex), d = Math.round(age - le);
+      out.push('Возраст смерти — ' + Math.floor(age) + ': ' + (d >= 3 ? 'на ' + d + ' ' + RL.Game.years(d) + ' дольше' : d <= -3 ? 'на ' + (-d) + ' ' + RL.Game.years(-d) + ' раньше' : 'примерно как') + ' ожидаемой продолжительности жизни при рождении (' + Math.round(le) + ').');
+    }
+    return out;
+  }
+  // Что было бы, если: другой квинтиль и другой регион — грубая оценка по тем же таблицам [~]
+  function whatIf(s) {
+    var p = s.person, out = [], bio = p.bio || {}, q0 = (s.history.filter(function (h) { return h.quintile && h.age <= 16; })[0] || {}).quintile;
+    var R = RL.S.region(s), msk = RL.S.regionById('msk');
+    if (q0) {
+      var alt = q0 <= 3 ? 5 : 1;
+      out.push('Родись ты в семье ' + alt + '-го квинтиля вместо ' + q0 + '-го: шанс на высшее — ~' + Math.round(VUZ_BY_Q[alt] * 100) + '% вместо ~' + Math.round(VUZ_BY_Q[q0] * 100) + '%, доход взрослым — ' + (alt > q0 ? 'примерно вдвое выше' : 'примерно вдвое ниже') + ' (доход детей в России повторяет доход родителей примерно наполовину).');
+    }
+    if (R && msk && R.id !== 'msk' && !R.abroad) {
+      var dLE = Math.round(Math.log(R.mortality / msk.mortality) / 0.09);
+      out.push('Родись ты в Москве, а не в регионе «' + R.name + '»: зарплаты в ' + (Math.round(msk.wage / R.wage * 10) / 10) + ' раза выше, ' + (dLE > 0 ? 'ожидаемая жизнь — примерно на ' + dLE + ' ' + RL.Game.years(dLE) + ' дольше' : dLE < 0 ? 'но смертность в твоём регионе даже ниже московской' : 'смертность примерно та же') + ', медицина ' + (msk.medicine > R.medicine + 10 ? 'заметно доступнее' : 'похожая') + '.');
+    }
+    if (out.length) out.push('Это не приговор: выборы внутри жизни сдвигают итог сильнее, чем кажется, — но стартовая клетка задаёт, сколько ходов есть.');
+    return out;
+  }
+  // Тихие отметки: то, что не видно в каждом месяце, но решило жизнь
+  function markers(s) {
+    var p = s.person, b = p.bio || {}, out = [], f = p.sex === 'f', g = function (m, w) { return f ? w : m; }, T = p.ties || [];
+    var gy = RL.Chains ? RL.Chains.grayStazh(s) : 0;
+    if (gy) out.push('Лет «в конверте»: ' + gy + '.');
+    if (b.tiesUsed) out.push('Пользовал' + g('ся', 'ась') + ' связями: ' + b.tiesUsed + ' раз; вернул' + g('', 'а') + ' долг — ' + (b.favorsPaid || 0) + ', отказал' + g('', 'а') + ' — ' + (b.favorsRefused || 0) + '.');
+    var en = T.filter(function (t) { return t.enemy; }).length;
+    if (en) out.push('Враги, нажитые отказами: ' + en + '.');
+    if (b.chainsFired) out.push('Решений, которые аукнулись через годы: ' + b.chainsFired + '.');
+    if (b.burnouts) out.push('Срывов от выгорания: ' + b.burnouts + '.');
+    if (b.coldMarriage) out.push('Брак остыл без скандалов — просто стало тихо.');
+    if (b.isolated) out.push('Были годы, когда не с кем было поговорить.');
+    if (b.ignoredYears) out.push('Лет с хроническими болезнями без нормального лечения: ' + b.ignoredYears + '.');
+    if (b.poorOld) out.push('Бедная старость — из мелких решений, а не из одной беды.');
     return out;
   }
   function verdict(rep, s) {
@@ -247,5 +301,5 @@ RL.Report = (function () {
     return 'Прожито ' + Math.floor(rep.age) + ' ' + RL.Game.years(Math.floor(rep.age)) + '. По таблице смертности ' + rep.ended + ' года впереди в среднем ещё ' + Math.round(rep.remainingLE) + ' ' + RL.Game.years(Math.round(rep.remainingLE)) + ' (до ~' + Math.round(rep.age + rep.remainingLE) + ').';
   }
 
-  return {sociology: sociology, build: build, verdict: verdict, badges: badges, epitaph: epitaph, decades: decades, summary: summary, outlived: outlived, traitLabel: traitLabel, examLines: examLines, habitLines: habitLines, lifeLines: lifeLines, STAGES: STAGES, FAM: FAM, STATS: STATS};
+  return {cohort: cohort, whatIf: whatIf, markers: markers, sociology: sociology, build: build, verdict: verdict, badges: badges, epitaph: epitaph, decades: decades, summary: summary, outlived: outlived, traitLabel: traitLabel, examLines: examLines, habitLines: habitLines, lifeLines: lifeLines, STAGES: STAGES, FAM: FAM, STATS: STATS};
 })();

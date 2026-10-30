@@ -18,11 +18,11 @@ RL.Hardship = (function () {
       var pay = Object.keys(b.items).filter(function (k) { return /^debt_/.test(k) && k !== 'debt_mortgage'; }).reduce(function (t, k) { return t + b.items[k]; }, 0);
       var unsec = o.debts.filter(function (d) { return d.kind !== 'mortgage' && d.kind !== 'edu'; }).reduce(function (t, d) { return t + d.balance; }, 0);
       h.load = pay / b.income > 0.6 && unsec > b.income * 6 ? h.load + 1 : Math.max(0, h.load - 1);
-      if (h.load >= 8 && !s.pending && (!h.trapAt || S.ageMonths(s) - h.trapAt > 120)) { h.trapAt = S.ageMonths(s); h.load = 0; RL.Events.queue(s, 'credit_trap', {}); }
+      if (h.load >= 10 && !s.pending && (!h.trapAt || S.ageMonths(s) - h.trapAt > 120)) { h.trapAt = S.ageMonths(s); h.load = 0; RL.Events.queue(s, 'credit_trap', {}); }
     }
     // дефолт: кредиторы идут в суд — приставы (RL.Law) или, с 2015, банкротство по заявлению банка
     var unsec2 = o.debts.filter(function (d) { return d.kind === 'bank' || d.kind === 'mfo'; }).reduce(function (t, d) { return t + d.balance; }, 0);
-    if (o.defaulted && s.date.year >= 2015 && !p.flags.bankrupt && unsec2 > 500000 && rng.chance(0.004)) {
+    if (o.defaulted && s.date.year >= 2015 && !p.flags.bankrupt && unsec2 > 800000 && rng.chance(0.002)) {
       applyEffects(s, {bankrupt: true}, rng);
       S.log(s, 'Банк подал на твоё банкротство. Суд списал долги, имущество — на торги, пять лет без кредитов.', 'bad');
       S.adj(s, 'mental', -6);
@@ -52,6 +52,17 @@ RL.Hardship = (function () {
         if (p.sex === 'm' && rng.chance(0.25) && RL.Teen) RL.Teen.applyEffects(s, {habitUp: {alcohol: 1}}, rng);
       }
     } else h.unemp = 0;
+    // «вторая смена»: работающая мать маленьких детей в браке — копится усталость; через 6 лет у половины — срыв (f_burnout_home)
+    // [~ Росстат «Использование времени» 2019: женщины тратят на дом и детей вдвое больше мужчин]
+    var small = (p.kids || []).some(function (k) { return k.alive && k.withMe && k.age < 14; });
+    if (p.sex === 'f' && small && p.job && p.job.employed && p.spouse && !h.relief) {
+      h.shift = (h.shift || 0) + 1;
+      if (h.shift % 6 === 0) S.adj(s, 'mental', -1);
+      if (h.shift === 72 && rng.chance(0.5)) RL.Events.queue(s, 'f_burnout_home', {});
+    } else if (!small) h.relief = 0;
+    // одна с детьми после развода: деньги и силы на пределе
+    if (p.sex === 'f' && small && !p.spouse && p.flags.divorced) { S.adj(s, 'mental', -0.15); if (o.lastBudget) S.adj(s, 'happiness', -0.1); }
+    quiet(s, rng, h);
     // инвалидность: работодатель не стал ждать
     if (p.disability && !h.disChecked) {
       h.disChecked = 1;
@@ -63,6 +74,39 @@ RL.Hardship = (function () {
     }
   }
 
+  // Тихие процессы: ничего не происходит — а жизнь портится. Счётчики в p.hard, отметки — в p.bio (для отчёта). Пороги [~].
+  function quiet(s, rng, h) {
+    var p = s.person, a = S.age(s), job = p.job && p.job.employed, sp = p.spouse && !p.spouse.dead ? p.spouse : null, bio = p.bio = p.bio || {incSum: 0, incN: 0};
+    // 1. выгорание годами: работа при плохой психике без отдыха → однажды срыв
+    if (job && p.stats.mental < 45 && ['career', 'sidejob', 'jobhunt'].indexOf(p.focus) >= 0 || (job && p.stats.mental < 35)) h.burn = (h.burn || 0) + 1;
+    else h.burn = Math.max(0, (h.burn || 0) - 2);
+    if (h.burn >= 36 && !s.pending) { h.burn = 0; bio.burnouts = (bio.burnouts || 0) + 1; RL.Events.queue(s, 'q_burnout_break', {}); }
+    // 2. брак остывает без скандалов: без фокуса на семью — понемногу каждый месяц
+    if (sp && sp.status === 'married') {
+      if (['family', 'kids'].indexOf(p.focus) >= 0) sp.relation = U.clamp(sp.relation + 0.25, 0, 100);
+      else if (sp.relation > 30) sp.relation = U.clamp(sp.relation - 0.12, 0, 100);
+      if (sp.relation < 45 && !h.coolNoted) { h.coolNoted = 1; bio.coldMarriage = 1; S.log(s, 'Вы давно не говорите ни о чём, кроме денег и быта. Никто не скандалит — просто стало тихо.', 'family'); }
+      if (sp.relation > 60) h.coolNoted = 0;
+    }
+    // 3. хроника без нормального лечения годами (нет доступа, денег или желания)
+    var untreated = p.conditions.filter(function (c) { return !c.cured && c.treated === false && (RL.DATA.conditions[c.id] || {}).kind === 'chronic'; }).length;
+    if (untreated && a >= 30) { h.ignore = (h.ignore || 0) + 1; if (h.ignore % 24 === 0) { S.adj(s, 'health', -3); bio.ignoredYears = (bio.ignoredYears || 0) + 2; if (h.ignore === 24) S.log(s, 'Два года хроническая болезнь без нормального лечения: таблетки через раз, к врачу «потом» или не попасть. Организм запоминает.', 'health'); } }
+    else h.ignore = Math.max(0, (h.ignore || 0) - 1);
+    // 4. одиночество копится: мало связей, нет пары
+    if (p.stats.social < 30 && !sp && a >= 25) {
+      h.alone = (h.alone || 0) + 1;
+      if (h.alone === 36) { S.log(s, RL.Events.text(s, 'Неделями ни с кем не разговариваешь, кроме кассира. Ты [привык|привыкла] — и это страшнее всего.', {}), 'bad'); bio.isolated = 1; }
+      if (h.alone > 36) S.adj(s, 'mental', -0.25);
+      if (h.alone === 72 && rng.chance(0.3) && RL.DATA.conditions.depression) RL.Health.addCondition(s, 'depression', rng);
+    } else h.alone = Math.max(0, (h.alone || 0) - 2);
+    // 5. бедная старость из мелких решений: микрозаймы, импульсивные траты, ставки — к пенсии ничего
+    var mfo = (p.own.debts || []).some(function (d) { return d.kind === 'mfo' && d.balance > 0; });
+    if (mfo) h.badFin = (h.badFin || 0) + 1;
+    if (p.pension && !h.oldPoorNoted && (h.badFin || 0) >= 24 && RL.Adult && RL.Adult.wealth(s) < RL.Economy.AVG24() * 2) {
+      h.oldPoorNoted = 1; bio.poorOld = 1;
+      S.log(s, 'Пенсия — и ничего за душой. Ни одного большого провала: микрозаймы, рассрочки, «потом отложу». Мелкие решения сложились в бедную старость.', 'bad');
+    }
+  }
   // торги: квартира уходит банку, остаток долга — на тебе (если торги не покрыли)
   function foreclose(s, mg, rng, sold) {
     var o = own(s), h = s.person.hard;
@@ -97,6 +141,9 @@ RL.Hardship = (function () {
       if (s.person.biz && RL.Adult) RL.Adult.applyEffects(s, {closeBiz: true}, rng);
     }
     // ипотечные каникулы: полгода без платежей
+    // доля зарплаты «в конверте» (выбор при найме): не стаж, меньше пенсия
+    if (eff.shadow !== undefined && s.person.job && s.person.job.employed) s.person.job.shadow = eff.shadow;
+    if (eff.shiftRelief && s.person.hard) { s.person.hard.relief = 1; s.person.hard.shift = 0; }
     // зарплата ниже (понижение после декрета, удалёнка)
     if (eff.wageMul && s.person.job && s.person.job.employed) s.person.job.raise = (s.person.job.raise || 1) * eff.wageMul;
     if (eff.mortHoliday) { var mg = o.debts.filter(function (d) { return d.kind === 'mortgage'; })[0]; if (mg) { mg.deferred = true; mg.deferUntil = S.ageMonths(s) + 6; } s.person.hard.mlate = 0; }
@@ -108,6 +155,7 @@ RL.Hardship = (function () {
     f.mfoDebt = d.some(function (x) { return x.kind === 'mfo' && x.balance > 0; });
     f.parentsCanHelp = S.parentsAlive(s).length > 0;
     f.money = s.person.stats.money;
+    f.poorRegion = (RL.Young.loc(s).region.unemployment || 1) >= 1.8;
     f.divorced = !!s.person.flags.divorced;
   }
   // каникулы кончились — платежи снова

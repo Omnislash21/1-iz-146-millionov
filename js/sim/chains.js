@@ -27,12 +27,14 @@ RL.Chains = (function () {
       var bio = p.bio = p.bio || {incSum: 0, incN: 0};
       bio.incSum += Math.min(8, inc / (avg * 0.72 * 0.87)); bio.incN++;
     }
+    // квинтиль семьи в 16 лет — «стартовый капитал»: от него зависит, на какую зарплату берут (RL.Young.makeJob)
+    if (a >= 16 && !p.flags.originQ && s.family.quintile) p.flags.originQ = s.family.quintile;
     // отложенные события
     if (s.later && s.later.length) {
       var due = s.later.filter(function (l) { return am >= l.at; });
       if (due.length) {
         s.later = s.later.filter(function (l) { return am < l.at; });
-        due.forEach(function (l) { if (RL.Events.def(l.id)) RL.Events.queue(s, l.id, {}); });
+        due.forEach(function (l) { if (RL.Events.def(l.id)) { RL.Events.queue(s, l.id, {}); var b = p.bio = p.bio || {incSum: 0, incN: 0}; b.chainsFired = (b.chainsFired || 0) + 1; } });
       }
     }
     // как растил детей: тепло копится, пока ребёнок дома и младше 18
@@ -73,5 +75,10 @@ RL.Chains = (function () {
   // стаж: «в конверте» взносы не платят — эти месяцы в стаж не идут
   function grayStazh(s) { var w = s.person.work; return w ? Math.round((w.grayMonths || 0) / 12) : 0; }
 
-  return {monthly: monthly, applyEffects: applyEffects, promoMul: promoMul, banned: banned, grayStazh: grayStazh, hasHigher: hasHigher};
+  // факты для цепочек: дети выросли в тепле; сколько отложенных последствий уже сработало
+  function facts(s, f) {
+    var k = (s.person.kids || []).filter(function (x) { return x.alive; });
+    f.kidsWarm = k.length > 0 && k.reduce(function (t, x) { return t + (x.warmth || 0); }, 0) / k.length > 20;
+  }
+  return {facts: facts, monthly: monthly, applyEffects: applyEffects, promoMul: promoMul, banned: banned, grayStazh: grayStazh, hasHigher: hasHigher};
 })();

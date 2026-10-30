@@ -93,16 +93,19 @@ RL.Mortality = (function () {
     {re: /Падение|Утопление|Переохлаждение|Пожар|Убийство|Травма при невыясненных/, k: function (x) { return (x.alc >= 2 ? 2.2 : 1) * (x.poor ? 1.5 : 1) * (x.rural ? 1.3 : 1); }},
     {re: /наркотиками|ВИЧ|гепатит/, k: function (x) { return x.drugsEver ? 4 : 0.6; }},
     {re: /Туберкулёз/, k: function (x) { return (x.poor ? 2.5 : 0.7) * (x.prison ? 3 : 1); }},
-    {re: /Самоубийство/, k: function (x) { return x.mental < 30 ? 2.5 : x.mental > 65 ? 0.5 : 1; }},
+    {re: /Самоубийство/, k: function (x) { return (x.mental < 30 ? 2.5 : x.mental > 65 ? 0.5 : 1) * Math.pow(x.regAlc, 0.9) * (x.cauc ? 0.35 : 1); }},
+    // регион: алкогольная и внешняя смертность по уровню потребления (Тыва, Чукотка — в 2–3 раза выше; Дагестан, Чечня — в разы ниже) [~ Росстат по субъектам]
+    {re: /Алкогольная|алкоголем|цирроз|Падение|Утопление|Переохлаждение|Пожар|Убийство|Травма при невыясненных/, k: function (x) { return Math.pow(x.regAlc, 0.8); }},
     {re: /ДТП/, k: function (x) { return x.rural ? 1.4 : 1; }},
     // рак у тех, у кого он диагностирован, уже считает js/sim/health.js — без диагноза табличный рак реже
     {re: /Рак|опухол|Лейкоз|Лимфом|Меланом/, k: function (x) { return x.cancerDx ? 1 : 0.5; }}
   ];
   function lifeOf(s) {
-    var p = s.person, h = p.habits || {}, ev = p.habitsEver || {}, L = RL.Young && p.own ? RL.Young.loc(s) : null;
+    var p = s.person, h = p.habits || {}, ev = p.habitsEver || {}, L = RL.Young && p.own ? RL.Young.loc(s) : null, R = L ? L.region : RL.S.region(s);
     return {smoke: (h.smoking || 0) >= 2, smokeEver: (ev.smoking || 0) >= 2, alc: h.alcohol || 0, sober: !(ev.alcohol >= 2), drugsEver: (ev.drugs || 0) >= 2,
       poor: p.stats.money < 25, rural: L ? ['village', 'small'].indexOf(L.settlement) >= 0 : p.settlement === 'village', mental: p.stats.mental, prison: !!p.flags.adultPrison,
-      cancerDx: p.conditions.some(function (c) { return c.id === 'cancer_adult'; })};
+      cancerDx: p.conditions.some(function (c) { return c.id === 'cancer_adult'; }),
+      regAlc: U.clamp(R.alcohol || 1, 0.1, 2), cauc: R.tags.indexOf('caucasus') >= 0};
   }
   function sampleCause(rng, age, sex, s) {
     // подробная таблица P(причина | смерть, пол, возраст) из пакета данных, иначе — группа Росстата и её расшифровка

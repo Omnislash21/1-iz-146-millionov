@@ -198,6 +198,8 @@ RL.Game = (function () {
         if (o.id === 'blog') v = 0.3 + Math.max(0, p.stats.social - 55) / 40; if (o.id === 'party') v = 0.5; if (o.id === 'faith') v = p.religionTradition === 'muslim' ? 0.8 : 0.25;
       }
       if (fd.sexW) v *= fd.sexW[p.sex] || 1;
+      // в слабости (бутылка, плохая психика, слабая воля) взрослый реже берётся за здоровье и учёбу и чаще «отдыхает»
+      if (a >= 18 && RL.Events.weakness) { var Wk = RL.Events.weakness(s); if (['health', 'study', 'selfedu', 'career', 'sport'].indexOf(o.id) >= 0) v *= 1 - Wk * 0.6; if (['screen', 'party', 'friends', 'fishing'].indexOf(o.id) >= 0) v *= 1 + Wk; }
       w[o.id] = Math.max(0.05, v);
       // теневой заработок автопилот берёт редко и почти только от бедности
       if (fd.adultWork) w[o.id] = fd.adultWork === 'escort' ? (p.stats.money < 25 ? 0.03 : 0.004) : 0.02;

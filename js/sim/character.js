@@ -9,8 +9,9 @@
 // и суицид, импульсивность ↔ правонарушения) [~ Roberts et al. 2007; Moffitt et al. 2011], перенесённые на шкалы игры.
 RL.Character = (function () {
   var U = RL.util, S = RL.S;
-  // медиана и разброс черт взрослых (автопилот, 60 жизней к 40 годам)
-  var NORM = {courage: [60, 15], conformity: [13, 12], curiosity: [13, 11], diligence: [48, 14], sociability: [49, 12], empathy: [31, 16], honesty: [-2, 14], selfControl: [24, 12], aggression: [3, 4]};
+  // медиана и разброс черт взрослых — середина двух выборок автопилота (120 жизней к 40 годам, со «слабостями» и без).
+  // Норма и слабость автопилота влияют друг на друга, поэтому норма зафиксирована, а не пересчитывается на лету.
+  var NORM = {courage: [54, 18], conformity: [12, 14], curiosity: [10, 8], diligence: [47, 17], sociability: [45, 15], empathy: [27, 16], honesty: [-5, 14], selfControl: [21, 15], aggression: [3, 5]};
   function z(s, k) {
     var v = (s.person.traits || {})[k] || 0, n = NORM[k] || [0, 20];
     // у детей черты ещё не сложились: считаем от нуля с широким разбросом
@@ -70,17 +71,18 @@ RL.Character = (function () {
     var sc = z(s, 'selfControl'), dil = z(s, 'diligence'), hon = z(s, 'honesty'), soc = z(s, 'sociability'), emp = z(s, 'empathy'), cur = z(s, 'curiosity'), agg = z(s, 'aggression');
     var hb = p.habits || {}, job = p.job && p.job.employed ? p.job : null, he = p.sex === 'f';
     var g = function (m, f) { return he ? f : m; };
-    var calm = !p.flags.charBadM || S.ageMonths(s) - p.flags.charBadM >= 18;
+    // после срыва — не чаще раза в 1,5 года; каждый следующий вдвое реже (человек учится на последствиях)
+    var calm = (!p.flags.charBadM || S.ageMonths(s) - p.flags.charBadM >= 18) && rng.chance(Math.pow(0.5, p.flags.charBadN || 0));
     // вспыльчивость: драка (чаще мужчины и выпившие)
     if (calm && sc + agg * 0.5 < -1.2 && a < 65 && rng.chance(0.0011 * Math.exp(-sc) * (he ? 0.3 : 1) * ((hb.alcohol || 0) >= 2 ? 2.5 : 1))) {
-      S.adj(s, 'health', -6); p.flags.charBadM = S.ageMonths(s);
+      S.adj(s, 'health', -6); p.flags.charBadM = S.ageMonths(s); p.flags.charBadN = (p.flags.charBadN || 0) + 1;
       if (rng.chance(0.06)) { S.log(s, 'Вспыльчивость подвела: драка, у второго — тяжёлые травмы. Возбудили дело.', 'bad'); RL.Events.applyEffects(s, {case: 'harm111'}, {}, rng); }
       else S.log(s, 'Вспыльчивость подвела: драка у магазина. Синяки, сломанный нос, протокол.', 'bad');
       return;
     }
     // сорваться на начальника
     if (calm && job && sc < -1.4 && rng.chance(0.002 * Math.exp(-sc))) {
-      p.flags.charBadM = S.ageMonths(s);
+      p.flags.charBadM = S.ageMonths(s); p.flags.charBadN = (p.flags.charBadN || 0) + 1;
       if (rng.chance(0.5)) { job.employed = false; job.monthsUnemployed = 0; S.log(s, 'Наорал' + g('', 'а') + ' на начальника при всех. Уволили «по соглашению сторон».', 'bad'); }
       else S.log(s, 'Сорвал' + g('ся', 'ась') + ' на начальника. Премии не будет, отношения испорчены.', 'bad');
       S.adj(s, 'mental', -3); return;
@@ -88,6 +90,7 @@ RL.Character = (function () {
     // импульсивные траты: кредитка, техника в рассрочку
     if (sc < -1 && a >= 18 && rng.chance(0.003 * Math.exp(-sc))) {
       RL.Events.applyEffects(s, {cash: -rng.int(15, 60) * 1000, happiness: 2}, {}, rng);
+      if (p.hard) p.hard.badFin = (p.hard.badFin || 0) + 6; // мелкое плохое решение — копится к старости
       S.log(s, rng.pick(['Купил' + g('', 'а') + ' новый телефон в рассрочку «потому что захотелось».', 'Спустил' + g('', 'а') + ' отпускные за выходные.', 'Взял' + g('', 'а') + ' кредит на то, без чего можно было жить.']), 'money');
       return;
     }

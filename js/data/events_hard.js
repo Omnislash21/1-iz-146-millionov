@@ -118,7 +118,7 @@ RL.DATA.events.push(
    "choices":[
      {"text":"Отшутиться","traits":{"selfControl":1},"effects":{"mental":-1}},
      {"text":"Сказать, что это не их дело","traits":{"courage":2,"conformity":-2},"effects":{"relation":{"all":-4},"mental":1}}]},
-  {"id":"night_street","title":"Дорога домой","when":{"sex":"f","age":[15,60]},"p":0.004,"cooldown":36,
+  {"id":"night_street","title":"Дорога домой","when":{"sex":"f","age":[15,60]},"p":0.003,"cooldown":36,
    "text":"Поздно вечером от остановки за тобой идёт мужчина. Ускоряешь шаг — он тоже.",
    "outcomes":[
      {"w":5,"text":"Забежала в круглосуточный магазин, позвонила подруге. Он ушёл.","effects":{"mental":-3}},

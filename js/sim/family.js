@@ -2,7 +2,6 @@
 // изъятие ребёнка, усыновление, переезды, мобилизация и контракт.
 RL.Family = (function () {
   var U = RL.util, S = RL.S;
-  var uid = 0;
 
   function adultMort(s, m) {
     var y = s.date.year;
@@ -141,7 +140,9 @@ RL.Family = (function () {
   function birthSibling(s, rng) {
     var mom = S.mother(s), man = S.manInHome(s);
     var sex = rng.chance(0.513) ? 'm' : 'f';
-    var sib = {id: 'sb' + (++uid) + '_' + rng.int(100, 999), role: 'sibling', sex: sex, name: RL.Birth.freshName(rng, s.person.ethnic, sex, [s.person.firstName].concat(s.family.members.filter(function (m) { return m.role === 'sibling'; }).map(function (m) { return m.name; }))),
+    // счётчик — в состоянии, а не в модуле: иначе две жизни в одной вкладке (или сохранение и загрузка) дают разные id
+    s.uidSib = (s.uidSib || 0) + 1;
+    var sib = {id: 'sb' + s.uidSib + '_' + rng.int(100, 999), role: 'sibling', sex: sex, name: RL.Birth.freshName(rng, s.person.ethnic, sex, [s.person.firstName].concat(s.family.members.filter(function (m) { return m.role === 'sibling'; }).map(function (m) { return m.name; }))),
       age: 0, ethnic: s.person.ethnic, alive: true, inHome: true, health: U.clamp(rng.normal(84, 8), 30, 100), relation: 60,
       edu: 0, job: {employed: false, base: 0}, half: man && man.role !== 'father'};
     s.family.members.push(sib);

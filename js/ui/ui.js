@@ -434,7 +434,7 @@
     var T = (state.person.ties || []).slice().sort(function (a, b) { return b.rank * 40 + b.str - (a.rank * 40 + a.str); });
     $('tiesPanel').style.display = S.age(state) >= 16 ? '' : 'none';
     $('ties').innerHTML = T.length ? T.map(function (t) {
-      return '<div class="m">' + esc(RL.Social.label(t)) + ' <span class="small muted">' + (t.str >= 60 ? 'близко' : t.str >= 30 ? 'общаетесь' : 'остывает') + '</span></div>';
+      return '<div class="m">' + esc(RL.Social.label(t)) + ' <span class="small ' + (t.enemy ? 'bad' : 'muted') + '">' + esc(RL.Social.status(t)) + '</span></div>';
     }).join('') : '<span class="muted">Нужных знакомых пока нет. Они появляются в вузе, армии, на работе и в компаниях друзей.</span>';
   }
   function renderTraits() {
@@ -482,6 +482,8 @@
     h += '<p>' + esc(RL.Report.verdict(rep, s)) + '</p>';
     var ep = RL.Report.epitaph(s); if (ep) h += '<p class="epitaph">«' + esc(ep) + '»</p>';
     var soc = RL.Report.sociology ? RL.Report.sociology(s) : []; if (soc.length) h += '<div class="sociology"><h3>Социологический разбор</h3>' + li(soc) + '</div>';
+    var ab = RL.Emigration ? RL.Emigration.reportLines(s) : []; if (ab.length) h += '<div class="sociology"><h3>Жизнь за границей</h3>' + li(ab) + '</div>';
+    [['Ты и твоя когорта', RL.Report.cohort], ['Что было бы, если', RL.Report.whatIf], ['Тихие отметки', RL.Report.markers]].forEach(function (b) { var x = b[1] ? b[1](s) : []; if (x.length) h += '<div class="sociology"><h3>' + b[0] + '</h3>' + li(x) + '</div>'; });
     var bd = RL.Report.badges(s); if (bd.length) h += '<div class="badges">' + bd.map(function (x, i) { return '<span class="badge' + (x.dark ? ' dark' : '') + '" style="animation-delay:' + (0.3 + i * 0.07) + 's"><i>' + x.icon + '</i>' + esc(x.text) + '</span>'; }).join('') + '</div>';
     h += '<canvas id="chart" width="900" height="260"></canvas>';
     h += '<div class="grid"><div><h3>Итог жизни</h3>' + li(RL.Report.summary(s)) + '</div><div><h3>Жизнь по десятилетиям</h3>' + li(RL.Report.decades(s)) + '</div></div>';

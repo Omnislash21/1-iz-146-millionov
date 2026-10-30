@@ -37,6 +37,8 @@ RL.Law = (function () {
       S.log(s, (t ? t.name : 'Знакомый') + ': «Тут на контроле у Москвы, извини». Дело идёт в суд.', 'bad');
     }
     if (o.kind === 'self' && rng.chance(L().acquittal * 10)) { S.log(s, 'Редчайший случай — оправдательный приговор!', 'good'); return; }
+    var foe = RL.Social && RL.Social.ties(s).filter(function (t) { return t.enemy && (t.sphere === 'police' || t.sphere === 'prosecutor'); })[0];
+    if (foe) { colonyP = Math.min(0.95, colonyP + 0.15); S.log(s, foe.name + ' постарал' + (foe.sex === 'f' ? 'ась' : 'ся') + ': дело ведут жёстко, о сделке со следствием речи нет.', 'bad'); }
     p.flags.criminalRecord = 1; p.flags.adultCase = (p.flags.adultCase || 0) + 1;
     if (p.flags.adultCase > 1) colonyP = Math.min(0.95, colonyP + 0.3);
     if (rng.chance(colonyP)) {

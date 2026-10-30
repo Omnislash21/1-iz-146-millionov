@@ -176,6 +176,7 @@ RL.S = (function () {
     if (RL.Careers) RL.Careers.facts(s, f);
     if (RL.Social) RL.Social.facts(s, f);
     if (RL.Hardship) RL.Hardship.facts(s, f);
+    if (RL.Chains) RL.Chains.facts(s, f);
     if (RL.Emigration) RL.Emigration.facts(s, f);
     if (RL.Leisure) RL.Leisure.facts(s, f);
     f.prof = p.job && p.job.employed ? p.job.prof : null;

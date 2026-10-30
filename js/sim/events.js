@@ -178,17 +178,40 @@ RL.Events = (function () {
   }
 
   // Автовыбор: ожидаемая польза исходов + согласованность с уже сложившимся характером + шум.
+  // Автопилот — не робот. Взвешивает «как правильно» (utility) и «чего хочется сейчас» (myopic: удовольствие и деньги сразу,
+  // расплата потом почти не видна). Доля «слабости» растёт при слабом самоконтроле, плохой психике, бутылке, безденежье [~].
+  // Черты тянут к своим вариантам: трус выбирает осторожное, нечестный — «решить вопрос», вспыльчивый — скандал.
+  function weakness(s) {
+    var p = s.person, h = p.habits || {}, zsc = RL.Character ? RL.Character.z(s, 'selfControl') : 0;
+    // калибровка: смертность и судимость автопилота должны оставаться у таблиц (tests/life-check.js) [~]
+    return U.clamp(0.06 + Math.max(0, -zsc - 0.5) * 0.08 + (p.stats.mental < 35 ? 0.1 : 0) + ((h.alcohol || 0) >= 2 ? 0.07 : 0) + ((h.drugs || 0) >= 2 ? 0.1 : 0) + (p.stats.money < 25 ? 0.05 : 0) + (S.age(s) < 25 ? 0.03 : 0), 0.03, 0.5);
+  }
+  function myopic(eff, s) {
+    if (!eff) return 0;
+    var a = S.age(s), w = a >= 18 && RL.Adult && s.person.own ? Math.max(0, RL.Adult.wealth(s)) : 0, scale = Math.max(3000, w / 40);
+    var u = (eff.happiness || 0) * 1.2 + (eff.social || 0) * 0.6 + (eff.cash || 0) / scale * (eff.cash > 0 ? 1.3 : 0.5) + Math.min(0, eff.mental || 0) * 0.5;
+    if (eff.habitUp) u += 1.5; // «расслабиться» хочется сейчас
+    if (eff.habitDown || eff.habitTry) u -= 1.5; // держаться — тяжело
+    if (eff.later) u += 0.5; // последствий не видно
+    if (eff.case || eff.crime) u -= 6; // страх есть, но слабее
+    if (eff.jobLoss) u -= 2;
+    return u;
+  }
   function autoChoose(s, rng) {
-    var pd = s.pending, e = def(pd.id), f = S.facts(s), best = 0, bestScore = -1e9;
+    var pd = s.pending, e = def(pd.id), f = S.facts(s), best = 0, bestScore = -1e9, W = weakness(s);
     pd.choices.forEach(function (ch) {
-      var c = e.choices[ch.i], sc = utility(c.effects, s);
+      var c = e.choices[ch.i], sc = utility(c.effects, s), my = myopic(c.effects, s);
       if (c.outcomes) {
-        var tot = 0, acc = 0;
-        c.outcomes.forEach(function (o) { var w = (o.w === undefined ? 1 : o.w) * mulMods(o.mods, f); tot += w; acc += w * utility(o.effects, s); });
-        sc += tot ? acc / tot : 0;
+        var tot = 0, acc = 0, accM = 0;
+        c.outcomes.forEach(function (o) { var w = (o.w === undefined ? 1 : o.w) * mulMods(o.mods, f); tot += w; acc += w * utility(o.effects, s); accM += w * myopic(o.effects, s); });
+        sc += tot ? acc / tot : 0; my += tot ? accM / tot : 0;
       }
-      if (c.traits) Object.keys(c.traits).forEach(function (t) { sc += (s.person.traits[t] || 0) * c.traits[t] * 0.01; });
-      sc += rng.normal(0, 1.5);
+      sc = (1 - W) * sc + W * my * 1.5;
+      if (c.traits) Object.keys(c.traits).forEach(function (t) {
+        var z = RL.Character ? RL.Character.z(s, t) : (s.person.traits[t] || 0) / 30;
+        sc += z * c.traits[t] * 0.45;
+      });
+      sc += rng.normal(0, 1.5 + W * 2);
       if (sc > bestScore) { bestScore = sc; best = ch.i; }
     });
     return best;
@@ -209,6 +232,13 @@ RL.Events = (function () {
     if (eff.buyRentFlat) u += 1;
     if (eff.death) u -= 500 * (eff.deathP || 1);
     if (eff.habit) Object.keys(eff.habit).forEach(function (k) { u -= (k === 'drugs' ? 15 : 3) * eff.habit[k]; });
+    if (eff.habitUp) Object.keys(eff.habitUp).forEach(function (k) { u -= (k === 'drugs' ? 12 : 5) * eff.habitUp[k]; });
+    if (eff.habitDown) u += 4; if (eff.habitTry) u += 2;
+    if (eff.jobLoss) u -= 8;
+    if (eff.wageMul) u += (eff.wageMul - 1) * 30;
+    if (eff.favorRefuse) u -= 1.5;
+    if (eff.bankrupt) u -= 2;
+    if (eff.emigrate) u -= 1;
     if (eff.crime || eff.case) u -= 40;
     // осторожность автопилота в крупных денежных решениях
     if (eff.startBiz) u -= 4;
@@ -224,5 +254,5 @@ RL.Events = (function () {
     return u;
   }
 
-  return {monthly: monthly, queue: queue, resolve: resolve, autoChoose: autoChoose, check: check, applyEffects: applyEffects, text: text, def: def};
+  return {weakness: weakness, monthly: monthly, queue: queue, resolve: resolve, autoChoose: autoChoose, check: check, applyEffects: applyEffects, text: text, def: def};
 })();

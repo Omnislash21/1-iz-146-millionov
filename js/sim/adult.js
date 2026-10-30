@@ -90,7 +90,9 @@ RL.Adult = (function () {
     var L = A().levels;
     if (j.level >= L.length - 1) return;
     var dip = (p.diplomas || []).some(function (d) { return d.level !== 'СПО'; });
-    var h = (RL.Character ? RL.Character.mul(s, 'promo') : 1) * (RL.Chains ? RL.Chains.promoMul(s) : 1) * A().promoBase * (RL.Careers ? RL.Careers.focusPromo(s) : p.focus === 'career' ? 2.5 : 1) * Math.pow(Math.max(20, p.stats.skills) / 55, 2) * Math.exp((p.traits.diligence || 0) / 60)
+    var rg = RL.Young.loc(s).region, rgk = rg.tags.indexOf('capital') >= 0 ? 1.3 : rg.unemployment > 1.8 ? 0.7 : 1; // столица — лифты быстрее, безработные регионы — медленнее [~]
+    if (RL.Social && RL.Social.clan(s) > 1.5) rgk *= RL.Social.best(s, ['official', 'business', 'police']) ? 1.5 : 0.6; // на Кавказе без «своих» не двигают
+    var h = rgk * (RL.Character ? RL.Character.mul(s, 'promo') : 1) * (RL.Chains ? RL.Chains.promoMul(s) : 1) * A().promoBase * (RL.Careers ? RL.Careers.focusPromo(s) : p.focus === 'career' ? 2.5 : 1) * Math.pow(Math.max(20, p.stats.skills) / 55, 2) * Math.exp((p.traits.diligence || 0) / 60)
       * (dip ? 1.3 : 0.8) * Math.pow(0.75, j.level) * (((p.habits || {}).alcohol || 0) >= 2 ? 0.4 : 1);
     if ((S.ageMonths(s) - (j.since || 0)) < 12) h *= 0.3;
     if (a >= 65) h = 0; else if (a >= 58) h *= 0.3;

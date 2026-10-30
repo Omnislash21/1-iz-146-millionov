@@ -5,7 +5,7 @@ var root = path.join(__dirname, '..');
 fs.readFileSync(path.join(root, 'index.html'), 'utf8').match(/src="(js\/[^"]+)"/g).map(function (m) { return m.slice(5, -1).replace(/\?.*$/, ''); })
   .filter(function (f) { return f.indexOf('js/ui') < 0; }).forEach(function (f) { vm.runInThisContext(fs.readFileSync(path.join(root, f), 'utf8'), {filename: f}); });
 var S = RL.S, N = +process.argv[2] || 200, t0 = Date.now();
-var INC = [], R = {lives: 0, emig: 0, back: 0, foreclose: 0, trap: 0, ties: 0, tieUsed: 0, chain: 0, fights: 0, schemes: 0, deaths: {}, nDeath: 0, errors: 0};
+var INC = [], MOB = {low: [], high: []}, R = {lives: 0, emig: 0, back: 0, foreclose: 0, trap: 0, ties: 0, tieUsed: 0, chain: 0, fights: 0, schemes: 0, deaths: {}, nDeath: 0, errors: 0};
 var groups = {low: {n: 0, jobLoss: 0, divorce: 0, cases: 0}, high: {n: 0, jobLoss: 0, divorce: 0, cases: 0}};
 for (var i = 0; i < N; i++) {
   var sx = i % 2 ? 'f' : 'm';
@@ -17,7 +17,11 @@ for (var i = 0; i < N; i++) {
       if (sc40 === null && S.age(s) >= 40) sc40 = RL.Character.z(s, 'selfControl') + RL.Character.z(s, 'diligence');
     }
     R.lives++;
-    if (s.person.bio && s.person.bio.incN >= 60) INC.push(s.person.bio.incSum / s.person.bio.incN);
+    if (s.person.bio && s.person.bio.incN >= 60) {
+      var rr = s.person.bio.incSum / s.person.bio.incN; INC.push(rr);
+      var q0 = (s.history.filter(function (h) { return h.quintile && h.age <= 16; })[0] || {}).quintile;
+      if (q0 <= 2) MOB.low.push(rr); else if (q0 >= 4) MOB.high.push(rr);
+    }
     var L = s.log.map(function (l) { return l.text; }).join('\n');
     if (s.person.abroadHist || s.person.abroad) R.emig++;
     if (s.person.abroadHist) R.back++;
@@ -53,4 +57,10 @@ console.log('Причины смерти (' + R.nDeath + '): ' + top.map(functio
 var cancer = Object.keys(R.deaths).filter(function (k) { return /Рак|опухол|Лейкоз|Лимфом|Меланом|рак/i.test(k); }).reduce(function (t, k) { return t + R.deaths[k]; }, 0);
 INC.sort(function (a, b) { return a - b; });
 console.log('Доход к медиане когорты (должна быть около 100%): p25 ' + Math.round(INC[Math.floor(INC.length * 0.25)] * 100) + '%, медиана ' + Math.round(INC[Math.floor(INC.length / 2)] * 100) + '%, p75 ' + Math.round(INC[Math.floor(INC.length * 0.75)] * 100) + '%');
+// баланс: плохой старт — не приговор (есть лифт), хороший — не гарантия (есть падение)
+['low', 'high'].forEach(function (k) {
+  var a = MOB[k].sort(function (x, y) { return x - y; }); if (!a.length) return;
+  var up = a.filter(function (x) { return x >= 1.2; }).length / a.length, down = a.filter(function (x) { return x < 0.55; }).length / a.length;
+  console.log((k === 'low' ? 'Старт в 1–2 квинтиле' : 'Старт в 4–5 квинтиле') + ' (' + a.length + '): медиана дохода ' + Math.round(a[Math.floor(a.length / 2)] * 100) + '%, выше 120% медианы — ' + Math.round(up * 100) + '%, ниже 55% — ' + Math.round(down * 100) + '%');
+});
 console.log('Онкология: ' + (cancer / Math.max(1, R.nDeath) * 100).toFixed(1) + '% смертей (Росстат 2019: ~15–16%)');

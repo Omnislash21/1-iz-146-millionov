@@ -446,7 +446,9 @@ RL.Young = (function () {
     var entry = U.interpYear(D.young.entryWage, Math.min(25, a));
     var q = dip ? 1 + (dip.q - 55) / 150 + (dip.red ? 0.05 : 0) + (dip.top ? 0.2 : 0) : 1;
     if (s.flags.internship) q *= 1.08;
-    var base = pr.wage * D.economy.wageScale * L.region.wage * st.wage * entry * q * (mul || 1) * rng.lognorm(pr.sd) * (RL.Emigration ? RL.Emigration.wageMul(s) : 1);
+    // стартовый капитал семьи: связи родителей, репетиторы, «куда пристроить» — ±12% к зарплате за квинтиль, после 40 — вдвое слабее [~ НИУ ВШЭ, межпоколенческая мобильность]
+    var oq = s.person.flags.originQ ? 1 + 0.12 * (s.person.flags.originQ - 3) * (a >= 40 ? 0.5 : 1) : 1;
+    var base = pr.wage * D.economy.wageScale * L.region.wage * st.wage * entry * q * (mul || 1) * oq * rng.lognorm(pr.sd) * (RL.Emigration ? RL.Emigration.wageMul(s) : 1);
     var shadowP = U.clamp(pr.shadow * U.interpYear(D.economy.shadowLevel, Math.min(s.date.year, 2024)) / 0.15 * 0.6, 0, 0.9);
     return {prof: profId, base: Math.round(base), shadow: rng.chance(shadowP) ? rng.range(0.3, 1) : 0, employed: true, raise: 1, since: S.ageMonths(s), monthsUnemployed: 0};
   }
